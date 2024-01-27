@@ -1,0 +1,16 @@
++ Panel : Bảng điều khiển 
++ Visible : Trông thấy , dễ thấy -> Hiển thị bảng điều khiển 
++ Horizontal : Chiều ngang  
++ Vertical : Chiều dọc 
++ pack : đóng gói 
++ Frame : Khung hình 
++ Operation : Hoạt động 
++ Dimension : Kích thước 
++ Preferred : Ưu tiên 
++ Label : Nhãn
+
++ typed : Đánh máy 
++ Released : Phát hành 
++ press :Nhấn ,ép 
+
++ focus :Tập trung

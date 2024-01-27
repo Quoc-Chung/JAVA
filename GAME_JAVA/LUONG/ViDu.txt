@@ -1,0 +1,47 @@
+- Luồng trong java là một đơn vị nhỏ nhất của xử lí đa nhiệm. 
+- Một chương trình Java có thể chạy nhiều luông đồng thời , giúp thực hiện 
+nhiều công việc đồng thời tăng cường hiệu suất. 
+
+- Luồng trong Java được triển khai bằng cách sử dụng lớp Thread hoặc triển 
+khai giao diện Runnable. 
+
+- Ý nghĩa của việc tạo luồng trong JAVA:
++ Tăng hiệu suất : Cho phép thực hiện các tác vụ đồng thời, giúp tận dụng 
+tài nguyên hệ thống và hiệu suất chương trình. 
+
++ Phản hồi người dùng : Giữ cho giao diện người dùng phản hồi khi có các 
+nhiệm vụ đòi hỏi thời gian dài. 
+
++ Xử lí đồng thời : Thực hiện nhiều công việc cùng một lúc, giúp chương 
+trình trở nên linh hoạt và có khả năng xử lí đồng thời. 
+
+- Công thức chung để tạo một luồng trong java : 
+1. Kế thừa từ lớp Thread : 
+
+public class MyThread extends Thread {
+    public void run() {
+        // Code thực thi trong luồng mới
+    }
+
+    public static void main(String args[]) {
+        MyThread myThread = new MyThread();
+        myThread.start();
+    }
+}
+
+2. Triển khai giao diện Runnable : 
+
+public class MyRunable implements Runnable{
+    public void run(){
+         // Code thực thi trong luông mới 
+    }
+}
+
+public static void main(String[] args){
+        MyRunnable myRunnable = new MyRunnable();
+        Thread thread = new Thread(myRunnable);
+        thread.start();
+}
+
+
+

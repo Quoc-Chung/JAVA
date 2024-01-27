@@ -1,0 +1,163 @@
+
+	public Mainn() {
+		gamePanel = new GamePanell();
+		gamewindown = new GameWindoww(gamePanel);
+		
+		/* - Dể nó nhận được sự kiện từ bàn phím - */
+		gamePanel.requestFocus(true);
+		StartGameLoop();
+	}	
+   public static void main(String[] args) {
+	 new Mainn();
+   }
+    
+
+/* - Xử lí với bàn phím - */ 
+import inputs.BanPhim;
+import inputs.Mouse;
+
+
+public class GamePanell extends JPanel {
+
+	/*- Khởi tạo dùng trong sự kiện - */
+	private Mouse mouse;
+	private BanPhim key;
+	
+
+
+	public GamePanell() {
+		/*- Khởi tạo bàn phím - */ 
+		mouse = new Mouse(this);
+		key = new BanPhim(this);
+		addMouseListener(mouse);
+		addKeyListener(key);
+		
+	}
+
+
+	private void setPanelSize() {
+	
+		Dimension size = new Dimension(1280,800);
+		setMinimumSize(size);
+		setPreferredSize(size);
+		setMaximumSize(size);
+		
+	}
+
+}
+
+	
+package input;
+
+import java.awt.event.KeyEvent;
+
+import main.GamePanel;
+import java.awt.event.KeyListener;
+import static utilz.Constants.Directions.*;
+public class KeyboardInputs implements KeyListener {
+	private GamePanel gamePanel;
+	
+    public KeyboardInputs(GamePanel gamePanel) {
+    	this.gamePanel = gamePanel;
+    }
+    @Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_W:
+		case KeyEvent.VK_A:
+		case KeyEvent.VK_S:
+		case KeyEvent.VK_D:
+			gamePanel.setMoving(false);
+			break;
+		}
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_W:
+			gamePanel.setDirection(UP);
+			break;
+		case KeyEvent.VK_A:
+			gamePanel.setDirection(LEFT);
+			break;
+		case KeyEvent.VK_S:
+			gamePanel.setDirection(DOWN);
+			break;
+		case KeyEvent.VK_D:
+			gamePanel.setDirection(RIGHT);
+			break;
+		}
+	}
+
+}
+
+
+package input;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import main.GamePanel;
+
+public class Mouse implements MouseListener, MouseMotionListener{
+
+	private GamePanel  gamePanel;
+	public Mouse(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+	}
+	
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+	
+	}
+	
+	
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+//			gamePanel.spawnRect(e.getX(),e.getY());
+
+		}
+	
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+    
+}
+

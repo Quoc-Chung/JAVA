@@ -1,0 +1,27 @@
+- Trong java , lớp Point thuộc gói java.awt được sử dụng để biểu diễn một điểm 
+trong không gian hai chiều (2D) . Lớp này thường được sử dụng trong đồ họa và 
+các ứng dụng đồ họa khác. 
+- Dưới đây là giải thích chi tiết về lớp Point : 
+- Lớp Point trong java có các tính chất cơ bản : 
+
++ Lớp point biểu diễn một điểm với tọa độ nguyên( x,y )
++ Tọa độ x và y có kiểu dữ liệu là INT. 
+
+- Có một số cách tạo đối tượng Point. Dưới đây là một số cách thường gặp : 
+
+Point point1 = new Point();    -->  Tạo điểm ở vị trí (0,0)
+Point point2 = new Point(10,20) -->  Tạo điểm ở vị trí (10,20)
+
+- Có một số cách để truy cập tọa độ của biến x và y  của một điểm bằng cách sử 
+dụng phương thức getX() và getY()
++ int x = point.getX();   => Lấy tọa độ x 
++ int y = point.getY();   => Lấy tọa độ y 
+
+- Cập nhật tọa độ : Có phương thức setLocation(int x ,int y) để cập nhật tọa độ 
+của một điểm. 
+- Cập nhật 
+    point.setLocation(5,10);   => Cập nhật tọa độ của điểm 
+
+- In ra tọa độ sau khi cập nhật 
+    System.out.println("Updated X coordinate: " + point.getX());
+    System.out.println("Updated Y coordinate: " + point.getY());

@@ -1,0 +1,121 @@
+   private int aniTick, aniIndex, aniSpeed = 20; 
+   
+   private int playerAction = IDLE; // 0 
+    private void updateAnimationTick() {
+		aniTick ++; 
+		if(aniTick  >= aniSpeed) {
+			aniTick = 0;
+			aniIndex ++; 
+			if(aniIndex >= GetSpriteAmount(playerAction)) {
+				aniIndex = 0;
+			}
+		}
+	}
+    public void paintComponent(Graphics g) {
+        - Vẽ lại giao diện mới sau khi cập nhật animation. 
+		super.paintComponent(g);
+		g.drawImage(animations[playerAction][aniIndex], (int) xDelta, (int) yDelta, 256, 160, null);
+
+    }
+===========================================================================
+- Ticks trong game để đo thời gian giữa các frame hoặc cập nhật trong game loop. 
+- Một tick thường tương ứng với một đơn vị nhỏ thời gian, và số lượng của 
+ticks sẽ thay đổi tùy thuộc vào cách hệ thống đo lường thời gian. 
+
+- Ticks càng nhanh thì game loop càng nhanh và ngược lại .Điều này giúp kiểm 
+soát tốc độ cập nhật và vẽ của game. 
+============================================================================
+- Đoạn mã chịu trách nhiệm vận hành và tạo một animation dựa trên các tham số 
+và biến được định nghĩa trong class. 
+- MẢNG H/A : [DÒNG][CỘT]  
+
++ aniTik = 0 ; -> Đơn vị nhỏ thời gian 
+
++ aniIndex = 0; -> Chỉ số của mảng h/a duyệt qua từng ảnh trên một hàng của ma trận 
+( Tức là duyệt qua từng cột của một hàng trong ma trận ).
+
++ aniSpeed = 20;  -> Thời gian giữa các frame. 
+
++ private int playerAction = IDLE;  -> Biến xác định trạng thái của người chơi. 
+
+
+- Phương thức updateAnimationTick() : 
++ Mỗi lần gọi  aniTick tăng lên. 
++ AniTick vượt quá aniSpeed , nó được đặt lại và aniIndex tăng 
++ Nếu aniIndex tăng lên vượt quá số lượng frame của playerAcrtion hiện tại 
+thì nó sẽ được vẽ lại 
+================================================================================
+   private int aniTick, aniIndex, aniSpeed = 20; 
+   
+   private int playerAction = IDLE; // 0 
+    private void updateAnimationTick() {
+		aniTick ++; 
+		if(aniTick  >= aniSpeed) {
+			aniTick = 0;
+			aniIndex ++; 
+			if(aniIndex >= GetSpriteAmount(playerAction)) {
+				aniIndex = 0;
+			}
+		}
+	}
+    public void paintComponent(Graphics g) {
+        - Vẽ lại giao diện mới sau khi cập nhật animation. 
+		super.paintComponent(g);
+		g.drawImage(animations[playerAction][aniIndex], (int) xDelta, (int) yDelta, 256, 160, null);
+
+    }
+
++ aniTick :  Một biến đếm tăng lên sau mỗi lần cập nhật, là mỗi lần cập nhật 
+frame (khung hình) của animation.
++ aniTick tăng lên sau mỗi lân gọi. 
+
++ aniIndex : tăng lên , biểu thi frame tiếp theo trong chương trình animation. 
+
++ aniSpeed : Tốc độ animation.
+
++ Biểu diễn hành động hiện tại của người chơi. 
+
++ Nếu aniIndex vượt quá tổng số frame cho playerAction hiện tại, nó sẽ đặt lại
+về 0.
+
+
+* Phương thức paintComponent : Phương thức này có thể là một phần của một 
+thành phần SWing , chẳng hạn như JPanel. 
+
+* Nó ghi đè phương thức "paintComponrnt" để xử lí đặc biệt. 
+
+* Nó gọi super.paintComponent(g) để đảm bảo vẽ đúng.
+
+* Nó vẽ frame hiện tại của animation bằng g.drawImage. 
+
+- Vẽ hình : 
+
++ g.drawImage() là phương thức dùng để vẽ hình.
++ Dòng này vẽ frame hiện tại của animation tại vị trí cụ thể (xDelta, yDelta) với
+kích thước cố định là 256 * 160 pixel. 
+
++animations[playerAction][aniIndex] đề cập đến hình ảnh cụ thể (sprite) cho playerAction
+ và aniIndex hiện tại 
+
++ playerAcrtion trỏ đến đúng cái dòng có hành động cụ thể. 
+
+===================================================================================
+- Giải thích thời gian : 
++ Dựa vào đoạn mã cung cấp , aniSpeed không phải là thời gian thực tế (vi dụ , giây) 
+mà là một giới hạn(threshold) cho giá trị của aniTick. Cụ thể : 
+
+    + aniTick tăng lên sau mỗi lần cập nhật. 
+	+ khi aniTick đạt hoặc vượt giới hạn aniSpeed , nó được đặt về 0 và 
+aniIndex tăng lên. 
+   
++ Do đó , aniSpeed không phải là thời gian thực tế giữa các frame của 
+animation . Nó là một giói hạn cho giá trị aniTick 
++ Nếu aniSpeed được đặt là 20 , nghĩa là animation sẽ cập nhật mỗi khi 
+aniTick đạt giá trị 20 hoặc vượt qua nó. 
+
++ Điều này có thể tạo ra một hiệu ứng animation nhanh hoặc chậm tuuyf thuộc 
+vào giá trị mà bạn muốn điều chỉnh giá trị aniSpeed
+=====================================================================================
+- Ta v 
+
+

@@ -1,0 +1,90 @@
+- Mỗi một trò chơi thì cần một vòng lặp trò chơi , nếu không  sẽ không có 
+thay đổi nào đối với trò chơi ( Kiểu trò chơi của chúng ta lúc này chỉ 
+là một hình ảnh tĩnh ). 
+
+- Vòng lặp trò chơi đơn giản nhất khi nói đến JPanel và JFrame đó chính là 
+repaint().
+- Chúng ta phải hiểu là vòng lặp ngày càng phức tạp thì sẽ làm cho game của 
+chúng ta chạy ngày càng mượt. 
+- Chúng ta sẽ nghiên cứu hai vấn đề : 
++ repaint game loop 
++ make a fps counter
++ remove bad game loop 
+
+- Tôi sẽ giải thích nội dung của hai đoạn mã trên JAVA : 
++ repaint game loop là class chính chứa hàm main để khởi tạo cửa sổ chơi 
+game . Nó là một lớp kế thừa từ JFrame , nơi bạn có thể cài đặt cửa sổ và 
+các thành phần cần thiết. 
++ GamePanel là một lớp con của JPanel , một thành phần giao diện người dùng
+trong Java Swing. 
++ Trong lớp này, có một phương thức paintComponent(Graphícs g) được gọi 
+tự động khí vẽ lại thành phần.
+
++ Phương thức draw(Graphics g) được gọi để vẽ nội dung của game, và ở đây 
+nó vẽ một hình chữ nhật đên lấp đầy cả panel. 
+
+
+=================================================================================
+- FPS là viết tắt của "Frames Per Second" ( Khung hình mỗi giây ).
+- Trong ngữ cảnh của game , FPS là một đơn vị đo lường để đo tốc độ làm mới 
+hình ảnh trên màn hình.
+- Đối với game, mục tiêu là giữ cho FPS ở mức cao để đảm bảo trải nghiệm chơi 
+game mượt mà và thú vị hơn. 
+
+* FPS trong game : 
+- FPS là số lượng khung hình (frame) mà game hiển thị mỗi giây. 
+- Một FPS cao đồng nghĩa với việc game chạy mượt mà và đáp ứng nhanh chóng.
+
+- 60 FPS là chuẩn , thường thì game sẽ chạy ở tầm múc này là đẫ mượt . Mức 
+60 FPS cung cấp trải nghiệm chơi game mượt mà và linh hoạt đối với đa số 
+người chơi. 
+
+- FPS được tính bằng cách : CHIA SỐ LƯỢNG KHUNG HÌNH ĐÃ VẼ ĐƯỢC CHO ĐẾN THỜI 
+ĐIỂM HIỆN TẠI CHO  THỜI GIAN ĐÃ TRÔI QUA 
+
+- Công thức tính FPS : 1 / (Thời gian giữa hai frame liên tiếp ). 
+
+- Ảnh hưởng đến trải nghiệm người chơi: 
+
++ FPS thấp có thể dẫn đến hiện tượng lang giật , kéo dài thời gian đáp ứng 
+của game. 
++ FPS cao cung cấp trải nghiệm mượt mà , giảm hiện tượng mờ hình và tăng 
+độ chính xác trong các trò chơi nhanh. 
+
+- Các nhà phát triển game thường cố gắng tối ưu hóa code và sử dụng kĩ thuật 
+tối ưu hóa đồ họa để đạt được FPS tốt nhất. 
+- Điều này bao gồm việc sử dụng kĩ thuật culling, giảm độ phân giải , sử 
+dụng kĩ thuật tối ưu hóa texture, và rất nhiều chiến lược khác. 
+
+- Tóm lại , FPS trong game là một yếu tố quan trọng để đảm bảo trải nghiệm 
+chơi game mượt mà và thú vị cho người chơi. Các nhà phát triển thường xuyên 
+theo dõi và tối ưu hóa FPS để tối ưu hóa hiệu xuất của game 
+
+- TÓM LẠI NHƯ NÀY : 
++ FPS quyết định độ giật lang của một con game 
++ FPS càng cao càng sướng(tầm 60 là đẹp), càng thấp càng giật 
+
+- Công thức tính FPS (Frames Per Second ) dựa trên thời gian giữa hai khung 
+hình liên tiếp. Công thức tính chính xác như sau : 
+
+FPS = 1/ (Thời gian giữa hai frame liên tiếp )
+
++ FPS là số khung hình được hiển thị mỗi giây 
+
++ Thời gian giữa hai frame liên tiếp được tính bằng đơn vị giờ đồng hồ, giây, 
+hoặc mili giấy, tùy thuộc vào đơn vị thời gian bạn đang làm việc. 
+
+==> Để tính FPS, bạn chỉ cần đo lường thời gian giữa hai lần cập nhật frame 
+liên tiếp và sử dụng công thức trên. Chia 1 cho thời gian đó sẽ cho bạn 
+số FPS tương ứng. Điều này giúp đánh giá hiệu suất của ứng dụng hoặc trò chơi, 
+và nếu bạn muốn đạt được mục tiêu nhất định (Ví dụ như 60b FPS ), bạn có thể 
+điều chỉnh cài đặt và tối ưu hóa để đạt được nó. 
+
+
+
+
+
+
+
+=======================================================================
+

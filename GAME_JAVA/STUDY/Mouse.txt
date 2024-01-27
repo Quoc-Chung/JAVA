@@ -1,0 +1,215 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Graphics;
+import java.awt.Color;
+
+
+public class OvalMoveApp {
+
+- BƯỚC 1: KHỞI TẠO BIẾN LƯU TRỮ CỬA SỔ KHUNG HÌNH 
+    private JFrame frame;
+    
+- BƯỚC 2: TẠO HAI BIẾN LƯU TRỮ VỊ TRÍ BAN ĐẦU CỦA HÌNH OVAL 
+    private int ovalX = 100;
+    private int ovalY = 100;
+
+
+- BƯỚC 3 :DÙNG HÀM KHỞI TẠO ĐỂ : 
+    + KHỞI TẠO VIỆC KHUNG HÌNH 
+    + TẠO MỘT BIẾN JPANEL DỂ THỰC HIỆN VIỆC VẼ HÌNH 
+    + THÊM SỰ KIỆN CHO CÁI BIẾN VỪA VẼ HÌNH ĐỂ THỰC HIỆN 
+    
+- BƯỚC 4 : THÊM CÁI BIẾN JPANEL ĐÓ VÀO KHUNG HÌNH THIẾT LẬP KHUNG HÌNH 
+
+
+    public OvalMoveApp() {
+        frame = new JFrame("Oval Move App");
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel drawPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.BLUE);
+                g.fillOval(ovalX, ovalY, 50, 30);
+            }
+        };
+
+        drawPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Khi nhấp chuột, cập nhật vị trí của hình oval
+                ovalX = e.getX() - 25;  // Để căn giữa hình oval theo điểm nhấp chuột
+                ovalY = e.getY() - 15;
+                drawPanel.repaint();  // Yêu cầu vẽ lại JPanel
+            }
+        });
+
+        frame.add(drawPanel);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new OvalMoveApp());
+    }
+}
+==================================================================================
+- Với sự kiện từ bàn phím thì cũng có thể làm tương tự các bước trên 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
+
+public class HinhVe {
+    public JFrame jframe;
+    public JPanel draw;
+    private int rectX = 100;
+    private int rectY = 100;
+    private int ovalX = 300;
+    private int ovalY = 100;
+    
+
+
+    public HinhVe() {
+        jframe = new JFrame();
+        jframe.setTitle("CHUONG TRINH TEST HINH VE");
+        jframe.setSize(500, 300);
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
+
+        // Tạo một đối tượng jPanel để vẽ, phải kế thừa từ JPanel
+        draw = new JPanel() {
+                @Override
+                public void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.setColor(Color.RED);
+                    g.fillRect(rectX, rectY, 50, 30);
+        
+                    g.setColor(Color.BLUE);
+                    g.fillOval(ovalX, ovalY, 50, 30);;
+                }
+        };
+
+
+
+        // Thêm key listener để di chuyển hình chữ nhật khi nhấn phím
+        draw.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // Không cần thiết lập
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // Không cần thiết lập
+            }
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // Di chuyển hình chữ nhật khi phím mũi tên được nhấn
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_LEFT) {
+                    rectX -= 10;
+                } else if (keyCode == KeyEvent.VK_RIGHT) {
+                    rectX += 10;
+                } else if (keyCode == KeyEvent.VK_UP) {
+                    rectY -= 10;
+                } else if (keyCode == KeyEvent.VK_DOWN) {
+                    rectY += 10;
+                }
+                // Yêu cầu vẽ lại JPanel
+                draw.repaint();
+            }
+        });
+
+
+
+        // Kích hoạt sự kiện cho JPanel
+        draw.setFocusable(true);
+
+
+
+        // Thêm JPanel vào JFrame
+        jframe.add(draw);
+
+
+
+        // Hiển thị JFrame
+        jframe.setVisible(true);
+
+
+
+        // Đảm bảo JFrame có focus
+        draw.requestFocusInWindow();
+    }
+
+
+
+    public static void main(String[] args) {
+       new HinhVe();
+    }
+}
+
+==================================================================================
+- Chúng ta rút ra được 1 quy luật là : 
+
++ Chúng ta lúc nào cũng phải sử dụng JFrame để hiển thị khung hình ( JFRAME )
+
++ Chúng ta muốn vẽ một cái gì đó thì sẽ sử dụng JPanel ( JPANEL )
+=> Chúng ta cũng có thể hiểu đơn giản là một biến muốn vẽ một cái l gì đó thì nó  
+luôn luôn phải kế thừa từ lớp JPANEL để từ đó ta phải thêm cái cần vẽ đó  vào khung  
+hình JFRAME mới hiển thị được.
+
++ Tiếp theo chúng ta sẽ phải thêm các sự kiện và sử lí các phương thức interface 
+ứng với bàn phím hay chuột 
+
+ draw.addKeyListener(new KeyListener(){});
+
+ drawPanel.addMouseListener(new MouseAdapter() {});
+
+====================================================================================
+- Hàm để vẽ một cái gì đó :
+
+       draw = new JPanel() {
+                @Override
+                public void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+
+                 - Các hàm xử lí việc vẽ - 
+                    g.setColor(Color.RED);
+                    g.fillRect(rectX, rectY, 50, 30);
+        
+                    g.setColor(Color.BLUE);
+                    g.fillOval(ovalX, ovalY, 50, 30);;
+                }
+        };
+
+===================================================================================
+- Các thư viện chúng ta cần setup như sau : 
++ Hai thư viện này được dùng cho hai đối tượng cụ thể 
+
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+import java.awt.Graphics;
+import java.awt.Color;
+
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+
+=================================================================================

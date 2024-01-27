@@ -1,0 +1,116 @@
+- Collections trong java là một Framework cung cấp một kiến trúc để lưu 
+trữ và thao tác tới tập hợp các đối tượng trong cùng một họ dữ liệu. 
+
+- Java Collection Framework cung cấp các khung hoạt động cho phép chúng 
+ta thực hiện các thao tác trên một họ đối tượng như tìm kiếm , sắp xếp ,
+chèn , xóa ,... 
+- Toàn bộ kiến trúc của java Collection dựa trên interface Collection để 
+từ đó xây dựng ra các interface và các class ứng với các cấu trúc dữ liệu 
+khác nhau 
+
+- Kiến trúc của Collection : 
+
+List Interface:
+
+    ArrayList:
+        Cấu trúc dữ liệu: Sử dụng mảng động để lưu trữ dữ liệu.
+        Ưu điểm: Truy cập ngẫu nhiên nhanh, thêm/xóa phần tử cuối cùng hiệu quả.
+        Nhược điểm: Thêm/xóa ở vị trí bất kỳ chậm.
+        Sử dụng khi: Đọc dữ liệu nhanh và thêm/xóa ở cuối danh sách là chủ yếu.
+
+    LinkedList:
+        Cấu trúc dữ liệu: Sử dụng danh sách liên kết để lưu trữ dữ liệu.
+        Ưu điểm: Thêm/xóa ở bất kỳ vị trí nào hiệu quả, tốt cho các thao tác thay đổi danh sách.
+        Nhược điểm: Truy cập ngẫu nhiên chậm hơn ArrayList.
+        Sử dụng khi: Cần thêm/xóa phần tử ở vị trí bất kỳ thường xuyên.
+
+    Vector:
+        Cấu trúc dữ liệu: Tương tự như ArrayList, nhưng được đồng bộ.
+        Ưu điểm: An toàn đa luồng, được đồng bộ.
+        Nhược điểm: Hiệu suất kém hơn ArrayList trong môi trường đa luồng.
+        Sử dụng khi: Cần đồng bộ trong môi trường đa luồng.
+
+    Stack:
+        Cấu trúc dữ liệu: Là một Vector với các phương thức được thêm để thực hiện các thao tác ngăn xếp (push và pop).
+        Ưu điểm: Cung cấp cấu trúc dữ liệu ngăn xếp.
+        Nhược điểm: Sử dụng Vector, có thể không hiệu quả trong một số trường hợp.
+        Sử dụng khi: Cần cấu trúc dữ liệu ngăn xếp.
+
+
+Set Interface:
+    HashSet:
+        Cấu trúc dữ liệu: Lưu trữ các phần tử duy nhất, không giữ thứ tự.
+        Ưu điểm: Tìm kiếm nhanh, không có phần tử trùng lặp.
+        Nhược điểm: Không giữ thứ tự chèn.
+        Sử dụng khi: Cần kiểm tra sự xuất hiện duy nhất của các phần tử.
+
+    LinkedHashSet:
+        Cấu trúc dữ liệu: Tương tự như HashSet, nhưng giữ thứ tự chèn.
+        Ưu điểm: Giữ thứ tự chèn, có thể sử dụng trong việc lấy dữ liệu theo thứ tự chèn.
+        Nhược điểm: Thêm/xóa hiệu suất thấp hơn HashSet.
+        Sử dụng khi: Cần duy trì thứ tự chèn của các phần tử.
+
+    TreeSet:
+        Cấu trúc dữ liệu: Sắp xếp các phần tử theo thứ tự tăng dần.
+        Ưu điểm: Tìm kiếm, thêm và xóa đều hiệu quả.
+        Nhược điểm: Hiệu suất có thể thấp hơn HashSet và LinkedHashSet.
+        Sử dụng khi: Cần duy trì thứ tự tăng dần của các phần tử.
+
+
+Queue Interface:
+    LinkedList:
+        Cấu trúc dữ liệu: Cung có thể sử dụng làm hàng đợi (Queue).
+        Ưu điểm: Hiệu suất tốt cho thêm/xóa ở đầu và cuối danh sách.
+        Nhược điểm: Truy cập ngẫu nhiên chậm hơn so với ArrayList.
+        Sử dụng khi: Cần thực hiện các thao tác hàng đợi.
+
+    PriorityQueue:
+        Cấu trúc dữ liệu: Ưu tiên phần tử theo một tiêu chí.
+        Ưu điểm: Trả về phần tử theo thứ tự ưu tiên.
+        Nhược điểm: Truy cập ngẫu nhiên chậm hơn.
+        Sử dụng khi: Cần ưu tiên phần tử dựa trên một tiêu chí.
+
+    Deque:
+        Cấu trúc dữ liệu: Double-ended queue, hỗ trợ thêm/xóa ở cả hai đầu.
+        Ưu điểm: Linh hoạt trong việc thực hiện các thao tác ở cả hai đầu.
+        Nhược điểm: Một số phương thức có thể không hiệu quả.
+        Sử dụng khi: Cần thực hiện các thao tác ở cả hai đầu của hàng đợi.
+
+    ArrayDeque:
+        Cấu trúc dữ liệu: Double-ended queue dựa trên mảng.
+        Ưu điểm: Hiệu suất tốt cho thêm/xóa ở cả hai đầu.
+        Nhược điểm: Không thích hợp cho thao tác ngẫu nhiên giống như LinkedList.
+        Sử dụng khi: Cần hiệu suất tốt cho thêm/xóa ở cả hai đầu.
+
+Map Interface:
+    HashMap:
+        Cấu trúc dữ liệu: Lưu trữ các cặp key-value, không giữ thứ tự.
+        Ưu điểm: Tìm kiếm, thêm và xóa đều hiệu quả.
+        Nhược điểm: Không giữ thứ tự của các cặp key-value.
+        Sử dụng khi: Cần lưu trữ và truy xuất dữ liệu theo key.
+
+    LinkedHashMap:
+        Cấu trúc dữ liệu: Tương tự như HashMap, nhưng giữ thứ tự chèn.
+        Ưu điểm: Giữ thứ tự chèn, có thể sử dụng trong việc lấy dữ liệu theo thứ tự chèn.
+        Nhược điểm: Thêm/xóa hiệu suất thấp hơn HashMap.
+        Sử dụng khi: Cần duy trì thứ tự chèn của các cặp key-value.
+
+    TreeMap:
+        Cấu trúc dữ liệu: Sắp xếp các phần tử theo thứ tự của key.
+        Ưu điểm: Tìm kiếm, thêm và xóa đều hiệu quả.
+        Nhược điểm: Hiệu suất có thể thấp hơn HashMap và LinkedHashMap.
+        Sử dụng khi: Cần duy trì thứ tự tăng dần của các cặp key-value.
+
+    SortedMap:
+        Cấu trúc dữ liệu: Interface định nghĩa một Map có thể được sắp xếp.
+        Ưu điểm: Cung cấp các phương thức để duyệt qua các entry theo thứ tự.
+        Nhược điểm: Cần được thực hiện bởi các lớp cụ thể như TreeMap.
+        Sử dụng khi: Cần các phương thức liên quan đến sắp xếp trong một Map.
+
+- Một số trường hợp : 
+    + Hash   : Không có thứ tự ( Hàm băm )
+    + Linked : Giữ thứ tự thêm phần tử vào ( Liên kết )
+    + Sorter : Có thể được sắp xếp 
+    + Tree   : Giữ thứ tự tăng dần . 
+
+

@@ -1,0 +1,84 @@
+- Luông trong java (Thread) là một khái niệm quan trọng trong lập trình  đa  
+luồng 
+- Một luồng thực thi độc lập một chương trình. Nó cho phép chương trình thực  
+hiện nhiều công việc đồng thời tăng hiệu suất và tương tác linh hoạt hơn.
+- Điều này có thể hữu ích khi bạn muốn thực hiện các tác vụ dài hạn, tránh 
+lâm đứt ngắn chương trình chính.
+- Để minh họa rằng mỗi luồng thực thi độc lập trong java, bạn có thể sử dụng 
+hai luồng in ra hai dãy khác nhau. 
+( VÍ DỤ DÙNG IN RA HAI LUÔNG VỚI CÁC GIÁ TRỊ TỪ 1 ĐẾN 5 ). 
+
+
+- Khi gọi phương thức start() trên một luồng trong Java, nó sẽ bắt đầu quá 
+trình chạy luồng đó và truy cập phương thức run () được định nghĩa trong 
+đối tượng được đưa vào tạo luông. 
+
+- Tuy nhiên , không có đảm bảo rằng luồng nào sẽ chạy trước khi bạn gọi 
+start() trên chúng.Thứ tự chạy của các luông có thể thay đổi giữa các lần 
+chạy của chương trình. Thực tế , việc xác định luồng nào chạy trước luông nào 
+sẽ chạy trước đối với các lần chạy khác nhau của chương trình là luông không 
+đoán trước được. 
+
+- Do đó, khi bạn gọi thread1.start() và thread2.start() , trong hàm "main" 
+cả hai luồng sẽ được bắt đầu chạy và có thể chạy song song với nhau. Tuy nhiên, 
+bạn ,không có đảm bảo về thứ tự chạy của chúng. Có thể luồn nào chạy trước 
+sẽ phụ thuộc vào quá trinh quản lí luồng và có thể thay đổi giữa các lần chạy. 
+
+
+==> Tóm lại là hai luồng có thể chạy song song với nhau. 
+================================================================================
+- Luông trong java có một số ứng dụng quan trọng , chủ yếu liên quan đến việc thực 
+hiện các tác vụ đồng thời , tăng cuồng hiệu hiệu suất vầ phản hồi của người 
+dùng trrong các ứng dụng đa nhiệm. 
+===============================================================================
+
+- Ôn tập lại hai cách tạo luồng : 
++ Cách 1 : Tạo luồng bằng cách kế thừa từ lớp Thread. Lớp Thread là một 
+lớp có sẵn trong java, cho phép tạo ra một lớp chạy đa tiến trình được. Để 
+tạo luồng bằng cách này , chúng ta phải tạo ra một lớp kế thừa từ lớp Thread 
+và ghi đè phương thức run() . Phương thức run() sẽ chứa những nhiệm vụ mà 
+mà luồng cần thực hiện khi được chạy
+==> Sau đó , chúng ta khởi tạo một đối tượng của lớp con và gọi phương thức 
+start() để bắt đầu chạy luồng 
+
+
+- Tạo một lớp MyThread kế thừa từ lớp Thread - 
+public class MyThread extends Thread {
+    - Ghi đè phương thức run -
+
+    @Override
+    public void run(){
+        System.out.println(" Xin chao ca nha ");
+    }
+}
+
+- Tạo một đối tượng của lớp  MyThread và gọi pt start() để chạy - 
+MyThread thread = new MyThread();
+thread.start();
+
+
+- Cách 2: Không kế thừa luồng nữa mà đi triển khai interface Runable 
+
+- Tạo một lớp MyRunnable triển khai từ giao diện Runnable-
+public class MyRunnable implements Runnable {
+    - Cài đặt phương thức run()-
+    @Override
+    public void run() {
+        System.out.println("Hello from MyRunnable");
+    }
+}
+
+- Tạo một đối tượng của lớp Thread, truyền vào một đối tượng của lớp MyRunnable và gọi phương thức start()
+MyRunnable myRunnable = new MyRunnable();
+Thread thread = new Thread(myRunnable);
+thread.start();
+
+
+===> Cấu trúc của luồng là một cấu trúc khi chạy chương trình Java thì nó 
+sẽ được chạy riêng, không quan tâm trong chương trình đó có những gì , nó chỉ 
+quan tâm đến nó không. 
+===> Luồng chỉ thực hiện những nhiệm vụ được gán cho nó trong phương thức 
+run(). 
+===> Luồng có thể tương tác với các luồng khác thông qua các phương thức 
+đồng bộ hóa hoặc các cơ chế truyền thông khác. 
+

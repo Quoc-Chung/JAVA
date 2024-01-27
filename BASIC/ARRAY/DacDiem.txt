@@ -1,0 +1,221 @@
+                  HÀM - ARRAY- ARRAY_LIST 
+- Viết hàm thì chúng ta sẽ viết nó trong class, nói chung là tất cả mọi thứ  
+chúng ta sẽ đều phả viết hết trong class. 
+- Tất cả các file trong C chính là một class.
+- Ta sẽ khai báo một đối tượng class để truy cập phương thức trong class. 
+
+public class Method{
+    int TinhTong(int a,int b){
+        return a+b;
+    }
+    int TinhHieu(int a,int b){
+        return a - b; 
+    }
+    int TinhNhan(int a ,int b){
+        return a*b;
+    }
+    int TinhThuong(int a,int b){
+        return (double)a/b;
+    }
+    public static void main(String[] args){
+        int a=1;
+        int b=2;
+        Method m = new Method();
+
+        int sum = m.TinhTong(a,b);
+        System.out.print("Sum : " + sum );
+    }
+}
+
+
+- Trước hàm chúng ta nên để public để khi chúng ta khai báo thì nó sẽ  
+truy cập một cách công cộng .
+======================================================================
+                            ARRAY_LIST 
+- Khi sử dụng với ArrayList thì lúc nào cũng phải import : 
+         import java.util.ArrayList;
+         import java.util.List;  
+
+- ArrayList trong java được sử dụng để lưu trữ bộ sưu tập các phần tử có  
+kích thước động. 
+- Một ArrayList tự động tăng kích thước của nó khi các phần tử mới được 
+thêm vào.
+- ArrayList là một phần của Collection Framework của java và thực hiện 
+List interface của java . 
+
+* Một số điểm chính của ArrayList : 
++ Là một mảng động (tự động tăng kích thước khi thêm phần tử vào hoặc ng lại )
++ ArrayList bên trong sử dụng một mảng để lưu trữ các phần tử, cho phép 
+lấy ra phần tử đó bằng chỉ mục 
+
++  Cho phép các giá trị trùng lặp và null 
++  Là một Collection theo thứ tự . Nó duy trì thứ tự chèn của các phần tử 
++  Không thể tạo ra một arrayList với kiểu dữ liệu nguyên thủy .  
+================================= 
+CÁC HÀM CỦA ARRAY_LIST 
+* add(PHẦN_TỬ) : Thêm mới một phần tử.
+* addAll(List) : Sao chép một list sang một ArrayList tạo bằng Collection. 
+* isEmpty() : Kiểm tra ArrayList rỗng 
+* size() : Kích thước của một ArrayList
+* get(CHỈ_SỐ) : Truy cập phần tử tại một chỉ mục cụ thể trong ArrayList 
+* set(CHỈ_SÔ,GIÁ_TRỊ_MỚI) : Sửa đổi phần tử tại một chỉ mục cụ thể trong ArrayList 
+* remove(CHỈ_SỐ) : Xóa bằng chỉ số 
+* remove(OBJECT) : Xóa bằng giá trị 
+* removeAll() : Xóa tất cả  
+* removeif() : Xóa bằng điều kiện 
+* clear () : Xóa một ArrayList.
+* contains(GIÁ_TRỊ) : Kiểm tra giá trị có trong Array_List không 
+* indexOf(GIÁ_TRỊ) : Tìm chỉ mục đầu tiên xuất hiện của giá trị 
+* lastIndexOf(GIÁ_TRỊ) : Tìm chỉ mục xuất hiện cuối  cùng . 
+
+=================================
+1. Tạo một ArrayList và thêm các phần tử mới cho nó : 
+- Tạo bằng cách sử dụng contructor ArrayList() để khởi tạo. 
+        List<String> animals = new ArrayList<>();         
+- Thêm một phần tử mới vào arrayList bằng phương thức add()
+
+2. Tạo một ArrayList từ Collection khác : 
+- Tạo bằng cách sử dụng hàm ArrayList(Collection c) tạo. 
+- Hàm này được sử dụng để tạo một đối tượng "Array_List" mới từ một 
+Collection khác . Collection là một giao diện trong java , nó là một khái 
+niệm trừu tượng của một nhóm đối tượng 
+- ArrayList là một lớp triển khaicuar giao diện List mà là một phân nhánh của 
+giao diện Collection 
+- Khi bạn tạo bằng hàm tạo này , bạn có thể chuyển một đối tượng "Collection" 
+và tạo ra một ArrayList mới chứa các phần tử từ Collection đó. 
+- Ví dụ : 
+   + Tạo một danh sách thông thường 
+   List<String> originalList = Arrays.asList("apple", "banana", "orange");
+
+   + Sử dụng một ArrayList(Collection c) để tạo một ArrayList từ danh sách đã có : 
+   ArrayList<String> arrayList = new ArrayList(originalList);
+
+   System.out.println("Các phần tử trong ArrayList:");
+    for (String element : arrayList) {
+            System.out.println(element);
+    }
+- Trong ví dụ này thì chúng ta ban đầu có một danh sách originalList chứa các  chuỗi 
+"apple" , "bananal" ,"orange" 
+- Sau đó, chúng ta sử dụng hàm tạo "ArrayList(Collection c) để tạo một ArrayList mới 
+từ danh sách "originalList" 
+- Cuối cùng, chúng ta hiển thị các phần tử trong "ArrayList" mới. Kết quả sẽ là các 
+phần tử "apple" , "banana" , "orange" theo thứ tự. 
+- Trong ngữ cảnh của cơ sở dữ liệu và bẳng băm (hash table ) , "Collection" (va chạm )
+xảy ra khi hai hoặc nhiều khóa (keys) được ánh xạ đến cùng một vị trí trong bảng băm. 
+
+3. Truy cập các phần tử từ một ArrayList : 
+
+4. Xóa các phần tử khỏi ArrayList : 
+- Loại bỏ một phần tử bằng chỉ mục : remove(int index) 
+- Xóa phần tử khỏi ArrayList : remove( Object o )
+- Xóa tất cả các thành phần khỏi ArrayList đã tồn tại trong Collection đã cho : removeAll()
+- Xóa bỏ một phần tử thỏa mãn một điều kiện nào đó : removeif()
+- Xóa một arrayList : clear()
+
+
+5. Tổng hợp các cách duyệt Array_List : 
+1. Duyệt bằng vòng for bình thường
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        // Duyệt qua các phần tử sử dụng vòng lặp for thông thường
+        System.out.println("Duyệt qua các phần tử bằng vòng lặp for:");
+      for (int i = 0; i < fruits.size(); i++) {
+            System.out.println(fruits.get(i));
+        }
+
+
+2. Duyệt bằng vòng lặp for-each ( range base for loop )
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        // Duyệt qua các phần tử sử dụng vòng lặp for-each
+        System.out.println("Duyệt qua các phần tử bằng vòng lặp for-each:");
+      for (String fruit : fruits) {
+            System.out.println(fruit);
+        } 
+
+   
+3. Sử dụng for-each và biểu thức lambda : 
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        // Duyệt qua các phần tử sử dụng phương thức forEach và lambda expression
+        System.out.println("Duyệt qua các phần tử bằng phương thức forEach và lambda expression:");
+        fruits.forEach(fruit -> System.out.println(fruit));
+
+4. Duyệt bằng for-each và tham chiếu phương thức 
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        // Duyệt qua các phần tử sử dụng phương thức forEach và tham chiếu phương thức
+        System.out.println("Duyệt qua các phần tử bằng phương thức forEach và tham chiếu phương thức:");
+         fruits.forEach(System.out::println);
+
+
+- Tóm lại với những bài như này thì chúng ta sẽ có rất nhiều cách để duyệt ARRAY_LIST:
++ Cách duyệt vòng for : 
+             for (int i = 0; i < fruits.size(); i++) {
+                 System.out.println(fruits.get(i));
+          }
++ Cách duyệt dùng for - each : 
+             for (String fruit : fruits) {
+                 System.out.println(fruit);
+          } 
++ Cách duyệt dùng  for-each và biểu thức lambda : 
+             fruits.forEach(fruit -> System.out.println(fruit));
++ Cách duyệt đùng for-each và tham chiếu phương thức : 
+             fruits.forEach(System.out::println);
+
+7. Tìm kiếm một phần tử trong ArrayList 
+- Kiểm tra xem một ArrayList có chứa một phần tử đã cho hay không : contains () 
+- Tìm chỉ mục của lần xuất hiện đầu tiên của một phần tử : indexOf() 
+- Tìm chỉ mục của lần xuất hiện cuối cùng của một phần tử : lastIndexOf() 
+
+===================================================================================
+7. Array_List của các đối tượng đo người dùng định nghĩa. 
+- Vì ArrayList hỗ trợ genneric (chung) , bạn có thể tạo ra Array_List thuộc bất kì 
+loại nào . 
+- Nó có thể là các loại đơn giản Integer , String, Double hoặc các loại phức tạp như 
+một ArrayList của ArrayLists hoặc một ArrayList của HashMaps hoặc một ArrayList của 
+baast kì người dùng định nghĩa các đối tượng.  
+
+==================================================================================================================
+GÀ LẠI LẬP TRÌNH : 
+
+- Do hạn chế của mảng : Không thể thêm , xóa phần tử 
+- Java cung cấp các tập Collection : Chúng ta có thể thêm , xóa và thay đổi kích
+thước của các tập này. 
+- Có hai lớp Collection thường gặp : ArrayList và HashMaps
+   + ArrayList : Nó giống như một mảng , nhưng có thể co giãn kích thước 
+các phần tử . 
+   + HashMaps : Cho phép bạn lưu trữ các cặp (key , value ) và tìm kiếm các 
+giá trị bằng key. 
+
+* Các để khai báo ArrayList : 
+       ArrayList <Type> ListName = new ArrayList<>();
+
+       ArrayList<Integer> a = new ArrayList<>();
+
+- Type ở đây chúng ta phải sử đụng wrapper class , tức là tất cả các chữ cái 
+thường của các kiểu dữ liệu này là chữ thường. 
+- Chương trình test : 
+    import java.util.ArrayList;
+    public class Array_List{
+        public static void main(String[] args){
+            - Khai báo list - 
+            ArrayList<Integer> a = new ArrayList<>();
+
+            - Khai báo với số lượng phần tử ban đầu  - 
+            ArrayList<Integer> b = new ArrayList<>(5);
+            
+        }
+    }

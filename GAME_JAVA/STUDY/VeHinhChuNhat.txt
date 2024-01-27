@@ -1,0 +1,168 @@
+import java.awt.Graphics;
+import javax.swing.JPanel;
+public class GamePanel extends JPanel {
+	public GamePanel() {
+
+	}
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.fillRect(100, 100, 200, 50);
+	}
+}
+public class MainClass {
+	public static void main(String[] args) {
+		new Game();
+	}
+
+}
+
+- Hàm này mô phỏng việc vẽ một hình chữ nhật
+- public void paintComponent(Graphics g) là một phương thức override từ lớp cha JPanel.Nó 
+được gọi tự động khi cần vẽ lại giao diện người dùng của JPanel. 
+
++ Graphics g là một đối tượng cung cấp các phương thức để vẽ hình ảnh và văn bản 
+trên thành phần  
++Gọi phương thức paintComponent của lớp cha. Điều này quan trọng để đảm bảo rằng bất kỳ vẽ 
+nào được thực hiện bởi lớp cha cũng được thực hiện. 
+Việc này giúp tránh gặp phải các vấn đề liên quan đến vẽ lặp lại (repainting) trong các ứng dụng GUI.
+g.fillRect(100, 100, 200, 50):
+
+Gọi phương thức fillRect của đối tượng Graphics để vẽ một hình chữ nhật.
+Cụ thể, hình chữ nhật sẽ được vẽ tại vị trí (100, 100) với chiều rộng 200 và chiều cao 50.
+
+- Tóm lại là sau này khi làm việc : 
+
++ JFrame chỉ cung cấp cho chúng ta một cái khung 
+
++ JPanel thì sẽ cung cấp các hình ảnh các cái nút , thiết lập các cái vị trí
+
+
+==> Tổng hợp hai cái này lại thì ta sẽ được một bức ảnh hoàn hảo (game windown)
+
+================================================================================
+           VẼ HÌNH ẢNH 
+
+
+package view;
+public class JPanelDraw extends  JPanel{
+
+  public JPanelDraw(){
+	this.setBackGround(Color.white);
+  }
+
+  @override 
+  protected void paintComponent(Graphics g){
+	super.paintComponent(g);
+	g.setColor(Color.RED);
+	g.drawLine(15,15,50,150);
+  }
+}
+
+import javax.swing.JFrame;
+public class DrawView extends JFrame{
+	public DrawView(){
+		this.setTitle("MOT CON CHO");
+
+		this.setSize(500,500);
+
+		this.setDefa....
+		this.setLocaltion....
+
+		JPanelDraw jpanel = new JPanelDraw();
+
+		this.setLayout (new BorderLayout());
+		this.add(JPanelDraw,BorderLayout.CENTER0);
+
+		this.setVisible(true);
+	}
+}
+
+=================================================================================
+- Để một thành phần ví dụ như là một hình vẽ được tạo ra có thể nhận được các sự 
+kiện từ bàn phím hoặc chuột thì chúng ta sẽ phải cấp cho nó quyền năng 
+
+==> CHÚNG TA GỌI QUYỀN NĂNG ĐÓ Ở ĐÂY LÀ SỰ TẬP TRUNG.
+- Mọi thành phần không thể tập trung sẽ không thể nhận được các sự kiện từ bàn 
+phím hoặc chuột. Sự tập trung có nghĩa là một thành phần (Component) sẽ dồn hết 
+mọi sự chú ý vào một nội dung , vấn đề cụ thể mà không để ý tới những tác động từ 
+bên ngoài. 
+
+- Sự tập trung sẽ giúp cho con người hay cụ thể là một thành phần có thể dồn hết 
+sự chú ý vào một cái gì đó. 
+- Rồi bây giờ chúng ta sẽ nghiên cứu đến việc một thành phần có thể tập trung bằng 
+cách nào  chúng ta sẽ phải làm liền hai thao tác 
+
+        (CHO PHÉP) ---------------------------------->  (YÊU CẦU)
+
++ Sử dụng setFocusable(true) cho phép một thành phần có sự tập trung. 
+
+
+- jpanel.setFocusable(true) cho phép jpanel có thể nhận được sự tập trung (focus) nếu 
+được yêu câu . Sự tập trung là khả năng của một thành phần (commponent) cần thiết 
+phải có để có thể nhận được các sự kiện từ bàn phím và chuột . Một thành phần không 
+thể tập trung sẽ không thể nhận được các sự kiện này. Mặc định JPanel đã có thể tập 
+trung nên câu lệnh này không thay đổi gì cả. 
+
+- jpanel.requestFocus(): Yêu cầu jpanel được tập trung .Tuy nhiên , bạn nên sử 
+đụng jpanel.requestFocusInWindow();
+
+
+- jpanel.repaint() yêu cầu jpanel được vẽ lại. Điều này có nghĩa là jpanel sẽ 
+gọi phương thức paintComponent của nó để cập nhật nội dung hiển thị trên màn hình.
+Bạn sẽ cần gọi phương thức này thay vì bạn muốn thay đổi hình ảnh của jpanel. Đối 
+với việc bạn muốn di chuyển một hình mà mình vẽ ban đầu từ vị trí này sang vị trí  
+khác thì phải có câu lệnh này để "MỘT HÌNH VẼ CÓ THỂ ĐƯỢC VẼ LẠI". 
+
+
+=================================================================================
+- Các đòng mã  : +  setFocusable(true)   thường được sử dụng trong lập 
+                 +  setVisible(true)
+				 +  requestFocus() 
+trình ĐỒ HỌA JAVA để đảm bảo rằng cửa sổ và các thành phần của nó có thể 
+NHẬN ĐƯỢC SỰ KIỆN TỪ BÀN PHÍM mà không cần tương tác với chuột. 
+
+- Khi một ứng dụng được khởi động : 
+
++ setFocusable(true) : Đảm bảo rằng cửa sổ JFrame và các thành phần  con 
+của nó có thể nhận được sự tập trung, tức là nó có thể nhận được các sự 
+kiện từ bàn phím. 
+
++ setVisible(true) đảm bảo rằng của sổ JFrame được hiển thị, tức là câu lệnh 
+này sẽ đảm bảo cấp quyền cho một cửa sổ khung hình có thể được hiển thị. 
+
++ drawPanel.requestFocus() : Yêu cầu drawPanel (JPanel) nhận được sự tập 
+trung , giúp nó nhận sự kiện từ bàn phím ngay khi ứng dụng khởi chạy. 
+===> Khi bạn chạy ứng dụng Snake , điều này giúp bạn bắt đầu điều khiển con 
+rắn mà không cần phải nhấn vào cửa sổ trước đó. 
+
+
+- Khi bạn cần sự tập trung vào một thành phần cụ thể : 
+		     		drawPanel.requestFocus() 
+			
+- Ý nghĩa để đảm bảo rằng drawPanel(Hoặc bất kì thành phần nào khác ) sẽ nhận được 
+sự kiện từ bàn phím mà cần phải nhấn chuột vào trước đó. 
+- Khi bạn muốn sử dụng bàn phím để điều khiển một trò chơi hoặc tương tác với 
+một thành phần cụ thể 
+
+
+- Những dòng mã này giúp đảm bảo rằng giao diện đò họa của bạn có thể tương tác 
+bằng cách sử dụng bàn phím ngay từ khi ứng dụng bắt đầu mà không cần phải thực 
+hiện các thao tác chuột  
+
+==========================================================================================
+
+- Các câu lệnh setFocusable(true) và drawPanel.requestFocus() thường đi kèm với 
+nhau trong trường hợp bạn muốn đảm bảo một thành phần cụ thể (Trong trường hợp này 
+là drawPanel) có thể nhận được sự tập trung và xử lí các sự kiện từ bàn phím. 
+
+- Một cái cấp quyền cho phép các thành phần chứa nó có thể nhận được sự kiện từ bàn 
+phím.
+- Một cái thì sau khi có quyền nhận sự kiện rồi thì sẽ yêu cầu nhận được sự tập 
+trung từ bàn phím . Bằng cách này thì người dùng có thể bắt đầu tương tác với ứng 
+dụng bằng cách sử dụng bàn phím ngay khi nó được hiển thị mà không cần phải nhấp 
+chuột vào drawPanel trước đó 
+
+===> Nói chung cả hai câu lệnh này thường được sử dụng cùng nhau để đảm bảo rằng 
+một thành phần cụ thể trong giao diện đồ họa có khả năng nhận sự kiện từ bàn phím 
+mà không cần tương tác với chuột trước đó. 
+

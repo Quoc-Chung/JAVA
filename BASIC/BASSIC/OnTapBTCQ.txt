@@ -1,0 +1,310 @@
+- Regex là tên viết tắt của Regular Expressions trong java, là một ngôn 
+ngữ mô tả các quy tắc mẫu (patten) để tìm và so khớp chuỗi trong các
+ngôn ngữ lập trình và các công cụ sử lí văn bản. 
+- Trong java, để sử dụng , làm việc với regex thì phải import một gói : 
+          import java.util.regex 
+
+- Java cung cấp hai lớp chính để làm việc với regex :
+                "Pattern" và "Matcher"
++ Pattern : Đối tượng này biểu diễn một biểu thức chính quy. 
++ Matcher : Đối tượng này sử dụng một mẫu (Pattern) để thực hiện các 
+phương thức so khớp ( Matching ) và tìm kiếm. 
+
+1. Cách tạo và sử dụng Pattern : 
+
+        import java.util.regex.*;
+        String regex = "abc";
+        Pattern pattern = Pattern.compile(regex);
+
+2. Sử dụng Matcher để so khớp : 
+       Matcher matcher = pattern.matcher("abcdef");
+       if (matcher.find()) {
+            System.out.println("Pattern found in the given text.");
+        }
+      else {
+            System.out.println("Pattern not found.");
+        }
+
+
+3. Các kí tự đặc biệt : 
+        .: Ký tự đại diện cho bất kỳ ký tự nào (ngoại trừ ký tự xuống dòng).
+        ^: Ký tự bắt đầu chuỗi.
+        $: Ký tự kết thúc chuỗi.
+
+4. Các kí tự đặc biệt cho số lần lặp : 
+        *: Xuất hiện 0 hoặc nhiều lần.
+        +: Xuất hiện 1 hoặc nhiều lần.
+        ?: Xuất hiện 0 hoặc 1 lần.
+        {n}: Xuất hiện chính xác n lần.
+        {n,}: Xuất hiện ít nhất n lần.
+        {n,m}: Xuất hiện từ n đến m lần.
+
+5. Kí tự bộ lọc : 
+        [abc]  : Bất kì kí tự nào trong dãy abc  
+        [^abc] : Bất kì kí tự nào không thuộc dãy abc 
+
+6. Bộ lọc chữ số và chữ cái : 
+
+        \d: Đại diện cho bất kỳ ký tự số nào (0-9).
+        \D: Đại diện cho bất kỳ ký tự không phải số.
+        \w: Đại diện cho bất kỳ ký tự chữ (a-z, A-Z), số (0-9), hoặc dấu gạch dưới (_).
+        \W: Đại diện cho bất kỳ ký tự nào không phải là chữ hoặc số.
+        \s: Đại diện cho bất kỳ ký tự trắng nào, bao gồm cả dấu cách, tab, và xuống dòng.
+        \S: Đại diện cho bất kỳ ký tự nào không phải là ký tự trắng.
+
+- Ví dụ về sử dụng regex để tách một chuỗi thành một mảng chuỗi : 
+         String input = "apple  orange,banana  buoi";
+         String[] fruits = input.split("\s+");
+         System.out.println(Arrays.toString(fruits)); 
+
+
+- Ví dụ thực hiện việc thay thế và tách chuỗi : 
++  Với bài này thì chúng ta phải kết hợp với hàm thay thế tất cả kí tự 
+trong một chuỗi và biến chúng thành kí tự thay thế : 
+         CHUỖI.replaceAll(KÍ_TỰ_CẦN_THAY , KÍ_TỰ_TA_MUỐN_THAY_THÀNH) 
+      
+        String input = "Hello 123 World";
+        String result = input.replaceAll("\\d", "*");
+        System.out.println(result);  // Output: Hello *** World
+
+- Quay đi quản lại thì chung quy chúng ta sẽ phải tổng hợp hai đối tượng:
+          Pattern pattern = Pattern.compile(BIỂU_THỨC_CHÍNH_QUY);
+ 
+          Matcher matcher = pattern.matcher(CHUỖI_IN_PUT);
+
+
+- Một số câu lệnh đặc biệt : 
+       + So khớp chuỗi : 
+              matches : 
+
+              equals  : 
+       + Tách chuỗi : 
+              matches(Regex) --> Trả về boolean 
+
+              replaceAll(Regex_Cần_Thay, Thay_Bằng) --> Trả về String
+               
+              replaceFirst(Regex_Cần_Thay, Thay_Bằng) --> Trả về String 
+
+              split(regex) --> Trả về String[] 
+
+              split(regex,limit_int) --> Trả về String[] 
+
+- Ví dụ về một số hàm đặc biệt này : 
+-------------------------------------------------------------------------
+1.matches : Trả về một giá trị boolean chỉ ra liệu toàn bộ chuỗi có khớp 
+với biểu thức chính quy cho trước hay không. 
+
+            String text = "Hello123";
+            boolean isMatch = text.matches("[A-Za-z0-9]+");
+            System.out.println(isMatch);  // Output: true
+-------------------------------------------------------------------------
+2.equals : Kiểm tra xem hai chuỗi có bằng nhau hay không. 
+            String str1 = "Xin chào";
+            String str2 = "Xin chào";
+            boolean isEqual = str1.equals(str2);
+            System.out.println(isEqual);  // Kết quả: true
+           
+-------------------------------------------------------------------------
+3. replaceAll (Regex_Cần_Thay,Thay_Bằng ): Thay thế tất cả các kí tự xuất 
+hiện trong biểu thức chính quy được chỉ địn bằng chuỗi thay thế 
+
+            String input = "abc123xyz";
+            String result = input.replaceAll("[0-9]", "*");
+            System.out.println(result);  // Kết quả: abc***xyz
+
+-------------------------------------------------------------------------
+4. replaceFirst(Regex_Cần_Thay,Thay_Bằng) : Thay thế kí tự xuất hiện trong 
+biểu thức chính quy lần đầu tiên bằng kí tự chỉ định trong hàm. 
+            String input = "abc123xyz";
+            String result = input.replaceFirst("[0-9]", "*");
+            System.out.println(result);  // Kết quả: abc*23xyz
+
+-------------------------------------------------------------------------
+5. split(regex) : Dùng để tách chuỗi thành mảng kí tự, thường được dùng 
+để tách một chuỗi thành một mảng các từ,... 
+            String input = "táo,cam,chuối";
+            String[] fruits = input.split(",");
+            for (String fruit : fruits) {
+                System.out.println(fruit);
+            }
+
+            // Kết quả:
+            // táo
+            // cam
+            // chuối
+-------------------------------------------------------------------------
+6. split(regex,limit_int): Tách chuỗi thành mảng các chuỗi con dựa trên 
+biểu thức chính quy, giới hạn bởi một giấ trị cụ thể, 
+            String input = "táo,cam,chuối";
+            String[] fruits = input.split(",", 2);
+            for (String fruit : fruits) {
+                System.out.println(fruit);
+            }
+            // Kết quả:
+            // táo
+            // cam,chuối
+-------------------------------------------------------------------------
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+- IMPORT CÁI GÓI NÀY ĐỂ KIỂM TRA XEM HỢP LỆ KHÔNG - 
+import java.util.Date;
+public class EmailValidate{
+    public static boolean Email_Hop_Le(String email){
+        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"; 
+
+        Pattern patternXXXX = Pattern.compile(regex);
+
+        Matcher matcher = patternXXXX.matcher(email);
+        return matcher.matches();
+    }
+
+
+
+     public static boolean isValidPhoneNumber(String phoneNumber) {
+        // Cho phép các ký tự số, dấu cộng (+) ở đầu, và có thể có khoảng trắng
+        String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10,}$";
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(phoneNumber);
+
+        return matcher.matches();
+    }
+    
+      
+     public static boolean isValidDateOfBirth(String dob) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);  // Tắt chế độ linh hoạt (lenient) để kiểm tra ngày tháng năm chính xác
+        try {
+            Date date = sdf.parse(dob);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+
+    public static void main(String[] args){
+
+    }
+}
+            
+- Phân tích ý nghĩa của các bước của những bài toán kiểm tra nhập hợp lệ : 
++ Đầu tiên để làm được những bài trên thì chúng ta lúc nào cũng phải chuẩn bị một 
+chuỗi regex để xem xem cái chuỗi mà ta nhập vào mà khóp với cái regex này thì ta sẽ 
+hiểu rằng các chuỗi nhập vào là đúng định dạng. 
++ String regex = ""; Khai báo một biến kiểu chuỗi có tên là regex và gán nó cho một 
+biểu thức chính quy.
+
++ Tiếp theo ta phải khởi tạo đối tượng pattern : 
+                   Pattern pattern = Pattern.compile(regex);
+--> Tạo một đối tượng Pattern từ biểu thức chính quy đã khai báo ở bên trên. Đối 
+tượng Pattern là một biểu diễn được biên dịch của một biểu thức chính quy , và nó 
+có thể được sử dụng để tạo  các đối tượng kiểu Matcher để thực hiện các thao tác 
+so khớp và tìm kiếm trên các chuỗi. 
+
++ Tiếp theo từ cái đối tượng "pattern" mà ta vừa khởi tạo ở bên trên thì ta sẽ 
+dùng nó  kết hợp với hàm matcher để khởi tạo một đối tượng Matcher . 
+--> Đối tượng Matcher là một công cụ thực hiện các thao tác khớp , tìm kiếm , thay 
+thế trên các chuỗi theo một biểu thức chính quy. 
+
++ return matcher.matches(); Trả về một biến kiểu boolean cho biết liệu biểu thức 
+chính quy có khớp hoàn toàn với chuỗi input không . Nếu nó trả về true , nếu không 
+có trả về false. 
+
+==> Các bước này có mối liên kết như sau : 
++ Đầu tiên , bạn định nghĩa một biểu thức chính quy để mô tả một mẫu số biểu thức 
+chính quy. 
++ Sau đó bạn sễ biên dịch cái biểu thức chính quy thành một đối tượng Pattern để sử 
+dụng lại nhiều lần 
++ Tiếp theo thì bạn tạo một đối tượng Matcher để so sánh một chuỗi cụ thể với biểu 
+thức chính quy. Cuối cùng thì bạn  trả về kết quả của việc so sánh đó. 
+
+===================================================================================
+                         CÁC HÀM CỦA ĐỐI TƯỢNG PATTERN 
++ compile(String regex) : Tạo một đối tượng Pattern từ biểu thức chính quy được  
+cung cấp. 
+            String regex = "[a-zA-Z]+";
+            Pattern pattern = Pattern.compile(regex);
+
++ matcher("IN_PUT") : Tạo một đối tượng Matcher từ chuỗi đầu vào đựa trên biểu
+thức chính quy. 
+            String input = "Hello123";
+            Matcher matcher = pattern.matcher(input);
+
+--->  Các hàm của đối tượng pattern thường được dùng để khởi tạo đối tượng là chính. 
+--->  Nê nhớ chúng ta dùng đối tượng Pattern đdịch của biểu thức chính quy và từ đó 
+nó sẽ có thể biểu diễn nó được nhiều lần. ể biểu diễn một biểu thức chính quy 
+thành các đối tượng Pattern để biểu diễn biễn được nhiều lần ở phía sau.  
+
+
+===================================================================================
+                       CÁC HÀM CỦA ĐỐI TƯỢNG MATCHER 
++ matches() : Kiểm tra xem toàn bộ chuỗi có khớp với biểu thức chính quy hay không. 
+           boolean isMatch = matcher.matches();
+
++  find() : Tìm kiếm một chuỗi con khớp với biểu thức chính quy hay không 
+           boolean found = matcher.find();
+
++ group() : Trả về một chuỗi con cuối cùng khớp với biểu thức chính quy. 
+           String matchedGroup = matcher.group();
+
++ start() : Trả về vị trí bắt đầu của chuỗi con cuối cùng khớp 
+           int startPos = matcher.start();
+
++ end()  : Trả về vị trí kết thúc của chuỗi con cuối cùng khớp.
+
++ group(int group): Trả về chuỗi con của nhóm cụ thể khớp với biểu thức chính quy.
+
+            String group1 = matcher.group(1);
+
++ groupCount(): Trả về số lượng nhóm trong biểu thức chính quy.
+            int groupCount = matcher.groupCount();
+
++ Sự đặc biệt của hàm find() của đối tượng Matcher trong java được sử dụng để tìm 
+kiếm một chuỗi con khớp với biểu thức chính quy trong chuỗi đầu vào. 
+          + Hàm find() không chỉ tìm kiếm một chuỗi con khớp đầu tiên mà nó gặp mà 
+nó còn tiếp tục tìm kiếm liên tục trong toàn bộ chuỗi đàu vào. Nếu có nhiều chuỗi con 
+khớp ,nếu khớp thì bạn có thể gọi find() nhiều lần để lây các kết quả khác nhau . 
+          + Sau mỗi lần gọi find() vị trí bắt đầu của tìm kiếm sẽ là vị trí kết thúc 
+của chuỗi con trước đó mà nó tìm thấy. Điều này cho phép tìm kiếm liên tục từ vị trí 
+cuối cùng đã tìm thấy. 
+          + Hàm finđ() thường được sử dụng trong một vòng lặp để lặp qua tất cả các  
+chuỗi con  khớp trong chuỗi đầu vào. 
+
+import java.util.regex 
+
+public class FindExample{
+    public static void main(String[] args){
+        String text = "apple, orange,banana, apple";
+
+        -- Tạo đối tượng pattern biên dịch biểu thức chính quy -- 
+        Pattern pattern = Pattern.compile("apple");
+
+        -- Tạo đối tượng Matcher từ chuỗi  đầu vào -- 
+        Matcher matcher = pattern.matcher(text);
+
+        -- Tìm và in ra tất cả các chuỗi con khớp -- 
+        while (matcher.find()) {
+            String match = matcher.group();
+            int start = matcher.start();
+            int end = matcher.end();
+            System.out.println("Found: " + match + " at positions " + start + "-" + end);
+        }
+    }
+}
+
+--> Nó sẽ in ra : Found: apple at positions 0-5
+                  Found: apple at positions 22-27
+
+==========================================================================================
+
+
+
+
+
+
+
+
+

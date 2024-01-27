@@ -1,0 +1,332 @@
+- Kiểm tra 1 kí tự có phải kí tự thường không : 
+                        Character.isLowerCase(KÍ_TỰ)
+========================================================================
+- Kiểm tra 1 kí tự có phải kí tự hoa không : 
+                        Character.isUpperCase(KÍ_TỰ)
+========================================================================
+
+- Kiểm tra 1 kí tự có phải kí tự  số hay không : 
+                        Character.isDigit(KÍ_TỰ)
+=======================================================================
+- Chuyển 1 kí tự từ thường sang hoa : 
+                        char HOA = Character.toUpperCase(THƯỜNG);
+
+=======================================================================
+- Chuyển 1 kí tự từ hoa sang thường : 
+                        char THUONG = Character.toLowerCase(HOA);
+
+=======================================================================
+- Chuyển một chuỗi từ thường sang hoa : 
+            - Cho CHUOI_THUONG String
+        String CHUOI_HOA = CHUOI_THUONG.toUpperCase();
+
+=======================================================================
+- Chuyển một chuỗi từ hoa sang thường : 
+            - Cho CHUOI_HOA String
+        String CHUOI_THUONG = CHUOI_HOA.toLowerCase();
+
+=======================================================================
+- Truy xuất một kí tự cụ thể trong chuỗi :  charAt(CHỈ_SỐ)
+        String example = "Hello";
+        -- Lấy ra kí tự ở chỉ số 2 ( l )
+        char characterAtIndex2 = example.charAt(2); 
+=======================================================================
+
+- Phương thức truy xuất các phần tử từ 1 vị trí đến cuối chuỗi :
+       String word = "example";
+       String result = word.substring(1);  --> xample 
+=======================================================================
+
+- Tách một chuỗi thành một mảng : 
+        String[] words  = CHUOI.split("\s+");
+========================================================================
+- Kiểm tra một kí tự có phải kí tự khoảng trắng trong java không : 
+        Character.isWhitespace(' ');
+
+- Dưới đây là một bài test loại bỏ khoảng trắng : 
+         public String LoaiBoKhoangTrang(String s){
+        String tmp = new String();
+        for (char x : s.toCharArray()){
+            if(!Character.isWhitespace(x)){
+               tmp += x;
+            }      
+        }
+         return tmp;
+    }
+
+========================================================================
+- Ta có thể duyệt qua một chuôi String bằng nhiều cách nhưng cách thông 
+dụng nhất mà ta hay dùng đó là việc kết hợp giữa việc dùng : 
+     toCharArray để chuyển đối chuỗi sang mảng kí tự 
+     charAt để truy cập vào từng kí tự trong mảng đối tượng :  
+
+
+        String str = "Hello";
+        for (char ch : str.toCharArray()) {
+           - Ứng với mỗi một ch là một kí tự trong chuỗi srt -
+            System.out.println(ch);
+        }
+
+
+========================================================================
+- Viết hoa tất cả các chữ cái đầu của một chuỗi : 
+        String VIET_HOA_CHU_DAU = "tôi muốn đưa tất cả chữ đầu viet hoa";
+        ---- Tách chuỗi thành mảng các từ ----
+        String[] words = VIET_HOA_CHU_DAU.split("\\s+");
+        
+        ---- Bay gio thi cac tu da duoc luu vao trong mang ----
+
+        ---- Chuyển đổi tất cả các chữ cái đầu của từ thành viết hoa ----
+        StringBuilder result = new StringBuilder();
+        ----Duyet qua tung tu ----
+        for (String word : words){
+            
+result.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+        }
+
+- Lớp StringBuilder và lớp StringBuffer là hai lớp trong java được sử dụng để 
+thao tác với các chuỗi có thể thay đổi .
+- Cả hai lớp đều được cung cấp phương thức thêm , xóa , sửa , nối , đảo ngược , cắt ,.... 
+- Còn phương thức append () là một phương thức Java của các lớp StringBuilder và StringBuffer nối 
+thêm một số giá trị vào chuỗi hiện tại
+
+    StringBuilder s = new StringBuilder(“I love Java ”);
+    int i = 14;
+  -- Thêm số  i vào cuối chuỗi -- 
+    s.append(i);
+    System.out.println(s);
+==========================================================================
+- Cách nhập  một kí tự dùng Scanner : 
+       char CHECK_HOA = scanner.next().charAt(0);
+  với : 
+     + scanner.next() : Đọc một chuỗi từ dòng lệnh 
+     + charAt(0) : Lấy ra kí tự đầu tiên của chuỗi đã đọc. 
+    
+==========================================================================
+                     KIỂM TRA MỘT KÍ TỰ NHẬP VÀO CÓ LÀ KÍ TỰ HOA KHÔNG 
+
+import java.util.*;
+
+public class Kiem_Tra_Ki_Tu_Dau_Vao {
+    public static void main(String[] args){
+        Scanner  scanner = new Scanner(System.in);
+        char CHECK_HOA;
+
+        while(true){
+            truy{
+               System.out.print("Nhap mot ki tu hoa : ");
+               CHECK_HOA = scanner.next().charAt(0);
+               if(Character.isUpperCase(CHECK_HOA)){
+                   System.out.println("Ki tu hoa da nhap :"+ CHECK_HOA);
+                   break;
+               } 
+               else{
+                   System.out.println("Ki tu vua nhap khong la ki tu hoa ");
+                   System.out.println("VUI LONG NHAP LAI);
+               }
+            }
+            catch(Exception e ){
+                -- Đọc và loại bỏ dữ liệu không mong muốn từ bàn phím  --
+                  scanner.nextLine(); 
+            }
+        }
+        scanner.close();
+    }
+}
+- Trong đoạn mã java bạn đã đưa ra , nextLine() được sử dụng để đọc và loại bỏ 
+dữ liệu không mong muốn từ bàn phím trong khối catch
+- Cụ thể , khi bạn sử dụng scanner.next().charAt(0) để đọc một kí tự ,có thể 
+có trường hợp dữ liệu không mong muốn (Như kí tự xuống dòng ) được giữ lại trong 
+bộ đệm của Scanner.
+- Nếu bạn không sử dụng scanner.nextLine() là một cách để loại bỏ dữ liệu đó 
+để tránh cái lần scanner tiếp theo nó sẽ tự động lấy cái kí tự trong bộ đệm đó 
+để đọc --> Dẫn đến bị trôi lệnh --> Không có cơ hội nhập kí tự lần sau. 
+
+- Tóm lại thì bằng cách sử dụng nextLine() trong khối catch thì chúng ta sẽ 
+đảm bảo rằng dữ liệu không mong muốn bị loại bỏ và con trỏ dòng lệnh sẽ nằm ở 
+dòng tiếp theo , chuẩn bị cho lần nhập kế tiếp. 
+
+
+
+import java.util.ArrayList;
+
+public class Chuoi {
+    public boolean Check(char[] Special, char KiTu) {
+        for (int i = 0; i < Special.length; i++) {
+            if (Special[i] == KiTu) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void PhanLoaiKiTu(String s) {
+        char[] tmp = s.toCharArray();
+        int dem1 = 0, dem2 = 0;
+        ArrayList<Character> specialList = new ArrayList<>();
+
+        for (int i = 0; i < tmp.length; i++) {
+            if (Character.isDigit(tmp[i])) {
+                dem1++;
+            } else if (Character.isAlphabetic(tmp[i])) {
+                dem2++;
+            } else {
+                if (!Check(specialList.toArray(new Character[0]), tmp[i])) {
+                    specialList.add(tmp[i]);
+                }
+            }
+        }
+
+        char[] specialArray = new char[specialList.size()];
+        for (int i = 0; i < specialArray.length; i++) {
+            specialArray[i] = specialList.get(i);
+        }
+
+        System.out.println(dem1 + " " + dem2 + " " + specialArray.length);
+    }
+
+    public static void main(String[] args) {
+        Chuoi c = new Chuoi();
+        c.PhanLoaiKiTu("Hello123@World!");
+    }
+}
+
+
+
+============================================================================
+
+                    CHUỖI TRONG JAVA 
+- Chuỗi với vai trò đối tượng thì trong java chuỗi có ba thể hiện : 
++ String: Bất biến
++ StringBuilder : Khả biến , multi-thread
++ StringBuffer  : Khả biến , Single-thread
+- Đều là các đối tượng chứ không phải mảng kí tự 
+
+- Một số hàm thông dụng trong java () :
+----------------------------------------------------------------------------------------------------- 
+1.CÁC PHƯƠNG THỨC KIỂM TRA CỦA LỚP STRING 
+[] length() : Trả về độ dài của chuỗi 
+        String str = "Hello, World!";
+        int len = str.length(); // len sẽ là 13 
+
+
+[] charAt(int index ) : Trả về kí tự ở vị trí chỉ định trong chuỗi  
+        String str = "Hello";
+        char ch = str.charAt(1); // ch sẽ là 'e'
+
+[] getChars (int Nguồn_Bắt_Đầu , int Nguồn_Kết_Thúc , Mảng_Lưu_Trữ ,int Vị_Trí_BĐ_Lưu_Trũ);
+--> Sao chép một phần của chuỗi vào một mảng kí tự 
+        String str = "Hello , Word!" ;
+        char[] charArray = new char[5]; 
+        str.getChars(0,5,charArray, 0);
+
+        charArray sẽ là ['H', 'e', 'l', 'l', 'o']
+       
+[] getBytes() : Trả về một mảng byte biểu diễn của chuỗi .
+        
+        String str = "Hello, World!";
+        byte[] byteArray = str.getBytes();
+
+[] hashCode() : Trả về mã băm của chuỗi 
+        String str = "Hello";
+        int hash = str.hashCode();
+
+----------------------------------------------------------------------------------------------------
+2.PHƯƠNG THỨC SSO SÁNH CỦA LỚP STRING 
+
+[] equals(Object obj) : So sánh nội dung của hai chuỗi 
+        String str1 = "Hello";
+        String str2 = "Hello";
+        String str3 = new String("Hello");
+
+        boolean result1 = str1.equals(str2); // true
+        boolean result2 = str1.equals(str3); // true
+           
+[] equalsIgnoreCase(String another) : So sánh nội dung của hai chuỗi  không phân biệt 
+hoa thường. 
+        
+        String str1 = "Hello";
+        String str2 = "hello";
+        boolean result = str1.equalsIgnoreCase(str2); 
+
+[] compareTo(String another) : So sánh hai chuỗi theo thứ tự từ điển 
+        String str1 = "Apple";
+        String str2 = "Banana";
+        String str3 = "Apple";
+
+        int result1 = str1.compareTo(str2); // < 0
+        int result2 = str1.compareTo(str3); // 0
+ 
+[] compareToIgnoreCase(String another): So sánh hai chuỗi theo thứ tự từ điển,
+không phân biệt chữ hoa và thường.
+        String str1 = "apple";
+        String str2 = "Banana";
+
+        int result = str1.compareToIgnoreCase(str2); // > 0
+
+
+[] regionMatches(int a1,String Chuoi_Khac_So_Sanh,int a2 , int len ){
+    a1 : Vị trí bắt đầu so sánh của chuỗi gốc 
+    String Chuoi_Khac : Chuỗi đem so sánh với chuỗi gốc  
+    a2 : Vị trí bắt đầu của chuỗi mang đi so sánh 
+    len : Độ dài so sánh ( Áp dụng cho cả hai chuỗi ). 
+}
+
+        String str1 = "Hello, World!";
+        String str2 = "World";
+        boolean result = str1.regionMatches(7, str2, 0, 5);
+            
+MỘT SỐ MẸO RÚT RA : + Có IgnoreCase : Không phân biệt hoa thường 
+                        equals     : So sánh nội dung 
+                        compareTo  : So sánh theo thứ tự từ điển  
+                    + Công thức chung : 
+                           CHUỖI_GỐC.HÀM(CHUỖI_SO_SÁNH_CÙNG)
+
+---------------------------------------------------------------------------------------------------
+3. CÁC PHƯƠNG THỨC CHUYỂN ĐỔI CỦA LỚP STRING :
+
+[] startsWith(String prefix) : Kiểm tra chuỗi có bắt đầu bằng một chuỗi khác hay không 
+
+[] endsWith(String suffix) : Kiểm tra chuỗi có kết thúc bằng một chuỗi khác hay không 
+            String str = "Hello, World!";
+            boolean startsWithHello = str.startsWith("Hello"); // true
+            boolean endsWithWorld = str.endsWith("World!"); // true
+        
+[] indexOf(String str) : Trả về vị trí xuất hiện đầu tiên của một chuỗi trong chuỗi gốc 
+
+[] lastIndexof(String str) : Trả về vị trí xuất hiện cuối cùng của một chuỗi 
+
+            String str = "Hello, World!";
+            int firstIndex = str.indexOf("o"); // firstIndex sẽ là 4
+            int lastIndex = str.lastIndexOf("o"); // lastIndex sẽ là 8
+
+
+[] substring(int beginIndex) : Trả về một phần của chuỗi bắt đầu từ vị trí chỉ định .
+
+
+            String str = "Hello, World!";
+            String subStr = str.substring(7); // subStr sẽ là "World!"
+
+
+[] concat(String str) : Nối chuỗi hiện tại với một chuỗi khác 
+            String str1 = "Hello, ";
+            String str2 = "World!";
+            String result = str1.concat(str2); // result sẽ là "Hello, World!"
+
+
+[] replace(char x , char y ): Thay thế tất cả các kí tự x bằng kí tự y trong chuỗi .
+            String str = "Hello, World!";
+            String replacedStr = str.replace('o', 'a'); // replacedStr sẽ là "Hella, Warld!"
+
+====================================================================================================
+        MỘT SỐ MẸO RÚT RA TRONG QUÁ TRÌNH LÀM BÀI TẬP  
+
+  words[i] = Character.toUpperCase(words[i].charAt(0)) + words[i].substring(1);
+-  Trên đây là cách chuyển một từ từ viết thường sang viết hoa chữ đầu : 
+charAt(CHỈ_SỐ) : Truy cập một vị trí bất kì trong từ  
+substring(CHỈ_SỐ) : Được sử dụng để trích xuất một phần của chuỗi bắt đầu từ  
+chỉ số "beginIndex" đến hết chuỗi. 
+
+
+====================================================================================================
+       

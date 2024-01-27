@@ -1,0 +1,41 @@
++  Đại diện cho cửa sổ chính của khung hình của cửa sổ : 
+    private JFrame mainFrame;
++ Tiếp theo chúng ta sẽ thiết lập cho khung hình của chúng ta về kích thước , vị trí 
+, màu sắc , layout ,....
+        /* - Khởi tạo khung hình -*/
+        mainFrame = new JFrame();
+        /* - Đặt tiêu đề cho khung hình - */
+        mainFrame.setTitle("GIAO DIEN TEST JPANEL ");
+        /* - Đặt kích thước cho khung hình - */
+        mainFrame.setSize(600, 300);
+
+        /*- Đặt cửa sổ ra giữa màn hình - */
+        mainFrame.setLocationRelativeTo(null);
+
+        /*- Tắt trạng thái khung hình -*/
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /* - Hiển thị khung hình - */
+        mainFrame.setVisible(true);
+
+
++ Tạo một biến lưu trữ nội dung(nhãn) cho phần đầu cửa sổ :
+    private JLabel TÊN_NHÃN;
+
++ Tạo nội dung cho nhẵn 
+    TÊN_NHÃN.setText("DEO BIET NOI NHU NAO");
+
+
+
++ Khởi tạo bảng điều khiển : 
+    private JPanel BẢNG_ĐIỀU_KHIỂN;
+
+    BẢNG_ĐIỀU_KHIỂN = new JPanel();
+
++ Đặt layout (Cách bố trí các phần tử ) cho khung hình 
+   
+    BẢNG_ĐIỀU_KHIỂN.setLayout(new GridLayout(3,1));
+
++ Thêm nhãn vào khung hình 
+
+    KHUNG_HÌNH.add(TÊN_NHÃN, BorderLayout.NORTH);
+   

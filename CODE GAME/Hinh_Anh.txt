@@ -1,0 +1,64 @@
+private void importImg() {
+		InputStream is = getClass().getResourceAsStream("/player_sprites.png");
+
+		try {
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		subImg = img.getSubimage(1 * 64, 8 * 40, 64, 40);
+		g.drawImage(subImg, (int) xDelta, (int) yDelta, 128, 80, null);
+
+}
+
+- Loat hình ảnh, trong hàm importImg() hình ảnh được đọc từ tệp  "/player_sprites.png" 
+trong thư mục resources. 
+
+- Trong hàm paintComponent (Graphics g) , một phần của hình ảnh (subimge) được 
+cắt từ hình ảnh chính img bằng cách sử dụng getSubimge với các tham số  
+x,y,width, height
+ 
+- subImg = img.getSubimage(1 * 64, 8 * 40, 64, 40) sử dụng phương thức 
+getSubimage được cắt một phần nhỏ của hình ảnh "img". 
+
++ img : Là biến đại diện cho hình ảnh chính mà bạn muốn cắt từ đó. Trong trường 
+hợp này , giả sử img là biến BufferedImage hoặc một loại hình ảnh khác.
++ getSubimage (1*64 , 8*40, 64,40) là cuộc gọi phương thức getSubImage , mà
+bạn sử dụng để cắt phần nhỏ của hình ảnh. Các phương thức trong chương trình 
+này là : 
+
+     + X : Là tọa độ x của điểm bắt đầu cắt phần nhỏ. Trong trường hợp này, nó được  
+tính là 1*64 , tức là 64 pixel từ trái sang phải 
+     + Y : Là tọa độ y của điểm bắt đầu cắt phần nhỏ . Nó được tính là 8 * 40 , tức là 
+     320 pixel từ trên cao xuống 
+
+     + 
+
+- Trong java, BufferedImage là một lớp cụ thể của gói java.awt.image được sử dụng 
+để làm việc với hình ảnh. 
+- Mặc dù Java cung cấp giao diện Image trong gói java.awt nhưng Image là giao diện 
+trừu tượng đơn chỉ định một hình thứ chung của hình ảnh, còn BufferedImage là 
+một lớp cụ thể sử dụng nó. 
+
+- Ké thừa từ lớp Image , nó mở rộng cung cấp phương thức cụ thể để quản lí và xử 
+lí hình ảnh một cách cụ thể. 
+
+====================================================================================
+                 getSubimage(int x, int y, int w, int h)
+- x là tọa độ x (hoành độ) của góc trái trên của phần hình ảnh con (subimage) mà bạn 
+muốn cắt ra tù hình ảnh chính. 
+- y là tọa độ y (hoành độ ) của góc trái trên cùng của hình ảnh con 
+
+w: Chiều rộng của phần hình ảnh con mà bạn muốn cắt ra từ hình ảnh chính, cũng được đo 
+lường theo pixel.
+
+h: Chiều cao của phần hình ảnh con mà bạn muốn cắt ra từ hình ảnh chính, cũng được đo 
+lường theo pixel.
+

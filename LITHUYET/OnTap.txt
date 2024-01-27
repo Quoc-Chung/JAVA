@@ -1,0 +1,72 @@
+
+- Lớp tiện ích Array : 
+
+
+- import thư viện để làm việc với lớp Array : 
+                java.util.Arrays
+------------------------------------------------------------------------
+- Sắp xếp mảng : 
+    int number [] = {5, 6, 7,1, 3, 4, 2};
+    Array.sort(number);
+    System.out.println("Sorted array: " + Arrays.toString(numbers));
+------------------------------------------------------------------------
+
+- Chuyển đổi một mảng thành một chuỗi , thường phục vụ mục đích in ra một 
+mảng: 
+   System.out.println("Array content: " + Arrays.toString(numbers));
+   Array content: [1, 2, 3, 4, 5]
+
+------------------------------------------------------------------------
+- Tìm kiếm trong mảng : 
+    int number [] = {5, 6, 7,1, 3, 4, 2};
+    int index = Arrays.binarySearch(MẢNG, GIÁ_TRỊ_TÌM_KIẾM);
+    int index = Arrays,binarySearch(number, 4);
+
+    System.out.println("Index of 5: " + index);
+
+------------------------------------------------------------------------
+- Sao chép một mảng sang mảng mới : 
+    + SAO CHÉP MẢNG A SANG MẢNG B 
+    int[] B = Arrays.copyOf(A, 3);
+    (3 ở đây là giá trị kích thước của mảng mới.)
+
+
+-------------------------------------------------------------------------
+- Điền giá trị vào mảng : 
+    
+    int[] filledArray = new int[5];
+    Arrays.fill(filledArray, 42);
+    System.out.println("Filled array: " + Arrays.toString(filledArray));
+
+-------------------------------------------------------------------------
+- Kiểm tra mảng rỗng : 
+
+    int[] emptyArray = {};
+    boolean isEmpty = Arrays.isEmpty(emptyArray);
+    System.out.println("Is the array empty? " + isEmpty);
+
+------------------------------------------------------------------------
+
+ - Lấy min- max từ mảng : 
+    int[] values = {3, 8, 1, 6, 2};
+    int minValue = Arrays.stream(values).min().orElse(0);
+    int maxValue = Arrays.stream(values).max().orElse(0);
+    System.out.println("Min value: " + minValue);
+    System.out.println("Max value: " + maxValue);
+        
+================================================================================
+- Các phương thwusc có trong slide : 
++ Chuyển đổi một mảng sang List với kiểu tương ứng: 
+    List<Integer> b = Array.asList(a);
+
++ Tìm vị trí xuất hiện đầu tiên bằng thuật toán tìm kiếm nhị phân : 
+    int index = Arrays.binarySearch(a,8);
+
++ Sắp xếp các phần tử tăng dần : 
+    Array.sort(a);
+
++ Chuyển đổi một mảng sang chuỗi , thường được dùng để in ra một mảng có kích 
+thước n phần tử.
+   String s = Arrays.toString(a);
++ Gán 1 giá trị cho  các phần tử mảng : 
+    Arrays.fill(a,6);

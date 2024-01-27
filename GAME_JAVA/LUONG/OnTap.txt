@@ -1,0 +1,138 @@
+- Đa luồng là một cơ chế quan trọng, điểm nổi bật trong lập trình java. 
+- Chúng ta chỉ tương tác trên máy ảo của java nên nó hỗ trợ chúng ta rất 
+nhiều trong quá trình  làm việc với đa luồng. 
+
+- Đa luồng (multithreading) cho phép nhiều nhiệm vụ (task) trong chương 
+trình thực thi đồng thời. 
+
+- Một thread là một luồng thực thi từ đầu đến kết thúc của một nhiệm vụ (task).
+
+- Một trong những đặc trưng mạnh mẽ của JAVA là hỗ trợ tạo sẵn và thực thi 
+đa luồng , cũng như khóa các tài nguyên liên quan để ngăn xung đột. 
+
+- Đa luồng giúp tăng hiệu năng và tính tương tác của chương trình. 
+
+- Cứ hiểu là trong một chương trình thì sẽ có nhiều tab hoạt động cùng lúc thì 
+mỗi tab đó chính là một luồng. 
+
+- Nhiều luồng chạy trên nhiều CPU , chia sẻ trên cùng một CPU. 
+=================================================================================
+
++ Multithreading : Đa luồng. 
++ Multitasking   : Đa tiến trình.
+
+- Đa luồng và đa tiến trình được sử dụng để tạo ra hệ thống đa nhiệm 
+- Một chương trình > 2 luồng chạy song song => ĐA LUỒNG 
+
+- Luồng là đơn vị nhỏ nhất trong chương trình có thể thực hiện một công 
+việc riêng biệt và các luồng này được quản lí bởi máy ảo JAVA. 
+
+- CÁCH TẠO LUỒNG TRONG JAVA : 
+
++ Trong java thì nó cung cấp  cho chúng ta một lớp tên là Thread 
++ Thread là 1 lớp có thể tạo ra 1 lớp chạy đa tiến trình được. 
++ Trong java , chúng ta có hai cách chính để tạo ra luông dó là : 
+    + Tạo một đối tượng của lớp kế thừa lớp Thread .
+    + Implements từ một interface có thên là Runnable.
+
++ Hai cách trên có những điểm giống nhau nhưng cũng có những điểm khác 
+nhau: 
+
+   + Giống nhau là đều dùng để tạo luồn 
+   + Khác nhau là nếu tạo một luồng từ lớp Thread thì chúng ta không thể kế 
+thừa thêm một lớp nào khác vì ngôn ngữ lập trình Java không hỗ trợ tính đa 
+kế thừa. 
+   + Còn nền chúng ta tạo luồng bằng cách implements interface Runnable thì 
+chúng ta có thể kế thừa một lớp khác ngoài lớp Thread. 
+
+
+1. Tạo luông bằng cách kế thừa từ lớp Thread
++ chúng ta phải tạo một lớp kế thừa từ lớp Thread
++ Tiếp theo chúng ta sẽ tiến hành ghi đè phương thức run() của lớp Thread. 
+==> Những gì có trong phương thức run() này sẽ được thực thi khi luồng 
+bắt đầu chạy .
+
+
+public class MyThread extends Thread {
+ 
+    @Override
+    public void run() {
+        super.run();
+        for (int i = 0; i < 5; i++) {
+            // Thread.currentThread().getName(): cho chúng ta biết tên luồng đang chạy
+            // và tên luồng này có thể thay đổi được.
+            System.out.println(Thread.currentThread().getName());
+        }
+    }
+ 
+}
+public static void main(String[] args) {
+        // Tạo ra luồng myThread0 từ lớp MyThread       
+        MyThread myThread0 = new MyThread();
+        myThread0.start();  // kích hoạt luồng
+}
+
+
+2. Tạo luồng bằng cách implements interface Runnable 
+
+public class DemoThread implements Runnable {
+ 
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+ 
+    }
+ 
+}
+
+DemoThread demoThread0 = new DemoThread();
+        Thread thread0 = new Thread(demoThread0);
+        thread0.start();
+
+- Sử dụng luồng giúp chia  sẻ thuộc tính giữa các luồng trong chương trình. 
+
+================================================================================
+- Chung quy lại thì chúng ta luôn nhớ rằng có hai cách tạo luồng trong java : 
+class MyThread extends Thread{
+    @Override 
+    public void run(){
+        .... Các câu lệnh mà luồng sẽ thực thi ....
+    }
+}
+
+- Tạo và khởi động luồng - 
+
+MyThread myThread = new MyThread();
+myThread.start();
+
+----------------------------------------------------------------
+class MyRunable implements Runable{
+    @Override 
+    public void run(){
+        .... Các câu lệnh mà luồng sẽ thực thi ....
+    }
+}
+
+- Tạo và khởi động luồng - 
+MyRunable myrunable = new MyRunable();
+Thread thread = new Thread(myrunable);
+thread.start();
+----------------------------------------------------------------
+- Có thể sử dụng một số phương thức của lớp Thread : 
++ start() : Bắt đầu dừng . 
+
++ setName(String name ) : Đặt tên cho luồng  
++ getName() : Lấy tên cho luồng 
+==> Y NHƯ HƯỚNG ĐỐI TƯỢNG 
+
++ setPriority(int priority) : Đặt độ ưu tiên cho luồng (Từ 1 - 10 );
++ getPriority() :Lấy độ ưu tiên của luồng 
+
++ sleep() : Tạm dừng luồng trong khoảng thời gian nhất định tính bằng mili giây 
+
++ join() : Chờ luông kết thúc trước khi tiếp tục luồng khác. 
+
++ interrupt() : gửi yêu cầu ngắt luồng 
+
+
++ isAlive() : Kiểm tra xem luồng có đang chạy hay không. 

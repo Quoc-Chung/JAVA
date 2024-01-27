@@ -1,0 +1,54 @@
+- Lớp trừu tượng Abstract Class không được dùng để khởi tạo đối tượng mà 
+nó được dùng như một bản thiết kế để khởi tạo đối tượng 
+
+Abstract class DongVat{
+    public void ngu(){
+        System.out.println("Dong vat ngu");
+    }
+}
+
+
+public class Main{
+    public static void main(String[] args){
+        DongVat dongvat = new DongVat();
+    }
+}
+==> Báo lỗi vì không thể khởi tạo đối tượng từ lớp trừu tượng  
+- Để sử dụng được lớp trừu tượng thì cần có một lớp kế thừa lại cũng như 
+triển khai lớp trừu tượng. 
+
+
+class Dog  extends DongVat{
+
+}
+
+public class Main{
+    public static void main(String[] args){
+        DongVat dongvat = new Dog();
+        dongvat.ngu();
+    }
+}
+
+ - Phương thức trừu tượng là phương thức được khai báo nhưng không có trình 
+triển khai . Nó trái hoàn toàn với phương thức trừu tượng có phần khai báo là 
+phần thân. 
+- Đéo có body thì là phương thức trừu tượng.
+
+- Lớp trừu tượng có phương thức trừu tượng ( Phương thức đéo có body) thì 
+lớp kế thừa lại lớp trừu tượng đó phải triển khai cái phương thức trừu 
+tượng của lớp cha ra không thì nó đéo chạy được đâu.
+- Lưu ý khi triển khai phương thức trừu tượng thì phải dùng từ khóa ghi đề 
+(@Override) 
+
+
+- Từ khóa Abstract khác interface như thế nào : 
++ interface nó  chỉ có  các phương  thức trừu tượng (Đéo có body )
++ trong lớp trừu tượng Abstract vừa có phương thức trừu tượng vừa có phương 
+thức đã được triển khai sẵn 
+
++ Để kế thừa interface thì dùng implement
++ Để kết thừa Abstract thì dùng extends
+
++ Nếu trong class của cả hai đều có phương thức trừu tượng thì cái thằng con 
+mà triển khai lại cái thằng cha thì bắt buộc nó phải triển khai hết.
+

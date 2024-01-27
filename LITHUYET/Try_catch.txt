@@ -1,0 +1,163 @@
++ ArithmeticException: Ném khi một phép toán số học không hợp lệ được
+thực hiện, chẳng hạn như chia cho 0.
+
++ ArrayIndexOutOfBoundsException: Ném khi một chỉ mục mảng được truy cập 
+vượt qua giới hạn của mảng.
++ StringIndexOutOfBoundsException: Ném khi một chỉ mục chuỗi được truy
+cập vượt qua chiều dài của chuỗi.
+-> Cha của hai thằng này là : IndexOutOfBoundsException
+
++ NullPointerException: Ném khi một phép toán được áp dụng cho một tham
+chiếu mà giá trị của nó là null.
+
++ IllegalArgumentException: Ném khi một phương thức nhận đối số không hợp 
+lệ.
+
++ InputMismatchException: Thường được sử dụng khi đầu vào không phù hợp 
+với định dạng mong đợi.
+
++ ClassCastException: Ném khi có một lỗi ép kiểu không hợp lệ.
+
++ FileNotFoundException: Ném khi một file được yêu cầu không được tìm 
+thấy.
+
++ IOException: Lớp cha cho nhiều loại exception xảy ra khi làm việc 
+với đầu vào/đầu ra.
+
++ InterruptedException: Ném khi một thread đang chờ, ngủ hoặc đang xử 
+lý bị gián đoạn.
+
++ NoSuchElementException: Ném khi không có phần tử nào được tìm thấy
+trong một tập hợp hoặc một trình duyệt.
+
++ NumberFormatException: Ném khi một chuỗi không thể chuyển đổi thành 
+một kiểu số hợp lệ.
+
++ SecurityException: Ném khi có một vấn đề liên quan đến an ninh.
+
++ RuntimeException: Lớp cha cho nhiều loại exception runtime, bao gồm 
+ArithmeticException, NullPointerException,...
+
+============================================================================
+- Trong java, từ khóa ném được sử dụng để ném một exception . Khi một 
+điêu kiện không hợp lệ xảy ra trong chương trình , bạn có thể sử dụng  
+throw để tạo và ném một exception thông báo rằng có một số vấn đề xảy ra
+
+- Dưới đây là cách công thức cơ bản để sử dụng "throw" : 
+     
+       throw new Kiểu_Exception(" Thông điệp mô tả lý do lỗi. ");
+
++ ExceptionType :Là tên của loại exception bạn muốn ném , ví dụ của nó là : 
+ArithmeticException, IllegalArgumentException, IOException
+exception
++ "Thông điệp mô tả lí do lỗi" : Là một chuỗi mô tả lí do xảy ra .
+Đây là thông điệp bạn muốn kiểm tra hiển thị khi exception được bắt. 
+
+- Các ví dụ ném : 
+
++ Ném "ArithmeticException" khi chia cho 0 : 
+       throw new ArithmeticException("Chia cho 0 không hợp lệ.");
+
++ Ném "ArrayIndexOutOfBoundsException" khi truy cập phần tử ngoài giới 
+hạn của mảng : 
+       throw new ArrayIndexOutOfBoundsException("Chỉ mục mảng nằm ngoài giới hạn.");
+
++ Ném " NullPointerException " khi thực hiện phép toán trên một tham số null 
+       throw new NullPointerException("Tham chiếu không được phép là null.");
+ 
++ Ném IllegalArgumentException khi đối số của phương thức không hợp lệ:
+       throw new IllegalArgumentException("Đối số không hợp lệ.");
+
+- Tóm lại việc ném một exception trong ngôn ngữ java (và nhiều ngôn ngữ 
+khác ) có ý nghĩa chính là thông báo về việc có một tình huống bất thường, 
+lỗi, hoặc điều kiện đặc biệt xảy ra trong quá trình thực thi chương trình.
+
+- Khi một phần của mã chạy vào một trạng thái không mong muốn hoặc không 
+thể xử lí , ném một exception là cách thông báo về điều đó. 
+- Ý nghĩa chính của việc ném exception bao gồm :  
+    + Thông báo lỗi 
+    + Dừng thực thi chương trình 
+    + Xác định vấn đề và quyết định cách xử lí 
+--> Tóm lại việc ném exception giúp kiểm soát lỗi, cung cấp thông điệp chi 
+tiết về vấn đề xảy ra và giúp chương trình chuyển đến xử lí exception một 
+cách linh hoạt. 
+
+- Dưới đây là một số ví dụ minh họa cho các trường hợp exception bạn đã liệt
+kê : 
+
+
+
+Dưới đây là một số ví dụ minh họa cho các trường hợp exception bạn đã liệt kê:
+
+
+ArithmeticException:
+public class Example {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0; // Phép chia cho 0
+        } catch (ArithmeticException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+}
+
+
+
+ArrayIndexOutOfBoundsException:
+public class Example {
+    public static void main(String[] args) {
+        try {
+            int[] array = {1, 2, 3};
+            int value = array[5]; // Truy cập chỉ mục vượt quá giới hạn của mảng
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+}
+
+
+
+StringIndexOutOfBoundsException:
+public class Example {
+    public static void main(String[] args) {
+        try {
+            String str = "Hello";
+            char ch = str.charAt(10); // Truy cập chỉ mục chuỗi vượt quá chiều dài
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+}
+
+
+
+NullPointerException:
+public class Example {
+    public static void main(String[] args) {
+        try {
+            String str = null;
+            int length = str.length(); // Thực hiện phép toán trên tham chiếu null
+        } catch (NullPointerException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+}
+
+
+
+IllegalArgumentException:
+public class Example {
+    public static void main(String[] args) {
+        try {
+            validateInput(-5); // Gọi phương thức với đối số không hợp lệ
+        } catch (IllegalArgumentException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+
+    private static void validateInput(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Đối số không hợp lệ.");
+        }
+    }
+}

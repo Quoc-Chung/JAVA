@@ -1,0 +1,34 @@
+- Để xây dựng lớp Paint (Sơn) cho phép người dùng thực hiện các thao tác
+với các hình bao gồm : Point , Circle , Line , Triangle, Rectangle,...
+- Người ta xây dụng nên không gian các hình với cách tiếp cận OOP 
+
+- Xây dựng một interface định nghĩa các phương thức : 
++ Nhóm tính toán : Diện tích (area) , Chu vi (perimeter) , Khoảng Cach(distance)...
++ Nhóm biến đổi : Tịnh tiến( move ) , Xoay(rotate ), thay đổi (Zoom),...
++ Dựa trên interface Shape , xây dựng các lớp tương ứng với các đối 
+tượng. 
+
+- Yêu cầu : 
+    + Cài đặt interface Shape dựa trên các phương thức của Shape(Tính toán 
++ Biến đổi )
+    + . Cài đặt các lớp tương ứng với các phương thức đã được mô tả
+trong <<interface>> Shape.
+   * Point, Circle, Line, Triangle, Rectangle ...
+   * attributes/constructors/getters and setters/toString
+   * area/perimeter/distance/move/rotate/zoom
+
+- Xây dựng chương trình chính : 
+   + Tạo một tệp các hình ngẫu nhiên và đưa vào trong danh sách để quản 
+lí.
+   + Thực hiện hiển thị danh sách các hình đã tạo ra 
+   + Tinh tổng chu vi và diện tích các hình đã tạo ra và tìm hình có diện 
+tích lớn nhất / nhỏ nhất
+   
+   + Biến đổi các hình bằng cách phóng to các hình với tỉ lệ ratio 
+
+
+- Các từ mới : 
+ + Enlarge : Phóng to 
+ + Tỉ lệ : Ratio 
+ + area : Diện tích 
+ + Calculate : tính toán 

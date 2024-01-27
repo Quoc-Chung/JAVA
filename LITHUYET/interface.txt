@@ -1,0 +1,174 @@
+- Trong java thì interface là một hợp đồng hay là một quy chuẩn chung yêu 
+cầu các nhóm lập trình viên dựa vào cái quy chuẩn đó viest phần mềm theo đúng 
+yêu cầu của họ theo quy chuẩn nhưng mà quy chuẩn chung. 
+
+- Trong java thì giao diện là một kiểu tham chiếu tương tự như lớp , chỉ có
+thể chứa các hằng số, chữ kí phương thức, phương thức mặc định , phương 
+thức tĩnh và kiểu lồng nhau. 
+
+- Thân phương thức chỉ tồn tại đối với các phương thức mặc đinh và phương thức 
+tĩnh. Các giao diện không thể được khởi tạo , nhưng chúng có thể được triển 
+khai bởi các lớp hoặc được mở rộng bởi các giao diện khác .
+
+- Cứ hiểu rằng một interface là một tập hợp các phương thức trừu tượng (phương 
+thức chỉ có khai báo chứ đéo triển khai). 
+- interface cung cấp một cách các phương thức để định nghĩa các hành vi chung 
+mà nhiều lớp có thể chia sẻ mà không cần phải sử dụng đa kế thừa. 
+- Một lớp có thể triển khai nhiều interface , giúp tăng tính linh hoạt và 
+tái sử dụng trong mã nguồn java.
+
+- Dưới đây là một ví dụ đầy đủ chi tiết để minh họa sức mạnh của interface 
+trong java. 
+
+
+- Định nghĩa một interface có tên Shape 
+interface Shape {
+    double calculateArea(); // Phương thức tính diện tích
+    double calculatePerimeter(); // Phương thức tính chu vi
+}
+
+- Lớp hình tròn triển khai interface Shape 
+
+class Circle implements Shape {
+
+    private double radius;
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+- Lớp hình vuông triển khai interface Shape
+class Square implements Shape {
+    private double side;
+
+    public Square(double side) {
+        this.side = side;
+    }
+
+    @Override
+    public double calculateArea() {
+        return side * side;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 4 * side;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Tạo đối tượng hình tròn
+        Circle circle = new Circle(5.0);
+        System.out.println("Area of Circle: " + circle.calculateArea());
+        System.out.println("Perimeter of Circle: " + circle.calculatePerimeter());
+
+        // Tạo đối tượng hình vuông
+        Square square = new Square(4.0);
+        System.out.println("Area of Square: " + square.calculateArea());
+        System.out.println("Perimeter of Square: " + square.calculatePerimeter());
+    }
+}
+
+- Trong ví dụ này , Shape là một interface với hai phương thức trừu 
+tượng calculateArea và calculatePerimeter . Cả hai lớp Circle và Square 
+đều triển khai interface này và cung cấp triển khai cụ thể cho các phương 
+thức tính diện tích và chu vi . Điều này giúp chúng ta có thể sử dụng các 
+đối tượng của các lớp này theo cách thống nhất bất kể loại hình học nào 
+đang được sử dụng. 
+
+- Trong java , từ kháo @Override được sử dụng để chỉ ra rằng một phương thức 
+trong lớp con đang ghi đè (override) một phương thức từ lớp cha hoặc một 
+interface . Việc sử dụng @override không bắt buộc , nhưng nó giúp đảm bảo 
+rằng phương thức trong lớp con thực sự đang cố gắng ghi đè một phương thức 
+trong lớp cha hoặc một interface . Và nếu có lỗi nào đó ( Ví dụ như sai tên 
+hay sai phương thức thì trình biên dịch sẽ thông báo lỗi ). 
+
+- Hãy xem xét một ví dụ cho thấy rõ được sức mạnh của interface : 
+// Định nghĩa interface ElectronicDevice
+interface ElectronicDevice {
+    void turnOn();
+    void turnOff();
+    boolean isOn();
+}
+
+// Lớp TV triển khai interface ElectronicDevice
+class Television implements ElectronicDevice {
+    private boolean powerOn;
+
+    @Override
+    public void turnOn() {
+        powerOn = true;
+        System.out.println("TV is turned on.");
+    }
+
+    @Override
+    public void turnOff() {
+        powerOn = false;
+        System.out.println("TV is turned off.");
+    }
+
+    @Override
+    public boolean isOn() {
+        return powerOn;
+    }
+}
+
+// Lớp Smartphone triển khai interface ElectronicDevice
+class Smartphone implements ElectronicDevice {
+    private boolean powerOn;
+
+    @Override
+    public void turnOn() {
+        powerOn = true;
+        System.out.println("Smartphone is turned on.");
+    }
+
+    @Override
+    public void turnOff() {
+        powerOn = false;
+        System.out.println("Smartphone is turned off.");
+    }
+
+    @Override
+    public boolean isOn() {
+        return powerOn;
+    }
+}
+
+// Chương trình chính để thử nghiệm
+public class Main {
+    public static void main(String[] args) {
+        ElectronicDevice tv = new Television();
+        ElectronicDevice phone = new Smartphone();
+
+        // Bật và tắt thiết bị
+        tv.turnOn();
+        phone.turnOn();
+
+        tv.turnOff();
+        phone.turnOff();
+
+        // Kiểm tra trạng thái của thiết bị
+        System.out.println("Is TV on? " + tv.isOn());
+        System.out.println("Is Smartphone on? " + phone.isOn());
+    }
+}
+
+- Trong ví dụ này thì một ElectronicDevice là một interface có chứa các 
+phương thức chung cho việc bật , tắt và kiểm tra trạng thái của một thiết 
+bị điện tử . Cả hai lớp Television và Smartphone đều triển khai interface 
+này . Nhờ đó chúng ta có thể quản lí các đối tượng của cả hai thiết bị bằng 
+cách sử dụng chung một giao diện , giúp tăng cường tính linh hoạt và giảm 
+sự phụ thuộc vào chi tiết cụ thể của từng lớp. 
+

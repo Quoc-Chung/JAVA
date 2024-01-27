@@ -1,0 +1,3 @@
+- Functional Interface : Là Interface có duy nhất một phương thức trừu 
+tượng. 
+- 

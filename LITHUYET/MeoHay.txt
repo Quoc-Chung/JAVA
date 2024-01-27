@@ -1,0 +1,25 @@
+- Tôi có một cấu trúc thư mục : 
+   package 
+       class 1
+       class 2 
+       class 3
+- Tôi muốn các class có thể sử dụng được phương thức của nhau trong cùng một class thì phải biên dịch 
+riêng từng file trên terminal.  
+- Tiếp theo tôi sẽ chỉ chạy file main mà thôi 
+
++ Công thức biên dịch : 
+   javac  TÊN_PACKAGE\TÊN_CLASS.java
+   java  TÊN_CLASS_CHỨA_PHƯƠNG_THỨC_MAIN  
+
+- Ví dụ tôi có một tổ chức file bên dưới : 
+    package SoPhucFull 
+        class SoPhuc.java
+        class TapSoPhuc.java
+        class Main.java 
+
+==> Tôi sẽ chạy các câu lệnh sau trên terminal : 
+        PS D:\Documents\KI 2 NĂM 2\CONG NGHE JAVA\BASIC\SLIDE> javac SoPhucFull\SoPhuc.java
+        PS D:\Documents\KI 2 NĂM 2\CONG NGHE JAVA\BASIC\SLIDE> javac SoPhucFull\TapSoPhuc.java
+        PS D:\Documents\KI 2 NĂM 2\CONG NGHE JAVA\BASIC\SLIDE> javac SoPhucFull\Main.java
+        PS D:\Documents\KI 2 NĂM 2\CONG NGHE JAVA\BASIC\SLIDE> java Main
+========================================================================================================================================

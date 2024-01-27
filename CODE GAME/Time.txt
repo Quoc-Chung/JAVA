@@ -1,0 +1,12 @@
+-  JAVA cung cấp cho chúng ta một số cách để lấy thời gian hệ thống như 
+sau : 
+
++    start = System.nanoTime();   start lấy thời gian theo nanosecond
+
++    start = System.currentTimeMillis();  start lấy thời gian theo millisecond
+
+
++    1 nanosecond = 10 ^(-9) seconds ( Giây )
++    1 millisecond = 10 ^ (-3) seconds ( Giây )
+
+

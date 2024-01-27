@@ -1,0 +1,186 @@
+- Từ khóa static trong java được sử dụng để chỉ định rằng một thành viên của 
+một lớp (Thường là thuộc tính hoặc phương thức ) là thuộc về lớp chứ không phải 
+của đối tượng được tạo từ lớp đó 
+--> Điều này cũng thấy rõ chỉ gọi được phương thức tĩnh bằng TÊN_LỚP trực tiếp
+luôn chứ không gọi bằng (ĐỐI TƯỢNG + TOÁN TỬ CHẤM )
+
+- Tất cả các đối tượng của lớp chia sẻ cùng một bản sao của biến static hoặc có
+thể gọi đến phương thức static mà không cần tạo một đối tượng. 
++ Hiểu cái này như này rất là dễ hiểu nghĩa là 1 cái lớp class chứa một cái 
+THUỘC TÍNH TĨNH thì khi mà tạo ra các đối tượng từ cái lớp đó ví dụ như ta có : 
+
+class LOP_MẪU {
+    public static KIỂU_DỮ_LIỆU  x;
+    .............
+
+    -- Hàm Tạo -- 
+    public LOP_MẪU(){
+        x= 0;
+    }
+
+    public void Tăng(){
+        x ++;
+    }
+    public void NhanHai(){
+        x = x2;
+    }
+
+}
+
+LỚP_MẪU ĐỐI_TƯỢNG_1 = new LỚP_MẪU();
+LỚP_MẪU ĐỐI_TƯỢNG_2 = new LỚP_MẪU(); 
+
++ Đây nhìn cái mẫu bên trên này nghĩa là hai cái đối tượng này sẽ cùng chia sẻ
+một bản sao, tức là sẽ dùng chung cùng tác động đến đối tượng tĩnh này theo thứ
+tự thằng nào đến trước ( Gọi tác động trước ) sẽ được ăn trước,.... 
+
+- Ví dụ : KHI GỌI NHƯ NÀY THÌ BIẾN STATIC SẼ TÙY BIẾN NHƯ SAU : 
+     
+    LỚP_MẪU ĐỐI_TƯỢNG_1 = new LỚP_MẪU();  ==>  x khởi tạo = 0;
+    ĐỐI_TƯỢNG_1.Tăng() ;  ===> x sẽ tăng lên 1; 
+
+    LỚP_MẪU ĐỐI_TƯỢNG_2 = new LỚP_MẪU();  ==> x sẽ được khởi tại lại bằng 0 
+    ĐỐI_TƯỢNG_1.Tăng() ; ===> x sẽ tăng lên 1 
+    DỐI_TƯỢNG_2.NhanHai(); ===> x sẽ  *2 = 2 
+
+===> Cứ hiểu là " CÁI BIẾN STATIC SẼ CHỊU CHUNG MỌI TÁC ĐỘNG CỦA CÁC ĐỐI TƯỢNG 
+MÀ DƯỢC TẠO TỪ CÁI CLASS CHỨA CÁI BIẾN STATIC ĐÓ " .
+
+- Thuộc tính (biến) tĩnh (static) : 
++ Chia sẻ giữa tất cả các đối tượng ( Giải thích ở bên trên ) : Biến static là 
+chung cho tất cả các đối tượng của lớp chứa biến static đó. Mọi đối tượng của lớp 
+đó chia sẻ cùng một bản sao của biến static  
+
++ Không cần tạo đối tượng : Bạn có thể truy cập vào cái thuộc tính ( biến static) 
+mà không cần tạo đối tượng từ lớp đó .
+
++ Biến static dùng để lưu trữ các thông tin chung : Sử dụng biến static khi bạn 
+muốn lưu trữ thông tin chung cho  tất cả các đối tượng của lớp đó. 
+
+- Phương thức tĩnh ( Static ): 
++ Không phụ thuộc vào đối tượng : Nó thốt lên được câu này là vì nó chả cần đéo 
+thằng đối tượng nào để gọi ra nó cả mà nó se dùng chính cái TÊN_LỚP để gọi nó. 
+
++ Phương thức static không thể gọi được các biến không static và cũng không có 
+từ khóa this trong phương thức static.
++ Ngược lại một "BIẾN PRIVATE STATIC " mà muốn GET ra thì cái phương thức get ra 
+cái biến static đó cũng phải là phương thức static .
+ 
+- Khi nào thì dùng từ khóa static : 
+
++ Biến static được sử dụng khi bạn muốn lưu trữ thông tin chung cho tất cả các 
+đối tượng của lớp : Ví dụ như việc đến số lượng các phần tử đã được tạo.
+
+public class Example {
+    static int count = 0; // Biến static
+    
+    public Example() {
+        count++; // Mỗi khi tạo đối tượng mới, tăng giá trị của biến static count
+    }
+}
+
++ Phương thức static : Sử dụng khi phương thức không phụ thuộc vào trạng thái hoạt 
+động của đối tượng và có thể thực hiện một số công việc chung cho toàn bộ lớp. Ví 
+dụ dùng phương thức static để mô tả các phương thức toán học : 
+
+    public class MathOperations {
+        public static int add(int a, int b) {
+            return a + b;
+        }
+    }
+
+
+- Một số ví dụ khác  : 
+1. BIẾN STATIC 
+    public class Example {
+        static int count = 0; // Biến static
+        
+        public Example() {
+            count++; // Mỗi khi tạo đối tượng mới, tăng giá trị của biến static count
+        }
+        
+        public static void main(String[] args) {
+            Example obj1 = new Example();
+            System.out.println("Count after obj1 creation: " + Example.count); // In ra 1
+            
+            Example obj2 = new Example();
+            System.out.println("Count after obj2 creation: " + Example.count); // In ra 2
+        }
+    }
+
+2.PHƯƠNG THỨC STATIC 
+    public class MathOperations {
+        public static int add(int a, int b) {
+            return a + b;
+        }
+        
+        public static int multiply(int a, int b) {
+            return a * b;
+        }
+        
+        public static void main(String[] args) {
+            int result1 = MathOperations.add(5, 3); // Gọi phương thức static mà không cần tạo đối tượng
+            System.out.println("Result of addition: " + result1); // In ra 8
+            
+            int result2 = MathOperations.multiply(4, 6);
+            System.out.println("Result of multiplication: " + result2); // In ra 24
+        }
+    }
+
+3. KHỐI STATIC 
+    public class StaticBlockExample {
+        static {
+            System.out.println("This is a static block."); // Khối static sẽ được thực thi khi lớp được nạp
+        }
+        
+        public static void main(String[] args) {
+            System.out.println("Inside the main method.");
+        }
+    }
+
+4. LỚP STATIC 
+
+    public class OuterClass {
+        static int outerStaticVar = 10;
+        
+        static class StaticInnerClass {
+            void display() {
+                System.out.println("Outer static variable: " + outerStaticVar);
+            }
+        }
+        
+        public static void main(String[] args) {
+            OuterClass.StaticInnerClass innerObj = new OuterClass.StaticInnerClass();
+            innerObj.display();
+        }
+    }
+
+- Trong java thì phương thức main có một số quy tắc đặc biệt để đảm bảo rằng 
+chương trình có thể thực hiện mà không cần tạo một đói tượng của lớp : 
+
++ Phương thức main phải được khai báo với từ khóa static . Nguyên do là vì phương 
+thức main được gọi trực tiếp từ hệ thống khi chương trình bắt đầu chạy, trước bất 
+kì đôi tượng nào được tạo . Nếu không có từ khóa static thì hệ thống sẽ càn một đối 
+tượng của lớp để gọi phương thức , nhưng lại không có một đối tượng nào tồn tại 
+vào thời điểm ban đầu . 
+
+public static void main(String [] args){
+   ......
+}
+
++ Tham số String[] args là một mảng chuỗi, được sử dụng để truyền các đối số 
+từ dòng lệnh khi chương trình được chạy. Thông thường, nếu bạn muốn chương
+trình của mình có thể nhận các tham số từ dòng lệnh, bạn cần có tham số này
+để xử lý các giá trị được truyền từ bên ngoài vào chương trình.
+
+- TẠI SAO PHẢI CÓ STATIC VÀ THAM SỐ STRING[] ARGS : 
++ static: Để chương trình có thể bắt đầu thực hiện mà không cần tạo đối tượng
+của lớp.
+
++ String[] args: Để chương trình có khả năng nhận và xử lý các đối số từ dòng 
+lệnh khi chạy.
+
+==> Nếu bạn không tuân theo quy tắc này (không có từ khóa static hoặc không có
+tham số String[] args), chương trình Java sẽ không thể chạy được như mong đợi.
+==> Hệ thống sẽ không biết từ nơi nào bắt đầu thực hiện chương trình và không 
+cung cấp đối số từ dòng lệnh.

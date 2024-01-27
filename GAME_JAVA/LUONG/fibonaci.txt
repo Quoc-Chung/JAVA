@@ -1,0 +1,7 @@
+- Để minh họa sự khác biệt khi không sử dụng luồng trong tình huống đơn 
+giản , dưới đây là một ví dụ sử dụng luồng để thực hiện một tác vụ đồng 
+thời.
+
+- Trong ví dụ này , chúng ta sẽ sử dụng luồng để giữ cho giao diện người 
+dùng phản hồi trong khi một công việc dài hạn đang được thực hiện (Ví dụ 
+công việc dài hạn ở đây là tính toán dãy fibonaci lớn)

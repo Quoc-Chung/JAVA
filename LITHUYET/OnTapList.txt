@@ -1,0 +1,136 @@
+- List trong java cung cấp phương tiện để duy trì bộ sưu tập theo thứ tự. 
+- Nó chứa các phương thức dựa trên chỉ mục để chèn , cập nhật , xóa và tìm 
+kiếm các phần tử . Nó cũng có thể có các phần tử trùng lặp . 
+
+- Chúng cũng có thể lưu trữ các phần tử null trong danh sách 
+
+- interface List được tìm thấy trong gói java.util kế thừa từ giao diện 
+interface Colectuon 
+
+- Các từ khóa trong giao diện interface : 
+
++ add(int index, E element) : Thêm một phần tử vào vị trí cụ thể trong ds
+           
+        List<String> myList = new ArrayList<>();
+        myList.add("Apple");
+        myList.add("Banana");
+        myList.add(1, "Orange"); // Thêm "Orange" vào vị trí thứ 1
+
++ Thêm một phần tử vào cuối danh sách : 
+       
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+
+
++ addAll (Collection ) : Thêm các phần tử vào cuối danh sách 
+     
+       List<Integer> numbers = new ArrayList<>();
+       numbers.add(10);
+       numbers.add(20);
+       numbers.add(20);
+
+===>   numbers hiện tại: [10, 20, 30]
+
++  clear () : Xóa sạch list làm cho list trở về nguyên thủy 
++  equals(Collection): So sánh hai collection với nhau xem có giống nhau hay không 
+        List<String> anotherList = new ArrayList<>(Arrays.asList("A", "B", "C"));
+        boolean isEqual = myList.equals(anotherList);
+
++ hashcode() : Trả về mã hash của bảng băm 
+
++ remove(VALUE ) : Xóa một đối tượng cụ thể  
+
+-----------------------------------------------------------------------------------
+- Ý nghĩa cụ thể của các phương thức All : 
+====================================================
++ addAll : Thêm tất cả các phần tử từ một collection vào list, chúng ta có thể chỉ 
+định vị trí thêm các phần tử vào list hoặc không chỉ định (Không có index thì 
+nó sẽ tự động thêm vào cuối ). 
+  
+  TÊN_LIST.addAll(VỊ_TRÍ, COLLECTION);
+                                                       0    1    2    3
+  List<String> LIST_1 = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));   
+  List<String> LIST_2 = Arrays.asList("X", "Y", "Z");
+  LIST_1.addAll(2,LIST_2);
+  -> Thêm tất cả các phần tử của LIST_2 
+                            0    1    2
+  -> Sau sẽ được LIST_1 : ["A", "B", "X", "Y", "Z", "C", "D"]
+
+
+  TÊN_LIST.addAll(COLLECTION);
+
+   List<String> myList = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));
+   List<String> additionalElements = Arrays.asList("X", "Y", "Z");
+   myList.addAll(additionalElements);
+
+-> phương thức addAll: myList = ["A", "B", "C", "D", "X", "Y", "Z"]
+
+=====================================================
+
++ retainAll : Giữ lại các phần tử vừa có trong List vừa có trong Colection. 
+
+     TÊN_LIST.retainAll(COLLECTION);
+
+     List<String> myList = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));
+     List<String> retainList = Arrays.asList("B", "D", "E");
+     myList.retainAll(retainList);
+
+-->  Sau phương thức retainAll: myList = ["B", "D"]
+
+====================================================
++ removeAll: Xóa tất cả các phần tử vừa có trong List vừa có trong Colection. 
+
+    TÊN_LIST.removeAll(COLLECTION); 
+
+    List<String> myList = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));
+    List<String> additionalElements = Arrays.asList("X", "Y", "Z");
+    myList.addAll(additionalElements);
+
+--> Sau phương thức addAll: myList = ["A", "B", "C", "D", "X", "Y", "Z"]
+=====================================================
+
++ replaceAll : Thay thế tất cả các phần tử trong danh sách bằng giá trị được tính 
+toán dựa trên một toán tử. 
+
+     List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+
+     numbers.replaceAll(x -> x * 2);
+-->  Sau phương thức replaceAll: numbers = [2, 4, 6, 8, 10]
+
+======================================================
++ containsAll: Kiểm tra xem danh sách có chứa tất cả các phần tử của một Colection 
+không. 
+     List<String> myList = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));
+     List<String> checkList = Arrays.asList("B", "D");
+     boolean containsAll = myList.containsAll(checkList);
+
+-->  containsAll: true
+
+======================================================
+
+- Dùng iterator duyệt List : 
+        List<String> list = new ArrayList<String>();
+        list.add("Java");
+        list.add("C++");
+        list.add("PHP");
+        list.add(1, "Python");
+        System.out.println("Phan tu co index = 2 la: " + list.get(2));
+ 
+        ListIterator<String> itr = list.listIterator();
+        while (itr.hasNext()) {
+            System.out.println("\t" + itr.next());
+        }
+
+
+        System.out.println("Duyet cac phan tu tu cuoi ve dau:");
+        while (itr.hasPrevious()) {
+            System.out.println("\t" + itr.previous());
+        }
+
+- Hai cách duyệt trên đều sử dụng iterator để duyệt : 
+        + Duyệt từ đầu về cuối dùng các hàm next 
+        + Duyệt từ cuối về đầu dùng các hàm previous
+- Trong phần này dùng
+    + itr.hasPrevious() kiểm tra xem còn phần tử nào ở phía trước hay không
+    + itr.previous() kiểm tra xem còn phần tử nào ở phía sau hay không.

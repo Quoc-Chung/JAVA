@@ -1,0 +1,148 @@
+- Mảng là một tập hợp các phần tử có cùng kiểu dữ liệu được lưu trữ gần nhau 
+trong bộ nhớ. 
+- Chỉ số đầu tiên cũng bắt đầu từ 0 
+- Các kiểu mảng trong java : 
+    + Mảng một chiều  
+    + Mảng nhiều chiều  
+
+- Tạo một mảng trong java : 
+    +    Kiểu_dữ_liệu[] arr;
+    +    Kiểu_dữ_liệu []arr;
+    +    Kiểu_dữ_liệu arr[];
+
+- Để chèn giá trị vào nó thì chúng ta có thể sử dụng một mảng bằng chữ - đặt 
+các giá trị trong danh sách : 
+   String[] cars = {" Honda" , " BMW "};
+
+   int[] myNum = {10,20,30,40};
+
+- Truy cập các phần tử trong mảng thì dùng chỉ số như bình thường :
+               TÊN_MẢNG[CHỈ_SÔ]
+
+- Độ dài trong mảng : TÊN_MẢNG.length
+
+ 
+
+- Sắp xếp mảng :
+    Dùng import java.util.Arrays;
+    Arrays.sort(TÊN_MẢNG);
+
+- Cấp phát mảng : 
+    +  tạo một mảng có độ dài 4, thêm các phần tử sau tạo
+           String[] cars1 = new String[4];
+ 
+    +  tạo một mảng không cần chỉ định số phần tử cụ thể
+           String[] cars2 = new String[] { "Honda", "BMW", "Ford", "Mazda" };
+ 
+    +  tạo một mảng không cần chỉ định số phần tử cụ thể
+           String[] cars3 = { "Honda", "BMW", "Ford", "Mazda" };
+        
+- Truyền một mảng :Ví dụ :  static void min(int arr[]){ .... }
+
+========================================================================================
+- Hàm trong java thì cũng tương tự như hàm trong các ngôn ngữ khác , chỉ
+có điều thì hàm trong java thì nó sẽ được định nghĩa trong class của
+lớp chính chính : 
+    public class TÊN_FILE_JAVA{
+        - Hàm phụ - 
+          public static void TÊN_HÀM_PHỤ( CÁC-THAM-SỐ ){
+                  
+        }
+        - Hàm chính - 
+          public static void main(){
+
+        }
+    }
+
+- Ví dụ hàm trả về bool : 
+
+    public static boolean isEven(int number) {
+            return number % 2 == 0;
+        }
+
+
+==========================================================================================
+- Các phương thức trong Array : 
+* Để sử dụng được phương thức này thì chúng ta phải import thư viện : 
+       package com.gpcoder.arrays;
+       import java.util.Array;
+
+- Ta sẽ cùng đi qua một số hàm  cơ sở : 
+    + Phương thức toString()  : Hiển thị tất cả các phần tử của một mảng 
+được phân tách băng ( DẤU PHẨY HOẶC KHOẢNG CÁCH )
+    + Phương thức deepToString() :Trả về một chuỗi biểu diễn đệ quy của mảng đa 
+chiều , trong đó mỗi mảng con được biểu diễn dưới dạng chuôi . 
+    + Phương thức sort() : Sắp xếp các phần tử trong mảng tằng dần 
+    + Phương thức binarySearch () : Tìm kiếm một mảng bằng thuật toán tìm kiếm nhị 
+phân . Trả về chỉ mục của phần tử nếu tìm thấy , ngược lại trả về một giá trị âm để 
+chỉ ra rằng phần tử không tồn tại 
+    + Phương thức fill () : Gán giá trị cho tất cả các phần tử của mảng ( fill = đầy = hết )
+    + Phương thức copyOf() : Tạo bản sao cho một mảng với kích thước mới . Nếu mảng mới lớn 
+hơn mảng cũ thì các phần tử mới sẽ được đặt giá trị mặc định. 
+    + Phương thức asList() : Chuyển đổi một mảng thành một danh sách có thể thay đổi 
+kích thước ( List )
+    + Phương thức equal() : So sánh hai đối tượng kiểm tra xem nó có bằng nhau 
+không .
+    + Phương thức deepEquals() : So sánh mảng hai chiều xem chúng có bằng nhau không  
+
+==============================================================
+- Đối với mảng một chiều :
+-> Dùng Arrays.toString() có thể in ra các giá trị của mảng.
+
+- Đối với mảng hai chiều : 
+-> Dùng Arrays.deepToString() có thể in ra giá trị mảng 
+
+- Phương thức sort thì ai cũng biết là để sắp xếp theo thứ tự tăng dần. 
+    + Dùng mergeSort sắp xêp kiểu đối tượng 
+    + Dùng QuichSort sắp xếp kiểu nguyên thủy 
+
+- Hàm binarySearch() được dùng để tìm kiếm nhị phân khi mảng đã được 
+sắp xếp từ trước. 
+- Hàm này có hai giá trị truyền vào là : binarySearch(MẢNG,VALUE) trả về INDEX 
+
+
+- Phương thức fill để gán tất cả giá trị của một mảng cho một giá trị 
+
+- Phương thức copyOf dùng để sao chép dữ liệu từ một mảng này sang một 
+mảng khác. 
+
+
+- Phương thức equal dùng để kiểm tra xem hai mảng " MỘT CHIỀU " có giống nhau không : 
+        System.out.println(Arrays.equals(s1, s2)); // Output :false
+        System.out.println(Arrays.equals(s1, s3)); // Output :true
+
+- Phương thức deepEquals dùng để kiểm tra xem hai mảng "NHIỀU CHIỀU " có giống nhau không : 
+        
+
+
+
+
+
+
+
+============================================================
+- Cách khai báo một mảng trong java : 
+      Kiểu_Dữ_Liệu[] Tên_Mảng; 
+
+- Một số ví dụ : 
+     int[] myArray;
+     String[] names;
+
+============================================================
+- Cách khai báo mảng khởi tạo kích thước : 
+     Kiểu_Dữ_Liệu[] tên_mảng = new Kiểu_Dữ_Liệu[Kích_Thước];
+
+- Một số ví dụ :
+     int[] a = new int[4];
+     double[] prices = new double[10];
+
+============================================================
+- Khai báo và khởi tạo mảng ngay từ đầu : 
+     int[] a = { 1,2,3,4,5};
+     String[] Ten = {"Chung" ,"Duong" ,"Thu Ha" };
+===========================================================
+- Tóm lại thì chúng ta sẽ phải luôn ghi nhớ công thức sau : 
+                 KIỂU_DỮ_LIỆU [] TÊN_MẢNG ;
+                
+
+

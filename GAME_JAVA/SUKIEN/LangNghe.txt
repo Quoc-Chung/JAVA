@@ -1,0 +1,220 @@
+- Đối tượng lắng nghe sự kiện (event listener object ) trong java là một 
+đối tượng thực hiện một hoặc nhiều giao diện sự kiện (event interface)
+
+- Trong hầu hết các trường hợp, giao diện chính để đối tượng đó triển khai 
+là ActionListener cho xử lí sự kiện từ các thành phần giao diện như nút 
+( JButton ), menu,..
+- Đối tượng lắng nghe sự kiện cần triển khai phương thức cụ thể của giao diện 
+sự kiện đó.
+- Ví dụ đối tượng con mèo muốn trở thành đối tượng lắng nghe của giao diện 
+ActionListener thì nó phải triển khai phương thức cụ thể của giao diện 
+ActionListener. Trong trường hợp của "ActionListener" , đó là phương thức 
+actionPerformed(ActionEvent e). 
+
+- Cụ thể, một đối tượng lắng nghe sự kiện cần có những đặc điểm sau : 
++ Đối tượng lắng nghe sự kiện cần triển khai ít nhất một giao diện sự 
+kiện. 
++ Đối tượng lắng nghe cần triển khai phương thức cụ thể của giao diện sự 
+kiện để xử lí sự kiện khi nó xảy ra ( Trong trường hợp ĐỐI TƯỢNG A muốn 
+trở thành đối tượng lắng nghe của giao diện ActionListener ,đó là phương 
+thức actionPerformed(ActionEvent e)).
++ Đối tượng lắng nghe cần được đăng kí với thành phần giao diện thông qua 
+việc sử dụng các phương thức addActionListener() hoặc các phương thức 
+tương tự. 
+==========================================================================
+public class LĂNG_NGHE implements ActionListener{
+    @Override 
+    public void actionPerformed(ActionEvent e){
+        System.out.println("Button clicked!");
+    }
+}
+
+public static void main(String[] args){
+    JFrame frame = new JFrame("TONG QUAN SU KIEN");
+
+    JButton button = new JButton("Click me"); 
+
+    LANG_NGHE nghe = new LANG_NGHE();
+    button.addActionListener(nghe);
+
+    frame.add(button);
+    frame.setSize(300, 200);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setVisible(true);
+}
+
+- Cách viết bên trên này chẳng khác gì cách viết bên dưới: 
+
+public class LANG_NGHE  implements ActionListener{
+    private JFrame jframe;
+    private JButton button;
+    public LANG_NGHE(){
+       jframe  = new JFrame();
+       jframe.setTitle("TONG QUAN SU KIEN");
+       jframe.setSize(300,200);
+        
+       button = new JButton("Click me");
+       button.addActionListener(this); - Nó cũng y hệt như LANG_NGHE -
+     
+       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       frame.setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Button clicked!");
+    } 
+}
+
+
+==========================================================================
+- BÀI TỔNG QUÁT : 
++ Nói chung ta rút ra được như này thì đối tượng muốn có một cái sự kiện 
+ở trong đó thì đối tượng đó phải là đối tượng lắng nghe, tức là nó phải 
+triên khai hết các thành phần của giao diện đó. 
++ Nói chung 
+
+public class BanPhim extends JFrame implements ActionList
+
+        this.setVisible(true);ener {
+    JButton button;
+
+    public BanPhim(){
+        button = new JButton();
+        button.addActionListener(this); 
+
+        .... các dòng code cửa sổ ..... 
+
+        this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == button) {
+            System.out.println("NUT DA DUOC BAM ");
+        }
+    }
+
+    public static void main(String[] args) {
+        new BanPhim();
+    }
+}
+===============================================================================
+- Để thêm một sự kiện vào đối tượng , bạn không nhât thiết phải thiết lập đối 
+tượng đó thành một đối tượng lắng nghe và triển khai tất cả các giao diện 
+liên quan.
+
+- Sử dụng lớp nặc danh : (Anonymos class) : 
+
+button.addActionListener(new ActionListener(){
+      @Override
+    public void actionPerformed(ActionEvent e) {
+        // Xử lý sự kiện
+    }
+});
+
+==============================================================================
+- Để có thể thao tác với bàn phím thì chúng ta vẫn còn một cách : 
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+public class KeyListenerExample extends JFrame implements KeyListener {
+    JTextArea textArea;
+
+    public KeyListenerExample() {
+        textArea = new JTextArea();
+        textArea.addKeyListener(this);
+
+        add(textArea);
+
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được nhấn và released
+        char keyChar = e.getKeyChar();
+        textArea.append("Key Typed: " + keyChar + "\n");
+    }
+    
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được nhấn
+        int keyCode = e.getKeyCode();
+        textArea.append("Key Pressed: " + KeyEvent.getKeyText(keyCode) + "\n");
+    }
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được released
+        int keyCode = e.getKeyCode();
+        textArea.append("Key Released: " + KeyEvent.getKeyText(keyCode) + "\n");
+    }
+
+
+    public static void main(String[] args) {
+        new KeyListenerExample();
+    }
+}
+
+
+=========================================================================================
+- Xử lí sự kiện với chuột : 
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class MouseEventExample extends JFrame implements MouseListener {
+    JButton button;
+
+    public MouseEventExample() {
+        button = new JButton("Click me");
+        button.addMouseListener(this);
+
+        add(button);
+
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == button) {
+            System.out.println("Button clicked!");
+            // Xử lý sự kiện khi nút được nhấn chuột
+        }
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        // Xử lý khi chuột vào nút
+    }
+
+    public void mouseExited(MouseEvent e) {
+        // Xử lý khi chuột rời khỏi nút
+    }
+
+    public void mousePressed(MouseEvent e) {
+        // Xử lý khi chuột được nhấn
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        // Xử lý khi chuột được thả ra
+    }
+
+    public static void main(String[] args) {
+        new MouseEventExample();
+    }
+}
+

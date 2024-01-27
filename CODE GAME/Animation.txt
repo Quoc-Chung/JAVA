@@ -1,0 +1,167 @@
+public class KeyboardInputs implements KeyListener {
+	private GamePanel gamePanel;
+	
+    public KeyboardInputs(GamePanel gamePanel) {
+    	this.gamePanel = gamePanel;
+    }
+    @Override
+	public void keyTyped(KeyEvent e) {
+		
+
+	}
+
+	@Override
+    - Phương thức này được gọi khi một phím được nhả ra - 
+	public void keyReleased(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_W:
+		case KeyEvent.VK_A:
+		case KeyEvent.VK_S:
+		case KeyEvent.VK_D:
+			gamePanel.setMoving(false);
+			break;
+		}
+	}
+
+	@Override
+    - Phương thức này được gọi khi một phím trên bàn phím được bấm - 
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_W:
+			gamePanel.setDirection(UP);
+			break;
+		case KeyEvent.VK_A:
+			gamePanel.setDirection(LEFT);
+			break;
+		case KeyEvent.VK_S:
+			gamePanel.setDirection(DOWN);
+			break;
+		case KeyEvent.VK_D:
+			gamePanel.setDirection(RIGHT);
+			break;
+		}
+	}
+
+}
+
+---------------------------------------------------------------------------------------
+  - Vị trí đặt nhân vật - 
+   private float xDelta= 100, yDelta = 100;
+   
+ - Lưu hình ảnh sau đó gán vào ma trận hình ảnh - 
+   private BufferedImage img;
+   
+  - Mảng hai chiều  lưu tru h/a tạo Animation -
+   private BufferedImage[][] animation;
+   
+  - Biến này dùng để lưu trữ hướng di chuyển của nhân vật - 
+
+   private int playerDir = -1;
+
+ - Biến này để giám sát nhân vật xem có -
+   private  boolean moving = false;
+
+
+   private int aniTick, aniIndex, aniSpeed = 20; 
+   
+   private int playerAction = IDLE;
+   
+
+public GamePanel() {	   
+	   importImg();
+
+	   setPanelSize();
+	   loadAnimation();
+	     
+   }  
+   private void loadAnimation() {
+	/* - Khởi tao kich thuoc lưu trữ ảnh 9 hàng - 6 cột - */ 
+	animation = new BufferedImage[9][6];
+	
+	for (int j=0; j < animation.length ;j++) {
+	for (int i=0; i < animation[j].length ; i++) {
+		animation[j][i] = img.getSubimage(i*64, j*40,64,40 );
+	}
+	
+	}
+
+}
+	private void importImg() {
+		   /*- Dấu gạch chéo cho bt ha sẽ đc tìm thấy ở một trong các thư mục */ 
+		InputStream is= getClass().getResourceAsStream("/player_sprites.png");
+		try {
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	private void setPanelSize() {
+		/*- Kich thuoc nv la 32 pixel - */ 
+		
+		Dimension size = new Dimension(1280,800);  
+		setMinimumSize(size);
+		setPreferredSize(size);
+		setMaximumSize(size);
+	}
+		
+	public void setDirection(int direction) {
+		this.playerDir = direction;
+		moving = true;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving= moving;
+	}
+
+	private void updateAnimationTick() {
+		aniTick ++; 
+		if(aniTick  >= aniSpeed) {
+			aniTick = 0;
+			aniIndex ++; 
+			if(aniIndex >= GetSpriteAmount(playerAction)) {
+				aniIndex = 0;
+			}
+		}
+	}
+
+	private void setAnimation() {
+		if(moving) {
+			playerAction = RUNNING;
+		}
+		else {
+			playerAction = IDLE;
+		}
+	}
+
+	private void updatePos() {
+			if (moving) {
+				switch (playerDir) {
+				case LEFT:
+					xDelta -= 5;
+					break;
+				case UP:
+					yDelta -= 5;
+					break;
+				case RIGHT:
+					xDelta += 5;
+					break;
+				case DOWN:
+					yDelta += 5;
+					break;
+				}
+			}
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);	
+		updateAnimationTick();
+		setAnimation();
+		updatePos();
+
+		g.drawImage(animation[playerAction][aniIndex], (int)xDelta, (int)yDelta,256,160, null);
+        
+	}
+    
+
+---------------------------------------------------------------------------------------

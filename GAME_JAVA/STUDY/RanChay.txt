@@ -1,0 +1,235 @@
+public class RanTest extends JFrame implements ActionListener {
+    private int gridSize = 20;
+    private int gridSizeX = 700 / gridSize;
+    private int gridSizeY = 500 / gridSize;
+
+    private int direction = KeyEvent.VK_RIGHT;
+
+    private int snakeLength = 1;
+    private ArrayList<Point> snake = new ArrayList<>();
+
+    private Point food = generateFood();
+
+    private Timer timer;
+
+***** LẦN 2 *****
+
+    public RanTest() {
+
+***** LẦN 3 ******
+        setTitle("Snake Game");
+        setSize(700, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
+
+        int initialX = 100;
+        int initialY = 100;
+        snake.add(new Point(initialX, initialY));
+
+***** LẦN 4 *****
+        JPanel drawPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+
+
+***** LẦN 5 *****
+                draw(g);
+            }
+        };
+
+
+***** LẦN 7  ******
+        drawPanel.setBackground(Color.BLACK);
+        add(drawPanel);
+
+
+
+****** LẦN 8 ******
+        drawPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                drawPanel.requestFocus(); - Yêu cầu tập trung - 
+            }
+        });
+
+***** LẦN 9 *****
+        drawPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+***** LẦN 10 *****
+                handleKeyPress(e);
+            }
+        });
+***** LẦN 12 *****
+        setFocusable(true);
+        setVisible(true);
+        drawPanel.requestFocus();
+
+***** LẦN 13 ******
+        timer = new Timer(100, this); 
+***** LẦN 14 ******
+        timer.start();
+
+    }
+
+    private Point generateFood() {
+        Random rand = new Random();
+        Point newFood;
+    
+        do {
+            int x = rand.nextInt(gridSizeX);
+            int y = rand.nextInt(gridSizeY);
+    
+         
+            int foodX = x * gridSize;
+            int foodY = y * gridSize;
+    
+            // Kiểm tra xem điểm mới có thuộc rắn hay không
+            newFood = new Point(foodX, foodY);
+        } while (snake.contains(newFood));
+    
+        return newFood;
+    }
+
+***** LẦN 6 *****
+    private void draw(Graphics g) {
+        g.setColor(Color.GREEN);
+        for (Point p : snake) {
+            g.fillRect(p.x, p.y, gridSize, gridSize);
+        }
+
+        g.setColor(Color.RED);
+        g.fillRect(food.x, food.y, gridSize, gridSize);
+    }
+
+
+
+
+    private void move() {
+        Point head = snake.get(0);
+        Point newHead = new Point(head.x, head.y);
+
+        switch (direction) {
+            case KeyEvent.VK_UP:
+                newHead.y -= gridSize;
+                break;
+            case KeyEvent.VK_DOWN:
+                newHead.y += gridSize;
+                break;
+            case KeyEvent.VK_LEFT:
+                newHead.x -= gridSize;
+                break;
+            case KeyEvent.VK_RIGHT:
+                newHead.x += gridSize;
+                break;
+        }
+
+        // Check collision with walls
+        if (newHead.x < 0) newHead.x = getWidth() - gridSize;
+        if (newHead.x >= getWidth()) newHead.x = 0;
+        if (newHead.y < 0) newHead.y = getHeight() - gridSize;
+        if (newHead.y >= getHeight()) newHead.y = 0;
+
+        // Check collision with self
+        if (snake.contains(newHead)) {
+            gameOver();
+            return;
+        }
+
+    
+        if (newHead.equals(food)) {
+            snakeLength++;
+            food = generateFood();
+        } else {
+            // Remove tail if not eating
+            snake.remove(snakeLength - 1);
+        }
+
+      
+        snake.add(0, newHead);
+    }
+
+    private void gameOver() {
+        timer.stop();
+        JOptionPane.showMessageDialog(this, "Game Over! Your score: " + (snakeLength - 1));
+        System.exit(0);
+    }
+
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        move();
+        repaint();
+    }
+;
+
+***** LẦN 11 *****
+    private void handleKeyPress(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                if (direction != KeyEvent.VK_DOWN)
+                    direction = KeyEvent.VK_UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                if (direction != KeyEvent.VK_UP)
+                    direction = KeyEvent.VK_DOWN;
+                break;
+            case KeyEvent.VK_LEFT:
+                if (direction != KeyEvent.VK_RIGHT)
+                    direction = KeyEvent.VK_LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                if (direction != KeyEvent.VK_LEFT)
+                    direction = KeyEvent.VK_RIGHT;
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
+***** LẦN 2 ***** 
+        new RanTest();
+    }
+}
+
+---------------------------------------------------------------------------------------------
+LẦN 1: main method được gọi khi bạn chạy chương trình, tạo một đối tượng RanTest (new RanTest()).
+
+
+LẦN 2-3: Constructor của RanTest (public RanTest()) được gọi.
+
+
+LẦN 4-6: Đặt cấu hình JFrame, bao gồm kích thước, chế độ đóng cửa sổ, vị trí của cửa sổ.
+
+
+LẦN 7: Tạo một JPanel drawPanel với sự kiện vẽ được cài đặt.
+
+
+LẦN 8: Đặt màu nền của drawPanel là đen.
+
+
+LẦN 9-11: Thêm MouseAdapter để đảm bảo drawPanel nhận được sự tập trung khi được nhấp chuột.
+
+
+LẦN 12-14: Thêm KeyAdapter để xử lý sự kiện từ bàn phím khi drawPanel được tập trung.
+
+
+LẦN 15: Đặt drawPanel có khả năng nhận sự tập trung, làm nó hiển thị và yêu cầu sự tập trung ngay lập tức.
+
+
+LẦN 16-17: Khởi tạo Timer với độ trễ là 100ms và sự kiện lắng nghe là chính đối tượng RanTest.
+
+
+
+LẦN 18: Bắt đầu Timer, kích hoạt sự kiện actionPerformed mỗi 100ms.
+
+
+LẦN 19: Khởi tạo rắn với đầu tiên ở vị trí (100, 100).
+
+
+LẦN 20-21: Tất cả các sự kiện và đối tượng đã được khởi tạo, chương trình chờ người dùng tương tác và diễn ra theo chu kỳ vòng lặp Timer.

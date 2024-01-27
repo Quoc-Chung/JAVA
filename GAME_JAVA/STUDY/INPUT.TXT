@@ -1,0 +1,165 @@
+- Dưới đây là từng bước làm việc với INPUT trong JAVA trong ví dụ của bạn : 
+
+1. Tạo JFrame và JPanel : 
++ JFrame là một đối tượng chứa cửa sổ của đối tượng  
++ JPanel là một đối tượng để vẽ hình cũng như xử lí SỰ KIỆN 
+
+JFrame jframe = new JFrame();
+JPanel draw = new JPanel();
+
+
+
+2. Giao diện paintComponent cho JPanel : 
+- Tạo một lớp con của JPanel và gọi phương thức repaint để vẽ lại khi cần.
+- Mày phải luôn nhớ rằng muốn vẽ ra một cái lòn gì đó thì luôn luôn phải gắn với 
+đối tượng JPanel 
+
+
+- Tạo một lớp con của jPanel để vẽ hinh và gọi phương thức repaint để vẽ lại khi cần. 
+- JPanel draw = new JPanel() {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Vẽ hình chữ nhật màu đỏ
+        g.setColor(Color.RED);
+        g.fillRect(rectX, rectY, 50, 30);
+
+        // Vẽ hình oval màu xanh
+        g.setColor(Color.BLUE);
+        g.fillOval(ovalX, ovalY, 50, 30);
+    }
+};
+
+- Tiếp theo là chúng ta sẽ sử lí các sự kiện từ bàn phím : 
++ Thêm một KeyListener để lắng nghe sự kiện từ bàn phím và xử lí các phím mũi tên
+
+
+
+
+=================================================================================
+- Chúng ta có hai cái lớp: 
++ package input : mouse và KeyboardInputs
++ package main  : Game , gamePanel , gameWindow, MainClass 
+
+- Các bước chính để xử lí sự kiện từ bàn phím hoặc chuột  
+B1: Tạo ra một lớp input được kế thừa từ lớp interface KeyListener 
+               lóp mouse được kế thừa từ lớp MouseListener , MouseMotionListener 
+
+
+- Trong mỗi lớp thì chúng ta sẽ tạo ra một biến instance (ví dụ ) để có thể tương tác
+với game khi có sự kiện. 
+- Kết nối input với gamePanel : 
++ Khởi tạo ra hai đối tượng là hai cái nút sau đó ta sẽ thêm sự kiện cho hai cái nút 
+đó 
+
+draw.addKeyListener(new KeyListener() {
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Không cần thiết lập
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Không cần thiết lập
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được nhấn
+        int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_LEFT) {
+            rectX -= 10; // Di chuyển sang trái
+        } else if (keyCode == KeyEvent.VK_RIGHT) {
+            rectX += 10; // Di chuyển sang phải
+        } else if (keyCode == KeyEvent.VK_UP) {
+            rectY -= 10; // Di chuyển lên
+        } else if (keyCode == KeyEvent.VK_DOWN) {
+            rectY += 10; // Di chuyển xuống
+        }
+
+        // Yêu cầu vẽ lại JPanel
+        draw.repaint();
+    }
+});
+
+- KeyListener được sử dụng để lắng nghe sự kiện từ bàn phím và thực hiện hành động phù hợp.
+
+BƯỚC 4 : Kích hoạt sự kiện cho JPanel và hiển thị JFrame 
+- Kích hoạt sự kiện cho JPanel để nó có thể nhận sự kiện từ bàn phím 
+                draw.setFocusable(true); 
+
+- Thêm JPanel vào JFrame và hiển thị JFrame 
+
+                jframe.add(draw);
+                jframe.setVisible(true);
+
+==> Chúng ta cần setFocusable(true) là cần thiết để JPanel có thể nhận sự kiện từ bàn phím 
+jframe.setVisible(true) dùng để hiển thị cửa sổ. 
+
+BƯỚC 5 : Chúng ta cần đảm bảo JFrame có focus 
+- Chúng ta sử dụng requestFocusInWindow() để đảm bảo rằng JFrame có focus khi ứng dụng bắt 
+đầu chạy : 
+             draw.requestFocusInWindow();
+
+- requestFocusInWindow() là cần thiết để đảm bảo rằng khi ứng dụng bắt đầu chạy thì JFrame 
+có focus. 
+
+- Tóm lại chúng ta sẽ phải trải qua các bước sau : 
+
++ Tạo JFrame và JPanel 
+
++ Từ JPanel tạo ra một biến và từ cái biến đó sẽ viết hàm paintComponent (Graphics g) để 
+vẽ ra một cái gì đó hay hay .
+
++ Từ cái biến vừa đùng để vẽ sẽ thêm một sự kiện addKeyListener (new KeyListener(){
+
+}); để nạp chồng toán tử từ bàn phím.
+
++ Viết sử lí của vị trí trong phương thức keyPressed 
+
++  Kích hoạt sự kiện cho JPanel và hiển thị JFrame 
+    draw.setFocusable(true);
+    jframe.add(draw);
+    jframe.setVisible(true);
+    draw.requestFocusInWindow();
+
+
+===================================================================================
+
+- Phương thức paintComponent (Graphics g) là một phần quan trọng của việc vẽ đồ họa trong 
+Java Swing. Khi bạn vẽ trên một đối tượng JPanel hoặc một lớp con của nó, bạn thường 
+gọi đến super.paintComponent (g) để đảm bảo rằng nền của đối tượng được xóa và các thành 
+phần vẽ trên nó sẽ xuất hiện đúng cách.
+
+- Giả sử bạn có một lớp con kế thừa từ lớp JPanel và bạn muốn vẽ hình chữ nhật trên đó 
+thì bạn có thể sử dụng hàm paintComponent(Graphics g) để làm việc đó để sử dụng để vẽ 
+hình chữ nhật 
+
+
+public class MyPanel extends JPanel {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Xóa nền
+
+        // Vẽ hình chữ nhật
+        g.fillRect(50, 50, 100, 50);
+    }
+}
+
+=======================================================================================
+- Phương thức repaint() được gọi để thông báo cho hệ thống vẽ Swing rằng bạn muốn vẽ lại 
+một phần hoặc toàn bộ thành phần. 
+- Trong trường hợp của bạn , bạn gọi repaint() sau khi thay đổi vị trí vủa hình chữ nhật 
+để yêu cầu hệ thống vẽ lại JPanel.
+
+- Khi phương thức repaint() được gọi , hệ thống sẽ tự động gọi lại phương thức 
+paintComponent(Graphics g) của JPanel. Trong trường hợp này , paintComponent SẼ VẼ LẠI HÌNH 
+CHỮ NHẬT Ở VỊ TRÍ MỚI . Nếu không có repaint() thì khi thay đổi vị trí của hình chữ nhật
+thì nó sẽ không được vẽ lại trên giao diện người dùng. 
+
+- Do đó repaint() là cần thiết để cập nhật giao diện người dùng khi có thay đổi trong dữ 
+liệu vẽ , như thay đổi vị trí của các hình . Nếu không có "repaint" bạn có thể thấy rằng 
+các thay đổi không được hiển thị cho người dùng. 
+
+- 

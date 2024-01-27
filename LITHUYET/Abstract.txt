@@ -1,0 +1,267 @@
+- Tính trừu tượng là một tiến trình ẩn các chi tiết trình triển khai và chỉ 
+hiển thị các tính năng của người dùng 
+- Lớp trừu tượng không thể được dùng để tạo ra các đối tượng như những lớp 
+bình thường khác. 
+- Một lớp được khai báo với từ khóa abstract thì đó chính là lớp trừu tượng. Nó 
+cần được kế thừa và phương thức của nó cần được triển khai. Nó không thể được 
+khởi tạo. 
+================================================================================
+- Trong java thì một phương thức (abstract method ) là một phương thức mà chỉ 
+khai báo chứ không có thân phần thực thi . Nó được sử dụng để định nghĩa một 
+hành động mà các lớp con cụ thể sẽ cung cấp phần thực thi. 
+
+- Để khai báo một phương thức trừu tượng , bạn sử dụng từ khóa "abstract" và 
+không có thân phần thực thi
+- Phương thức trừu tượng không thể có thân phần thực thi trong lớp chứa nó. 
+=> Tóm lại là nó chỉ được khai báo và để cho các lớp con triển khai. 
+
+abstract class Shape{
+    // Phương thức trừu tượng , không có thân phần thực thi 
+    abstract void draw();
+
+    void display(){
+        System.out.println("This is a shape" );
+    }
+}
+
+class Circle extends Shape {
+ // Triển khai phương thức trừu tượng từ lớp cha
+    void draw() {
+        System.out.println("Drawing a circle.");
+    }
+}
+
+class Rectangle extends Shape {
+    // Triển khai phương thức trừu tượng từ lớp cha
+    void draw() {
+        System.out.println("Drawing a rectangle.");
+    }
+}
+
+public class AbstractExample{
+    public static void main(String[] args){
+        Circle circle = new Circle();
+
+        circle.draw();
+        circle.display();
+
+        Rectangle rectangle = new Rectangle();
+        rectangle.draw();
+        rectangle.display();
+
+    }
+}
+- Lớp trừu tượng cung cấp một cơ chế sử dụng đa hình. Bạn có thể tạo một biến 
+tham chiếu của lớp trừu tượng và gán nó cho đối tượng của bất kì lớp con nào 
+triển khai. 
+- Lớp trừu tượng giúp tổ chức mã nguồn một cách logic và giảm sự phức tạp của 
+mã nguồn. Bạn có thể đặt các phương thức chung vào lớp trừu tượng và triển khai 
+chúng ở các lớp con. Điều này giúp giảm sự lặp lại và làm cho mã nguồn dễ bảo 
+trì.
+
+- Một ví dụ cụ thể khác : 
+abstract class Shape{
+    protected double area; 
+    - Phương thức trừu tượng về việc tính diện tích - 
+    abstract void CaculateArea();
+
+    - Phương thức hiển thị diện tích - 
+    void DisplayArea(){
+        System.out.println("Area : " + area);
+    }
+}
+
+class Circle extends Shape{
+    private double radius;
+
+    Circle (double radius){
+        this.radius = radius;
+    }
+    - Triển khai phương thức tính diện tích cho hình tròn - 
+    void calculateArea() {
+        area = Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double width;
+
+    Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    // Triển khai phương thức tính diện tích cho hình chữ nhật
+    void calculateArea() {
+        area = length * width;
+    }
+}
+
+public class AbstractExample {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);
+        circle.calculateArea();
+        circle.displayArea();
+
+        Rectangle rectangle = new Rectangle(4, 6);
+        rectangle.calculateArea();
+        rectangle.displayArea();
+    }
+}
+- Ta có thể thấy rõ  được rằng shape là lớp trừu tượng có phương thức trừu 
+tượng calculateArea(). Cả hai lớp con "Circle" và "Rectangle" triển khai phương 
+thức này theo cách thích hợp cho hình tròn và hình chữ nhật. 
+- Khi chạy chương trình , chúng ta có thể thấy rõ được sự linh hoạt của đa hình 
+
+===============================================================================
+- Đa hình là một trong những đặc điểm quan trọng của lập trình hướng đối 
+tượng (OOP) . Nó cho phép một đối tượng được thực hiện nhiều hình thái (forms)
+tức là một đối tượng có thể thực hiện các hành vi khác nhau tùy thuộc vào 
+ngữ cảnh. 
+
+- Ví dụ đa hình trong Java : 
+class Animal {
+    public void sound(){
+        System.out.println("Animal makes a sound");
+    }
+}
+- Lớp con 1 - 
+class Dog extends Animal{
+    public void sound(){
+        System.out.println("\nGau gâu ");
+    }
+}
+- Lớp con 2 - 
+class Cat extends Animal {
+    public void sound{
+        System.out.println("Cat meows");
+    }
+}
+
+public class PolymorphismExample {
+    public static void main(String[] args) {
+        // Tạo đối tượng Dog và gọi phương thức sound()
+
+
+        Animal myDog = new Dog();
+        myDog.sound();  // Output: Dog barks
+
+        // Tạo đối tượng Cat và gọi phương thức sound()
+        Animal myCat = new Cat();
+        myCat.sound();  // Output: Cat meows
+    }
+}
+- Lớp Animal là lớp cha với một phương thức sound().
+- Lớp con Dog và Cat kế thừa từ lớp Animal và triển khai lại phương thức 
+sound() theo cách riêng của mỗi loài. 
+
+- Trong main chúng ta tạo ra hai đối tượng myDog lầ thể hiện của lớp Dog 
+                                           myCat là thể hiện của lớp Cat 
+
+--> Mặc dù chúng đều được khai báo là Animal nhưng vì đa hình , chúng có thể 
+thực hiện các hành vi khác nhau tùy thuộc vào loại thực sự của đối tượng 
+tại thời điểm này . 
+- Trong cả hai trường hợp thì chúng ta gọi phương thức sound() của lớp cha  
+nhưng do nó đa hình , nó thực sự gọi đến phương thức tương ứng của đối tượng 
+thực sự là Dog và Cat 
+
+- Công thức tổng quát : 
+--- Lớp cha  ---
+class Animal {
+    public void sound() {}
+}
+--- Lớp con 1 ---
+class Dog extends Animal {
+    public void sound() {}
+}
+--- Lớp con 2 ---
+class Cat extends Animal {
+    public void sound(){}
+}
+
+public class PolymorphismExample {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        myDog.sound();  // Output: Dog barks
+
+
+        Animal myCat = new Cat();
+        myCat.sound();  // Output: Cat meows
+    }
+}
+==> DÙNG LỚP CHA KHỞI TẠO RA CON 
+
+------------------------------------------------------------------------------
+- Đa hình trong java là một khái niệm mà chúng ta có thể thực hiện một hành 
+động bằng nhiều cách khác nhau. 
+- ĐA HÌNH : ĐA (NHIỀU) + HÌNH (HÌNH THÁI KHÁC NHAU ) --> NHIỀU HÌNH THÁI 
+                                                           KHÁC NHAU 
+- Chúng ta có thể thực hiện đa hình bằng cách nạp chồn  phương thức hay ghi 
+đè phương thức. 
+- Có hai kiểu đa hình : 
+  + Đa hình lúc runtime trong java. 
+  + Đa hình lúc thực thi trong java.
+
+- Đa hình lúc runtime là quá trình gọi phương thức đã được ghi đè trong thời 
+gian thực thi chương trình. Trong quá trình này , một phương thức được ghi đè
+được thông qua biến tham chiếu của một lớp cha. 
+class Bike {
+    void run(){
+        System.out.println("running");
+    }
+}
+
+public class Splender extends Bike{
+    void run(){
+        System.out.println("Running safely with 60km ");
+    }
+
+    public static void main (){
+        Bike b == new Splender();
+        b.run();
+    }
+}
+
+
+- Đa hình ở đây đề cập đến khả năng một đối tượng có thể thực hiện nhiều hành 
+vi khác nhau dựa trên loại thực sự của đối tượng đó. 
+- Đa hình giúp cho các đối tượng có thể được sử dụng chung qua giao diện chung
+nhưng chúng vẫn có thể thực hiện hành vi cụ thể của mình . 
+
+- Lớp cha -
+class Shape{
+   public void draw(){
+    System.out.println("Drawing a shape.");
+   }
+}
+
+- Lớp con kế thừa từ lớp cha  - 
+class Circle extends Shape {
+    @override 
+    public void draw(){
+        System.out.println(" Vẽ hình tròn ");
+    }
+}
+class Rectangle extends Shape {
+    @override 
+    public void draw(){
+        System.out.println("\nVe hinh chu nhat ");
+    }
+}
+
+- Lớp sử dụng đa hình để vẽ các hình - 
+public class MAIN {
+    public static void main(String[] args){
+        Shape[] shapes = new Shape[3];
+
+        shapes[0] = new Circle();
+        shapes[1] = new Rectangle();
+        shapes[2] = new Shape(); // Đối tượng của lớp cha
+
+        -- Gọi phương thức draw trên từng đối tượng, sẽ thực hiện phương thức --
+        for (Shape shape : shapes) {
+            shape.draw();
+        }
+    }
+}

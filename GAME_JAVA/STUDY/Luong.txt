@@ -1,0 +1,132 @@
+- Thread hay còn gọi là luồn là đơn vị nhỏ nhất trong java. 
+- Mỗi luồng sẽ thực hiện một công việc hoàn toàn riêng biệt và nó sẽ được quản 
+lí bởi máy ảo Java. 
+
+- Java chính là một ngôn ngữ  lập trình đa phân luồng . Thread kế thừa ý tưởng đa 
+nhiệm trong các ứng dụng để bạn có thể chia nhỏ các hoạt động riêng biệt bên trong 
+một ứng dụng đơn thành các luồng riêng lẻ. 
+- Mỗi một thread có thể chạy song song riêng biệt với nhau
+- Mỗi một luồng đều sẽ đi qua các giai đoạn khác nhau : 
+
++ ĐƯỢC SINH RA   --> BẮT ĐẦU --> CHẠY --> TỰ ĐỘNG HỦY 
+
+- Mỗi một luồng đều có quyền ưu tiên nhất định để giúp cho hệ điều hành xác định 
+chính xác thứ tự thread nào được xử lí trước , thread nào được xử lí sau. 
+
+- Một vòng đời của một cái luồng sẽ theo sơ đồ sau: 
+
++ New : Trạng thái đầu tiên của một Thread khi mới bắt đầu vòng đời của nó. 
+
++ Runable: Khi một Thread được sinh ra và bắt đầu chạy , nó sẽ trở thành Runable.Và 
+ở trong trạng thái này , nó được xem như đang thực hiện tác vụ của chính mình. 
+
++ Waiting : Đôi khi một luồng sẽ ở trong trạng thái waiting (chờ đợi) để một thread khác 
+thực hiện một tác vụ nào đó. Và nó sẽ tự động chuyển vè trạng thái runable chỉ khi 
+thread khác ra hiệu. 
+
++ Timed waiting : Một thread trong trạng thái runable có thể chuyên thành trạng thái  
+timeWaiting trong một  khoảng thời gian nào  đó. Thời gian này dài  hay ngắn phụ thuộc vào  
+tốc  đọ xử lí của  luồng  trước đó. 
+
++ Terminated : Một luồng trong trạng thái runable có thể đi vào trạng thái Terminated 
+khi nó đã hoàn thành xong tất cả tác vụ của nó.
+
+==================================================================================
+- Đối với ChatGPT thì việc tạo luồng trong java có thể được thực hiện nhiều tác vụ 
+cùng một lúc, đặc biệt là khi bạn muốn thực hiện các tác vụ dài hạn , không muốn làm  
+chậm luồng chính của ứng dụng (thường là luông giao diện người dùng.);
+
++ Thực hiện các tác vụ nền 
++ Xử lí đa nhiệm : Việc sử dụng nhiều luồn có thể tận dụng tốt nguồn lực của hệ thống 
+và cải thiện hiệu suất chung của ứng dụng. 
+
++ Xử lí các sự kiện đồng thời : Trong  một số trường hợp, bạn có thể muốn xử lí 
+nhiều sự kiện đồng thời . Việc sử dụng luồng giúp chia  nhỏ công việc và xử lí 
+các sự kiện cùng một lúc. 
++ Công thức để tạo một luồng : 
+
+
+new Thread (() -> {
+    // Thực hiện các công việc dài hạn tại đây 
+    // Ví dụ tải dữ liệu từ mạng 
+}).start();
+
+
+
+   new Thread(() -> {
+            while (true) {
+                move();  // Thực hiện thay đổi trạng thái
+                drawingPanel.repaint();  // Gọi repaint để vẽ lại
+                try {
+                    Thread.sleep(50);  // Ngủ để kiểm soát tốc độ vòng lặp
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+    private void move() {
+        x += 5;
+        if (x > getWidth()) {
+            x = 0;
+        }
+    }
+
+- Chúng ta có thể tạo một luồng bằng cách sử dụng lambda để thực hiện một vòng 
+lặp vô hạn. Trong vòng lặp này , phương thức move() được gọi để thay đổi trạng thái 
+, sau đó repaint() được gọi để vẽ lại drawPanel và cuối cùng luông được ngủ trong 
+khoảng thời gian 50 mm bằng cách sử dụng Thread(50) để kiểm soát tốc độ của vòng 
+lặp 
+
+- Dưới đây là giải thích chi tiết : 
+
++ Luồng mới : 
+     new Thread(() -> {....}).start(); dùng để tạo một luồng mới bằng cách sử dụng 
+biểu thức lambda . Luồng này sẽ chạy mã bên trong dấu ngoặc nhọn. 
+
++ Vòng lặp vô hạn: 
+     while(true) : tạo ra một vòng lặp vô hạn , nghĩa là luông này sẽ chạy mã bên 
+trong nó liên tục. 
+
++ Thay đổi trạng thái : 
+      move () : Gọi phương thức move() để thực hiện các thay đổi của  trạng thái.
+
++ Vẽ lại drawingPanel : 
+        drawingPanel.repaint(): Gọi phương thức repaint() để yêu cầu vẽ lại bản giao 
+diện khi một thằng lon nào đó thay đổi vị trí của mình thì mình phải vẽ lại nó mới 
+hiện ra. 
+
++ Ngủ để kiểm soát tốc độ : 
+
+       Thread.sleee(50) : Ngủ luồng trong 50 mm để kiểm soát tốc độ của vòng lặp và 
+điều này sẽ giúp kiểm soát tốc độ của vòng lặp, tránh việc chạy quá nhanh. 
+
++ Phương thức move () thực hiện thay đổi giá trị của biến x và nếu giá trị của x vượt
+quá chiều rộng của drawingPanel , nó sẽ được thiết lập lại về 0 . Điều này sẽ tạo ra 
+hiệu ứng di chuyển ngang của hình trên drawingPanel.
+
+====================================================================================
+- Tìm hiểu về Thread và cách xử lí đa luồng 
+- Đồng bộ luồng.
+
+- Đồng bộ luồng ( 2: java) 
+
++ Khi thực hiện các tác vụ trong window thì trong window có thể thực hiện nhiều tác 
+vụ cùng một lúc. 
++ Tại một thời điểm có thể thực hiện rất nhiều tác vụ như  là : 
+     - Nghe nhạc  -> Tiến trình 1
+     - Xem phim  -> Tiến trình 2
+     - Chat      -> Tiến trình 3 
+     - Gõ văn bản -> Tiến trình 4 
+     - Lướt web  -> Tiến trình 5 
+
+- Tại sao lại có nhiều tác vụ cùng một lúc như thế không. ????????????
+- Mỗi một chương trình được bật lên thì hệ điều hành sẽ cấp phát cho cái hệ 
+thống của mình 10 cái tiến trình. 
+
+- Máy tính của chúng ta : Tại một thời điểm thì máy tính nó chỉ xử lí được 1 dòng 
+lệnh 
+
+- Khi xây dựng một phần mềm (Game) -> 1 tiến trình. 
+( Lúc thì chat ,lúc thì downloat file ,..) .Trong quá trình chơi game 

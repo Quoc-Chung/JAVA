@@ -1,0 +1,313 @@
+- Trong java cung cấp 3 kiểu biến : 
++ Biến cục bộ ( local ) --> Biến trong phương thức
+
++ Biến thực thể ( instance ) --> Thuộc tính của đối tượng.
+
++ Biến tĩnh ( static )  --> Biến dùng chung của đối tượng.
+
++ Biến tham số ( parameter ) --> Tham số của phương thức.
+
+--------------------------------------------------------------------
+- Một số lưu ý về biến static : 
++ Biến static được khai báo trong một class với từ khóa "static" , phía 
+bên ngoài các phưng thức
++ Thường thì cứ hiểu như nó là một thuộc tính tĩnh của đối tượng.
++ Biến static được khai báo trong một class với từ khóa "static" , phía bên 
+ngoài các phương thức , hàm khởi tạo,...
++ Sẽ có duy nhất một bản sao của các biến static được tạo và các đối tượng 
+được sinh ra từ cái class chứa static đều dùng chung cái biến static đó , đều
+tác động chung đến biến static đó. 
++ Một phương thức static sẽ chỉ chơi với một thằng biến static chứ nó không 
+chịu chơi với thằng bình thường. 
++ Để lấy ra một biến static để ở phạm vi PRIVATE thì chúng ta phải viết 
+phương thức GET_BIẾN_ĐÓ cũng phải là phương thức static 
+
+     Biến static  <-------------- Phương thức static get_Biến_static 
+
++ Để truy cập đến biến static : 
+            LỚP_CHỨA.(BIẾN STATIC)
+    
+- Một số ví dụ về phương thức : 
+package example; 
+public class Circle{
+    private int x;
+    private int y; 
+    private int z;
+    private static int So_Doi_Tuong_Duoc_Tao; 
+
+    public Circle(){
+        this.x = 0;
+        this.y =0;
+        this.z =0;
+        Circle.So_Doi_Tuong_Duoc_Tao ++;
+    }
+    public void TinhToan(){
+        So_Doi_Tuong_Duoc_Tao = 5;
+    }
+}
+public class main(){
+    public static void main(String[] args){
+         Circle c1;        ---> So_Doi_Tuong_Duoc_Tao = 1;
+         c1.TinhToan();    ---> So_Doi_Tuong_Duoc_Tao = 5;
+
+         Circle c2;        ---> So_Doi_Tuong_Duoc_Tao = 6;
+         
+         Circle c3;        ---> So_Doi_Tuong_Duoc_Tao = 7;
+
+         c2.TinhToan();    ---> So_Doi_Tuong_Duoc_Tao = 5;
+
+         System.out.printf("\nSo doi tuong :" + Circle.So_Doi_Tuong_Duoc_Tao);
+    } 
+}
+-------------------------------------------------------------------------------
+- Hằng là giá trị không thay đổi trong toàn bộ chương trình.
+- Trong java để hỗ trợ cho các hằng số , chúng ta sử dụng từ khóa final và static 
++ Trong java thì từ khóa final được sử dụng để chỉ định rằng một biến không 
+thể thay đổi ( Nó chả khác gì "const" ) sau khi đã được gán hoặc khởi tạo. 
+
+- Từ khóa final có thể được sử dụng để áp dụng cho biến, phương thức, lớp, hoặc 
+thậm chí là toàn bộ lớp.
+
+public class Example {
+    final int constVariable = 10;
+
+    public void exampleMethod() {
+        // constVariable = 20; // Lỗi, không thể thay đổi giá trị của biến final
+    }
+}
+
+-------------------------------------------------------------------------------
+- Ôn tập các loại phạm vi truy nhập trong hướng đối tượng : 
+    + private : Chỉ trong class 
+    + default : Nằm trong package 
+    + protected : Bên trong class , Lớp con , không cho lớp ngoài hay interface 
+    + public : Trong project 
+
+  project    package    class      class_kethua 
+
+   public 
+             default 
+                       private
+                       protected    protected
+
+------------------------------------------------------------------------------
+- Ôn tập các từ khóa : 
++ this : Dùng để tham chiếu đến thuộc tính của lớp hiện tại để thông qua đó có 
+thể truy cập thuộc tính và phương thức của đối tượng. 
++ super : Dùng để tham chiếu đến phương thức của lớp cha mà cái phương thức của 
+lớp cha đó lại đc phương thức của lớp con có cùng tên định nghĩa lại. 
++ final = const 
++ static : Dùng để định nghĩa thuộc tính và phương thức của lớp.
+
+--------------------------------------------------------------------------------
+- Cơ chế kiểm soát lỗi trong java : 
++ Cấu trúc kiểm soát lỗi với try.... catch ... finally được sử dụng để 
+xử lí các trường hợp ngoại lệ (exceptions) . Dưới đây là cách sử dụng cấu 
+trúc này cùng với ví dụ minh họa : 
+
+* try :  Khối try chứa mã mà bạn muốn kiểm tra có ngoại lệ xảy ra không 
+* catch: Nếu một ngoại lệ xảy ra trong khối try , chương trình sẽ nhảy tới
+khối catch để sử lí ngoại lệ đó.
+* Lưu ý rằng mỗi catch sẽ xác định một ngoại lệ cụ thể mà nó sẽ sử lí. 
+* finally : Khối finally chứa mã được thực thi bất kể có xẩy ra ngoại lệ 
+hay không , tức là cái khối này luôn luôn sẽ chạy sau khi kết thúc khối 
+try và catch . Nó thường được sử dụng để thực hiện các hành động quan trọng 
+khác. 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class TryCatchFinallyExample {
+
+    public static void main(String[] args) {
+        BufferedReader reader = null;
+        try {
+            // Mở file để đọc
+            reader = new BufferedReader(new FileReader("example.txt"));
+
+            // Đọc dữ liệu từ file
+            String line = reader.readLine();
+            System.out.println("Đọc dữ liệu từ file: " + line);
+
+            // Gây ra một ngoại lệ để minh họa
+            int result = 10 / 0; // Chia cho 0 để tạo ngoại lệ ArithmeticException
+        } catch (IOException e) {
+            // Xử lý ngoại lệ IOException
+            System.err.println("IOException: " + e.getMessage());
+        } catch (ArithmeticException e) {
+            // Xử lý ngoại lệ ArithmeticException
+            System.err.println("ArithmeticException: Chia cho 0 không hợp lệ.");
+        } finally {
+            try {
+                // Đóng tài nguyên, ví dụ: đóng file
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                // Xử lý ngoại lệ IOException khi đóng file
+                System.err.println("IOException when closing the file: " + e.getMessage());
+            }
+            System.out.println("Khối finally được thực hiện bất kể có lỗi hay không.");
+        }
+    }
+}
+
+- Ngoại lệ (exception) là một sự kiện xảy ra trong quá trình thực thi chương trình , làm  
+ảnh hưởng đến luồng thực thi chương trình 
+- Ngoại lệ xuất hiện khi có một điều kiện bất thường xảy ra trong quá trình thực 
+thi chương trình , thường lầ do lỗi hoặc điều kiện không mong muốn. 
+- Trong java thì ngoại lệ được đại diện bởi các đối tượng thuộc các lớp con của 
+lớp throwable. 
+
+- Khi một ngoại lệ xảy ra , chương trình có thể chọn xử lí nó thông qua cấu trúc 
+try - catch - finally để tránh việc chương trình dừng đột ngột và cung cấp cơ hội 
+để xử lí tình huống ngoại lệ một cách kiểm soát. 
+
+- Ngoại lệ có thể là các loại như  :
+
++ ArithmeticException (Ngoại lệ Toán học): Xảy ra khi có lỗi trong các phép toán số
+học, chẳng hạn như chia cho 0.
+
++ NullPointerException (Ngoại lệ Chỉ số Null): Xảy ra khi bạn cố gắng truy cập thuộc
+ tính hoặc phương thức của một đối tượng mà tham chiếu của nó đang là null.
+
++ ArrayIndexOutOfBoundsException (Ngoại lệ Chỉ số Mảng Vượt Quá Giới Hạn): Xảy ra khi 
+bạn cố gắng truy cập một phần tử trong mảng với một chỉ số nằm ngoài khoảng giới hạn của mảng.
+
++ FileNotFoundException (Ngoại lệ Không Tìm Thấy Tệp Tin): Xảy ra khi bạn cố mở hoặc đọc một
+tệp tin mà không tìm thấy tệp tin đó trong hệ thống tệp tin.
+
+- Ta chú ý các trường hợp sau : 
++  Arithmetic : Toán học 
++  NullPointer  : Chỉ số null 
++  ArrayIndexOutOfBounds : Chỉ số mảng vượt quá giới hạn. 
++  FileNotFound : Không tìm thấy file .
++  IOException: Lỗi đọc/ ghi Input/output file.
++  NumberFormat: Chuyển đối số đéo được :>
+-------------------------
++ Phương thức getMessage() là một phương thức của lớp ngoại lệ ( thường là lớp 
+con của lớp throwable ). Phương thức này sẽ trả về chuỗi mô tả ngắn về ngoại lệ.
++ Cụ thể thì phương thức getMessage() được sử dụng để lấy thông điệp mô tả lí do 
+cụ thể khi một ngoại lệ xảy ra. Phương thức này trả về một chuỗi có thể được in ra
+màn hình hoặc sử dụng trong quá trình xử lí ngoại lệ để cung cấp thông tin chi tiết 
+về lí do xảy ra ngoại lệ. 
+
++ Dưới đây là một ví dụ minh họa về sử dụng hàm getMessage() trong sử lí ngoại lệ :
+
+public class ExceptionExample {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0; // Gây ra ArithmeticException
+        } catch (ArithmeticException e) {
+            // Sử dụng getMessage() để lấy thông điệp mô tả lý do xảy ra ngoại lệ
+            System.err.println("ArithmeticException: " + e.getMessage());
+        }
+    }
+}
+
+- Dưới đây là các ví dụ ngoại lệ : 
+
+1. ArithmeticException: Toán tử lỗi 
+    try {
+        int result = 10 / 0; // Gây ra ArithmeticException
+    } catch (ArithmeticException e) {
+        System.err.println("ArithmeticException: " + e.getMessage());
+    }
+2. NullPointerException : Truy cập null 
+
+    try {
+       String str = null;
+        int length = str.length(); // Gây ra NullPointerException
+    } catch (NullPointerException e) {
+        System.err.println("NullPointerException: " + e.getMessage());
+    }
+
+3. ArrayIndexOutOfBoundsException : Truy cập quá giới hạn mảng. 
+
+    try {
+        int[] arr = {1, 2, 3};
+        int value = arr[5]; // Gây ra ArrayIndexOutOfBoundsException
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.err.println("ArrayIndexOutOfBoundsException: " + e.getMessage());
+    }
+
+4. FileNotFoundException : Đọc file không tồn tại. 
+    import java.io.BufferedReader;
+    import java.io.FileReader;
+    import java.io.FileNotFoundException;
+
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader("nonexistent.txt")); // Gây ra FileNotFoundException
+    } catch (FileNotFoundException e) {
+        System.err.println("FileNotFoundException: " + e.getMessage());
+    }
+
+5. IOException : Input/ ouput bị lỗi ( Lỗi liên quan đến các việc đọc ghi dữ liệu)
+
+    import java.io.BufferedReader;
+    import java.io.FileReader;
+    import java.io.IOException;
+
+    BufferedReader reader = null;
+    try {
+        reader = new BufferedReader(new FileReader("example.txt"));
+        String line = reader.readLine();
+    } catch (IOException e) {
+        System.err.println("IOException: " + e.getMessage());
+    } finally {
+        try {
+            if (reader != null) {
+                reader.close();
+            }
+        } catch (IOException e) {
+            System.err.println("IOException when closing the file: " + e.getMessage());
+        }
+    }
+
+6. NumberFormatException : Xảy ra khi một chuỗi không thể chuyển đổi thành kiểu 
+số hợp lệ. 
+
+    try {
+        String str = "abc";
+        int value = Integer.parseInt(str); // Gây ra NumberFormatException
+    } catch (NumberFormatException e) {
+        System.err.println("NumberFormatException: " + e.getMessage());
+    }
+- Cơ chế cấu trúc " try - catch - finally : 
++ try : Các lệnh trong khối này được thực thi . Nếu có ngoại lệ xảy ra trong khi 
+thực thi , nó sẽ được ném ( throw ) và quy trình thực thi sẽ chuyển sang khối catch 
+tương ứng. 
+
++ catch : Khối này chứa mã được thực thi khi ngoại lệ xảy ra trong khối try . Mỗi 
+khối catch được kết hợp với một loại ngoại lệ cụ thể . Nếu ngoại lệ phù hợp xảy ra 
+mã trong khối catch đó sẽ được thực thi. 
+
++ finally : Khối này chứa mã sẽ được thực thi bất kể có xảy ra ngoại lệ hay không 
+trong khối try . Thường được sử dụng để giải phóng tài nguyên hoặc thực hiện các 
+hành động cuối cùng. 
+
+try {
+    // Mã có thể gây ra ngoại lệ
+    // ...
+} catch (LoaiNgoaiLe1 e1) {
+    // Xử lý ngoại lệ LoaiNgoaiLe1
+    // ...
+} catch (LoaiNgoaiLe2 e2) {
+    // Xử lý ngoại lệ LoaiNgoaiLe2
+    // ...
+} finally {
+    // Mã trong finally sẽ được thực hiện bất kể có ngoại lệ hay không
+    // Thường được sử dụng để giải phóng tài nguyên
+    // ...
+}
+------------------------------------------------------------------------------------------------------------
+                    LAN TRUYỀN LỖI 
+- Lỗi tự động lan truyền nếu như chúng ta không thực hiện việc kiểm soát 
+lỗi. 
+- Cho phép tập trung việc kiểm soát các lỗi tại một mức nhất định để có 
+thể đồng bộ và thực hiện chung một hành động để xứ lí lỗi. 
+- Cho phép xử lí các lỗi nghiệp vụ bằng cách định nghĩa lỗi hoặc sử dụng 
+lỗi đã có trong java. 
+
+- 

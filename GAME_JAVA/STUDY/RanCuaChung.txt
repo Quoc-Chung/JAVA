@@ -1,0 +1,307 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.Color;
+
+
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+import java.util.ArrayList;
+import java.util.Random;
+
+
+import javax.swing.JOptionPane;
+import java.awt.Point;
+- Để làm được trò con rắn này thì bên cạnh đó chúng ta không thể thiếu việc  
+import các thư viện : 
+
++ javax.swing.JFrame : Sử dụng để tạo cửa sổ ( Windown ) cho ứng dụng. 
+
++ javax.swing.JPanel : Sử dụng để tạo một Container ( Bảng ) để chứa các 
+thành phần đồ họa(component) khác, trong trường hợp này là để vẽ đồ họa cho 
+trò chơi con rắn. 
+==> Hai thư viện này là luôn luôn phải có , không được thiếu.
+
+
++ java.awt.Graphics : Được sử dụng để vẽ các hình ảnh đồ họa lên các thành 
+phần đồ họa. 
+
++ java.awt.event.ActionEvent và java.awt.event.ActionListener: Được sử dụng 
+để xử lý sự kiện khi có hành động được thực hiện (trong trường hợp này, sự
+kiện là khi timer chạy).
+
++ java.awt.event.KeyEvent, java.awt.event.MouseAdapter, java.awt.event.MouseEvent,
+ java.awt.event.KeyAdapter: được sử dụng để xử lí các sự kiện từ bàn phím và chuột 
+
++ KeyEvent và KeyAdapter được sử dụng để xử lí các sự kiện từ bàn phím 
++ MouseAdapter và MouseEvent được sử dụng dể xử lí các sự kiện từ chuột.
+
+
+public class RanTest extends JFrame implements ActionListener {
+
+- Kích thước mỗi ô trong trò chơi. 
+    private int gridSize = 20;     
+
+
+
+- Số ô theo chiều rộng            
+    private int gridSizeX = 700 / gridSize;
+
+
+- Số ô theo chiều ngang 
+    private int gridSizeY = 500 / gridSize;
+
+
+- Biến này được dùng để theo dõi chiều dài của con rắn 
+    private int snakeLength = 1;
+
+
+- Biến này được dùng để lưu trữ các điểm tạo nên con rắn 
+    private ArrayList<Point> snake = new ArrayList<>();
+
+- Biến này được dùng để lưu trữ vị trí của thức ăn 
+    private Point food = generateFood();
+
+- Đối tượng Timer để cập nhật trạng thái trò chơi. 
+    private Timer timer;
+
+    
+- Đặt hướng di chyển của con rắn ban đầu là sang bên phải.
+    private int direction = KeyEvent.VK_RIGHT;
+
+
+- Đây là hàm khởi tạo của class RẮN TEST được dùng để khởi tạo cửa sổ ,
+vẽ hình con rắn ,đồ ăn cho con rắn , setup màu cho background, thêm sự 
+kiện cho người chơi. 
+- Nói chung là cái hàm này sẽ thực hiện hầu hết các tác vụ trong trò chơi 
+và khi ta muốn chạy chương trình thì ta chỉ cần khởi tạo đối tượng class 
+là được. 
+
+    public RanTest() {
+==============================================================================
+------------------------------------------------------------------------
+- Đặt tiêu đề cho tiêu đề của cửa sổ khung hình 
+- Đặt kích thước cho cửa sổ  : Chiều rộng : 700 - Chiều cao: 500
+- Đặt mặc định việc thoát cửa sổ thì chương trình cũng sẽ tự đóng. 
+- Đặt kích thước cửa sổ không thể điều chỉnh được , tức là cửa sổ của 
+chương trình không thể thay đổi bằng cách kéo góc hoặc biên , nó luôn 
+giữ nguyên một kích thước.
+- Đặt vị trí của cửa sổ ra giữa khung hình. 
+
+
+
+        setTitle("Snake Game");
+        setSize(700, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+--------------------------------------------------------------------------
+- Tiếp theo là chúng ta 
+
+        JPanel drawPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                - Đặt màu cho con rắn - 
+                 g.setColor(Color.GREEN);
+
+                
+                    for (Point p : snake) {
+                        g.fillRect(p.x, p.y, gridSize, gridSize);
+                    }
+
+
+                - set màu cho con rắn 
+                    g.setColor(Color.RED);
+                    g.fillRect(food.x, food.y, gridSize, gridSize);
+                        }
+        };
+
+--------------------------------------------------------------------------
+- Đặt background cho khung cửa sổ hiện tại chuyển sang màu đen. 
+
+        drawPanel.setBackground(Color.BLACK);
+-------------------------------------------------------------------------
+- Thêm vào cửa sổ những cái mà mình vừa vẽ ở bên trên. 
+
+        add(drawPanel);
+-------------------------------------------------------------------------
+
+
+        drawPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+          - Chỗ này là yêu cầu có thể nhận diện xử lí từ máy tính - 
+                drawPanel.requestFocus();
+            }
+        });
+-------------------------------------------------------------------------
+        drawPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                handleKeyPress(e);
+            }
+        });
+-------------------------------------------------------------------------
+        setFocusable(true);
+        setVisible(true);
+        drawPanel.requestFocus();
+-------------------------------------------------------------------------
+
+
+
+
+        timer = new Timer(100, this); // Reduced the timer delay for smoother movement
+        timer.start();
+
+        // Initialize snake with a starting position
+        int initialX = 100;
+        int initialY = 100;
+        snake.add(new Point(initialX, initialY));
+    }
+
+=======================================================================================
+- Hàm này dùng để tạo ra điểm vị trí của thức ăn random : 
+
+
+
+
+    private Point generateFood() {
+        Random rand = new Random();
+        Point newFood;
+        
+        // Keep generating new food until it is not on the snake
+        do {
+            int x = rand.nextInt(gridSizeX);
+            int y = rand.nextInt(gridSizeY);
+            newFood = new Point(x * gridSize, y * gridSize);
+        } while (snake.contains(newFood));
+    
+        return newFood;
+    }
+=======================================================================================
+- Hàm này dùng để di chuyển con rắn đến một vị trí mới 
+
+    private void move() {
+        Point head = snake.get(0);
+        Point newHead = new Point(head.x, head.y);
+
+        switch (direction) {
+            case KeyEvent.VK_UP:
+                newHead.y -= gridSize;
+                break;
+            case KeyEvent.VK_DOWN:
+                newHead.y += gridSize;
+                break;
+            case KeyEvent.VK_LEFT:
+                newHead.x -= gridSize;
+                break;
+            case KeyEvent.VK_RIGHT:
+                newHead.x += gridSize;
+                break;
+        }
+        
+- Các câu lệnh này dùng để check xem trong quá trình di chuyển thì con rắn nó có 
+va chạm với tường không nếu rắn va chạm với tường thì sẽ cập nhật lại 
+vị trí của con rắn. 
+
+
+        if (newHead.x < 0) newHead.x = getWidth() - gridSize;
+        if (newHead.x >= getWidth()) newHead.x = 0;
+        if (newHead.y < 0) newHead.y = getHeight() - gridSize;
+        if (newHead.y >= getHeight()) newHead.y = 0;
+
+- Câu lệnh này kiểm tra xem con rắn nó chết khi nào 
+        if (snake.contains(newHead)) {
+            gameOver();
+            return;
+        }
+
+- Câu lệnh này kiểm tra xem con rắn có ăn đồ ăn không  
+        if (newHead.equals(food)) {
+            snakeLength++;
+            food = generateFood();
+        } else {
+            // Remove tail if not eating
+            snake.remove(snakeLength - 1);
+        }
+
+        // Add new head
+        snake.add(0, newHead);
+    }
+
+
+==============================================================================================
+
+- Câu lệnh này chạy khi gameOver() và hiện ra thông báo vè điểm của bạn. 
+    private void gameOver() {
+        timer.stop();
+        JOptionPane.showMessageDialog(this, "Game Over! Your score: " + (snakeLength - 1));
+        System.exit(0);
+    }
+
+==============================================================================================
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        move();
+        repaint();
+    }
+    
+
+
+
+
+
+==============================================================================
+- Hàm này được thiết kế để sử lí sự kiện khi một phím được bấm trên bàn phím 
+- switch(e.getKeyCode()){
+    - Nếu ta bấm nút hướng lên trên kiểm tra nếu hướng đang xuống dưới thì cho 
+nó hướng lên trên 
+    - Nếu ta bấm nút hướng lên xuống dưới kiểm tra nếu đang hướng lên trên thì 
+phải đổi chiều ngược lại. 
+    - Nếu như ta bấm nút hướng sang trái mà kiểm tra nếu như đang chạy sang bên 
+phải thì phải đổi chiều 
+    - Nếu như ta kiểm tra hướng sang phải mà .......
+} 
+
+    private void handleKeyPress(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                if (direction != KeyEvent.VK_DOWN)
+                    direction = KeyEvent.VK_UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                if (direction != KeyEvent.VK_UP)
+                    direction = KeyEvent.VK_DOWN;
+                break;
+            case KeyEvent.VK_LEFT:
+                if (direction != KeyEvent.VK_RIGHT)
+                    direction = KeyEvent.VK_LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                if (direction != KeyEvent.VK_LEFT)
+                    direction = KeyEvent.VK_RIGHT;
+                break;
+        }
+    }
+
+=============================================================================
+- Câu lệnh này khởi tạo đối tượng mới cũng như là chạy chương trình. 
+    public static void main(String[] args) {
+        new RanTest();
+    }
+}
+=============================================================================

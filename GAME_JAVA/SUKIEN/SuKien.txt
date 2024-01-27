@@ -1,0 +1,63 @@
+- Sự kiện trong java là một cái gì đó thay đổi mà ta phải phản hồi lại thay đổi 
+ấy .( Tức là có một cái gì đó thay đổi hay tác động và ta phải xử lí - Viết các 
+hàm thay đổi hay xử lí cái sự thay đổi ấy ) 
+
+- Ví dụ : 
+   + Nhấn vào nút bấm -> Ta phải xử lí xem bấm vào thì trạng thái sẽ thay đổi như 
+thế nào. 
+   + Bấm chuột phải , bấm một nút gì đó  --> Phải sử lí làm nhân vật quay đầu 
+chẳng hạn. 
+
+- Sự kiện thì có hai phần : 
++ Phần thay đổi : Nhán nút , bấm chuột, bấm nút bàn phím,....
++ Phần phản hồi : Luôn luôn lắng nghe ( Listenner ). 
+
+- Bản chất của việc phản hồi là thực hiện code , gọi các hàm xử lí mục đích, ý  
+tưởng mà ta muốn thực hiện khi thay đổi ( Khi nhấn nút , bấm chuột,...)
+
+==> Ta gọi chung cái mô hình xử lí sự kiện là : event - listenner 
+
+- Một hàm chạy sự kiện -> Thường là do mình gọi 
+
++ Hệ thống (Thằng lắng nghe - listenner )
++ Bao giờ gọi : Không biết trước 
++ Khi nào ấn thì gọi -> Cần đối tượng lắng nghe. 
+
+- Một nút bấm ( Component ) có thể có nhiều giám sát ( listener ) : Giám sát việc 
+bấm chuột , giám sát việc ấn bàn phím ,....
+- Một giám sát có thể giám sát nhiều nút bấm. 
+- Vì vậy swing cung cấp rát nhiều lớp Listenner 
+- Nội dung hàm và giám sát (listener) có quan hệ gì không. Chúng ta cần phải tìm 
+hiểu được xem ai lắng nghe (Giám sát) việc nhấn nút (listener nào)
+- Gọi các hàm sự kiện theo khuôn dạng có sẵn ( Gọi là interface )
+
+- Thành phần (component ) nào bị thay đổi thì ta sẽ code sự kiện cho cái nút bấm 
+đó.
+
+- Sự kiện nhấn nút là : ActionListener -> Là interface 
+========================================================================================
+- Sự kiện là một phần  quan trọng trong bất kì ứng dụng nào của  GUI.Tất cả 
+các ứng dụng dạng GUI xử lí sự kiện trong suốt thời gian mà nó chạy . Có ba  
+thành phần tham  gia vào hệ thống sự kiện : 
++ Event nguồn.
++ Đối tượng event ( Những đối tượng có sự thay đổi ).
++ Đôi tượng lắng nghe event.'
+
+- Event nguồn tạo  ra các cái sự thay đổi 
+
+1. Đối tượng Event: 
+- Môi khi có thứ gì đó xảy ra thì một đối tượng event nào đó sẽ được tạo. Chẳng 
+hạn như nhấn chuột , nhấn phím trên bàn phím 
+=========================================================================================
+- Chúng ta sẽ cùng ôn tập lại một chút về sự kiện từ bàn phím và chuột : 
++ Trong java, chúng ta có thể xử lí sự kiện từ bàn phím và chuột bằng cách 
+sử dụng giao diện :
+    +  ActionListener hoặc KeyListener cho bàn phím.
+    +  MouseListener cho chuột.
+
+* SỬ DỤNG ACTIONLISTENER : 
++ Sử dụng để đăng kí một đối tượng lắng nghe sự kiện cho thành phần đó. 
++ Trong ngữ cảnh JButton, addActionListener() được sử dụng để xác định 
+phương thức nào sẽ được gọi khi nút được nhấn. 
++ Khi bạn gọi addActionListener() trên đối tượng JButton , bạn cần truyền 
+vào một đối tượng lắng nghe sự kiện .

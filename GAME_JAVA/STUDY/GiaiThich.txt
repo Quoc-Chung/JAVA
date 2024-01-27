@@ -1,0 +1,186 @@
+ JFrame jf = new JFrame();
+        jf.setVisible(true);
+
+==> Hiển thị một của sổ chương trình. 
+
+jf.setVisible() : Ẩn hiện một khung hình. 
+
+- JPanel là một class trong java , nó là một vật chứa , có thể chứa các thành phần  
+khác của một chương trình. 
+
+JPanel() 
+setBackground(Color c)
+setPreferredSize(Dimension d)
+
+- Dưới đây là ý nghĩa của phương thức trong lớp JPanel của thư viện Swing trong java. 
+
++ JPanel() Đây là một trong các phương thức khởi tạo một lớp được sử dụng để chứa các 
+thành phần đồ  họa , nút , và các thành phần khác của giao diện người dùng. 
+
++ setBackground(Color c) : Ý nghĩa là để đặt nền của JPanel. 
++ Bạn có thể truyền vào một đối tượng Color vào để đặt màu nền  mong muốn. 
++ Ví dụ setBackground(Color.RED) sẽ đặt màu nền của panel thành màu đỏ. 
+
+
++ setPreferredSize(Dimension đ): Đặt kích thước ưu tiên của JPanel 
++ Phương thức này được sử dụng để xác định bởi bố cục (layour manager ) khi quyết 
+định cách các thành phần trong panel được sắp xếp. Đối số của phương thức là một 
+đối tượng "Dimension" trong đó bạn có thể xác định chiều rộng và chiều cao tương 
+ứng.
++ setPreferredSize(new Dimension(300, 200)) sẽ đặt kích thước ưu tiên của panel 
+là 300 pixels chiều rộng và 200 pixels chiều cao.
+
+- Các từ mới trong hai cái hàm này là : 
+
+- JPanel trong java Swing được sử dụng để tạo ra các cái container chính là nơi 
+chứa các phần tử khác. 
+- container là thành phần chủ chốt trong các thành phần của Swing GUI 
+- Một container cung cấp một không gian, là nỏi đặt một thành phần. 
+
+- Một Container chính là một Component ( thành phần ) và nó có thêm khả năng 
+để thêm các thành phần khác vào chính nó. 
+
++ Các lớp con của container được gọi là Container . Một số ví dụ về lớp con của 
+Container chính là JPaner , JFrame và JWindown ,... 
+
++ Một layout mặc định có mặt trong mỗi container . Layout này sẽ bị ghi đè bỏi 
+phương thức setLayout()
+
+==> Hiểu đơn giản là layout ban đầu sẽ là trống  không nhưng khi muốn chèn hay ghi 
+đè một  thứ gì đó lên cửa sổ thì sẽ phải setLayout()
+
+- GUI là viết tắt của Graphic User Interface ( Giao diện người dùng đồ họa). 
++ Đây là một cách để tưởng tác với phần mềm thông qua các yếu tố đồ họa như cửa 
+sổ , nút bấm , ô văn bản, và các thành phần khác thay vì thông qua dòng lệnh.
++ Trong trường hợp của đoạn mã Java được đưa ra , prepareGUI là một một phương thức 
+để chuẩn bị giao diện người dùng đồ họa. 
+
+================================================================================
+- Layout của một khung hình (frame) trong lập trình đồ họa thường được xác định 
+bởi layout manager. Nó quyết định cách mà các thành phần bên trong khung hình sẽ 
+được sắp xếp và hiển thị. 
+- Java Swing cung cấp một số layout manager để giúp quản lí sắp xếp các thành phần 
+trên khung hình. Dưới đây là một số layout manager phổ biến : 
+
+* FlowLayout : 
+  + Các thành phần được sắp xếp theo chiều ngang hoặc chiều dọc theo thứ tự thêm 
+vào.
+  + Dòng tiếp theo sẽ bắt đầu từ đầu của đòng trước , tùy thuộc vào hướng sắp xếp.
+
+* BorderLayout: 
+  + Nó sẽ tự động chia cửa sổ khung hình thành 5 phần chính.
+  + Các khung hình thành năm vùng : NORTH, SOURTH,EAST,WEST và CENTER;
+        + NORTH: trên cùng cửa sổ (Tiêu đề)
+        + SOURTH: dưới cùng cửa sổ (Đặt nút ok hay Cancel )
+        + EAST : bên phải , đặt các thành phần chức năng phụ.
+        + WEST : bên trái , đặt các thành phần hoặc điều khiển chức năng phụ. 
+        + CENTER : Chính giữa, thường để đặt bảng điều khiển 
+  + CÁc thành phần ở mỗi vùng tương ứng của khung hình.
+
+* GridLayout: 
+  + Chia khung hình thành một lưới ô , trong đó mỗi ô có thể chứa một thành phần.
+  + Kích thước của các ô có thể được đặt trước hoặc tự động điều chỉnh theo kích 
+thước của khung hình. 
+
+* BoxLayout: 
+  + Cho phép xếp các thành phần theo một hướng cụ thể (Ngang và dọc)
+  + Các thành phần có thể xếp chồng lên nhau hoặc căng đều. 
+
+==> Các layout này cung cấp các phương thức sắp xếp tự động cho các thành phần 
+trên khung hình , giúp tạo ra giao diện người dùng một cách hiệu quả và linh hoạt. 
+
+==> Cho lựa chọn layout manager phụ thuộc vào yêu cầu cụ thể của ứng dụng và cách 
+bạn muốn tổ chức giao diện. 
+=================================================================================
+
+- Ôn tập tổng hợp các layout trong java swing : 
++ Layout trong java SWing được sử dụng để chỉ định bố cục của các thành viên con 
+bên trong một container.
++ Container cũng là một thành phần giao diện của java Swing , tuy nhiên nó có thể 
+chứa các thành phần nhỏ hơn như : 
+                                + button ( nút )
+                                + label ( nhãn )
+                                + Input ( Đầu vào )
++ Java  swing cung cấp một số layout , đối với mỗi loại layout được sử dụng thì 
+các thành phần con bên trong nó sẽ được trình bày khác nhau. 
+
++ Dưới đây là các danh sách layout hay được sử dụng : 
+    + FlowLayout
+    + BorderLayout
+    + BoxLayout 
+    + GridLayout 
+-------------------------------------------------------------------------------
++ FlowLayout bố trí các thành phần con theo hướng từ trái sang phải hay từ phải 
+sang trái trên cùng một dòng. 
++ Nếu tất cả các thành phần con không thể chứa trên một dòng thì  chúng sẽ  dược 
+xếp trên một hàng mới. 
++ Để tạo mới một FlowLayout thì chúng ta có 3 contructor như sau : 
+
+
+FlowLayout() : Tạo mới một FlowLayout object với các giá trị mặc định như canh giữa 
+các thành phần con, khoảng cách ngang và dọc giữa các thành phần còn  là 5  
+
+FlowLayout(int aligh) : Tương tự như trên , tuy nhiên việc canh các phần tử ở giữa theo 
+mặc định sẽ được ghi đè bởi một giá trị được chèn vào 
+
+FlowLayout(int aligh, int hgap ,int vgap) : Căn cách phần tử với hgap là căn 
+ngang còn vgap là căn dọc.
+
+-------------------------------------------------------------------------------
+- BorderLayout tổ chức các thành phần còn thành 5 vùng . 
+- Ở mỗi vùng có thể chứa tối đa một thành phần con , khi thêm các phần  tử khác nhau 
+vào boderLayout thì cần chỉ định vùng thêm.
+
+-------------------------------------------------------------------------------
+
+- GridLayout được sử dụng để bố trí các thành phần trong một lưới hình chữ nhật, 
+lưới này được phân thành các hình chữ nhật có kích thước bằng nhau 
+- Chúng ta có thể tạo GridLayout như sau : 
+GridLayout() – Tạo GridLayout với duy nhất một dòng và một cột
+
+GridLayout(int row, int col) – Tạo GridLayout với row dòng và col cột.
+
+GridLayout(int row, int col, int hgap, int vgap) – Tạo GridLayout với row dòng và col cột, 
+các phần tử trên cùng một dòng cách nhau hgap và trên cùng một cột cách nhau vgap.
+
+==============================================================================================
+- Phân biệt add của JFrame và JPanel : 
++ Thứ nhất là cả hai cái phương thức này dều dược dùng để thêm các thành phần (component) vào 
+giao diện của người dùng.
++ Tuy nhiên có một số  khác biệt quan trọng giữa việc sử dụng add trong JFrame
+ và add trong JPanel 
+
++ JFrame là cửa sổ chính của ứng dụng . Thông thường thì bạn sẽ thêm các thành phần 
+trực tiếp vào JFrame hoặc thông qua các container lồng bên trong nó.
++JFrame có thể sử dụng một layout manager để quyết định cách sắp xếp các thành phần 
+bên trong theo thứ tự thêm vào.
+
++ Các thành phần thường được đặt trực tiếp trong JFrame và layout manager có thể 
+được thiết lập cho JFrame để quản lí cách chúng được sắp xếp. 
+
+
++ JFrame có một container pane(bảng nội dung ) mặc định được truy cập trực tiếp 
+thông qua getContentPane() 
+
++ add thêm các thành phần vào content pane. 
+
+
+
++ JPanel là một container bên trong các container khác , nó không phải cửa sổ 
+chính. Thường được sử dụng để nhóm và tổ chức các thành phần trong giao diện. 
++ JPanel có thể sử dụng layout manager riêng để quyết định các thành phần bên 
+trong nó được sắp xếp. 
+
++ JPanel thường được tạo và thiết lập với các thành phần say đố được thêm vào JFrame. 
+
+          JPanel panel = new JPanel();
+          panel.add(new JButton("Click Me")); // Thêm vào JPanel
+          frame.add(panel); // Sau đó thêm JPanel vào JFrame
+
+- Tóm lại : 
+
++ add trong JFrame thêm trực tiếp vào cửa sổ chính 
++ add trong JPanel thường được sử dụng để thêm vào các container bên trong , và sau 
+đó container này có thể được thêm vào JFrame. 
+
+

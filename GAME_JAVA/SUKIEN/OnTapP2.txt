@@ -1,0 +1,135 @@
+- Bước 1 :Đảm bảo Jpanel có thể nhận tập trung và có thể nhận sự kiện :
+
+public class GamePanell extends JPanel {
+    private Mouse mouse;
+    private KeyboardInputs key;
+
+    public GamePanell() {
+        /* - Viết ở mouse và key hàm khởi tạo đối số GamePanel - */
+        mouse = new Mouse(this);
+        key = new KeyboardInputs(this);
+
+       /* - Viết để nhận được sự tập trung - */
+        setFocusable(true);
+        requestFocusInWindow();
+
+      /* - Viết thêm một số key để cho nó có thể nhận được sự kiện từ bàn phím - */ 
+        addMouseListener(mouse);
+        addKeyListener(key);
+  
+    }
+}
+
+
+- Bước 2 : Triển khai các phương thức có trong Mouse và KeyBoardInputs : 
+
+// Trong Mouse
+@Override
+public void mouseClicked(MouseEvent e) {
+    // Xử lý sự kiện khi chuột được nhấn và nhả
+    gamePanel.spawnRect(e.getX(), e.getY());
+}
+
+// Trong KeyboardInputs
+@Override
+public void keyReleased(KeyEvent e) {
+    switch (e.getKeyCode()) {
+        case KeyEvent.VK_W:
+        case KeyEvent.VK_A:
+        case KeyEvent.VK_S:
+        case KeyEvent.VK_D:
+            gamePanel.setMoving(false);
+            break;
+    }
+}
+
+@Override
+public void keyPressed(KeyEvent e) {
+    switch (e.getKeyCode()) {
+        case KeyEvent.VK_W:
+            gamePanel.setDirection(UP);
+            gamePanel.setMoving(true);
+            break;
+        case KeyEvent.VK_A:
+            gamePanel.setDirection(LEFT);
+            gamePanel.setMoving(true);
+            break;
+        case KeyEvent.VK_S:
+            gamePanel.setDirection(DOWN);
+            gamePanel.setMoving(true);
+            break;
+        case KeyEvent.VK_D:
+            gamePanel.setDirection(RIGHT);
+            gamePanel.setMoving(true);
+            break;
+    }
+}
+
+===========================================================================
+- Các bước nhận sự kiện từ bàn phím : 
+
+BƯỚC 1 : IMPORT THƯ VIỆN XỬ LÍ SỰ KIỆN :
++ Sự kiện từ bàn phím và cả chuột  
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
++ Sự kiện cho bàn phím :
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
++ Sự kiện cho chuột: 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+-----------------------------------------------------------------------
+BƯỚC 2: KẾ THỪA CÁC INTERFACE CHO ĐỐI TƯỢNG JFRAME : 
+
+public class TEST extends JFrame implements ActionListener {
+     Các phương thức và thuộc tính khác
+}
+
+public class TEST extends JFrame implements KeyListener {
+    Các phương thức và thuộc tính khác
+}
+
+public class TEST extends JFrame implements MouseListener {
+    Các phương thức và thuộc tính khác
+}
+=======================================================================
+- Lưu ý trong quá trình viết hàm khởi tạo đối tượng này nhớ phải cho
+đối tượng này  có thể nhận tập trung và có thể nhận sự kiện : 
+
+public class GamePanell extends JPanel {
+    private Mouse mouse;
+    private KeyboardInputs key;
+
+    public GamePanell() {
+        /* - Viết ở mouse và key hàm khởi tạo đối số GamePanel - */
+        mouse = new Mouse(this);
+        key = new KeyboardInputs(this);
+
+       /* - Viết để nhận được sự tập trung - */
+        setFocusable(true);
+        requestFocusInWindow();
+
+      /* - Viết thêm một số key để cho nó có thể nhận được sự kiện từ bàn phím - */ 
+        addMouseListener(mouse);
+        addKeyListener(key);
+  
+    }
+}
+
+========================================================================
+------------------------------------------------------------------------
+BƯỚC 3: Triển khai phương thức của interface đã kế thừa
+Cho sự kiện của nút
+
+@Override
+public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == button) {
+        System.out.println("Button clicked!");
+        // Xử lý sự kiện khi nút được nhấn
+    }
+}

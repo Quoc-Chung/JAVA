@@ -1,0 +1,62 @@
+- Từ khóa @override được sử dụng để chỉ định rằng một phương thức trong lớp con 
+có ý định ghi đè một phương thức đã được định nghĩa trong lớp cha của nó .
+
+- Ghi đè (override) là quá trình khi một lớp con cung cấp một triển khai 
+mới cho một phương thức đã được định nghĩa trong lớp cha của nó, với cùng 
+một chữ kí tên(Tên, kiểu trả về , và danh sách tham số ). Khi một đối tượng 
+của lớp con gọi phương thức , triển khai mới của lớp con sẽ được sử dụng thay
+vì triển khai ở lớp trả.
+- Cứ hiểu đơn giản việc ghi đè ở đây là ghi thêm vào phương thức ở lớp con 
+mà cái phương thức ở lớp con này đã tồn tại trước đó ở lớp cha rồi. 
+------------------------------------------------------------------------
+- Một ví dụ dễ hiểu về việc ghi đè  : 
+class Animal {
+    public void PHƯƠNG_THUC_CHA(){
+        System.out.println("Phương thức A tồn tại trong cha rồi . ");
+    }
+}
+
+class Dog extends Animal {
+
+    @override
+    public void PHUONG_THUC_CHA(){
+        -- Viết thêm các hàm khác --
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal animal = new Dog();
+        animal.makeSound();
+    }
+}
+- Trong lớp cha có phương thức A mà mọi lớp con của nó đều có thể sử dụng  
+- Lớp Dog là lớp con của Animal và nó ghi đè phương thức A để cung cấp các 
+triển khai mới. 
+- Trong phương thức main của một đối tượng của lớp Dog được tạo và gán cho 
+một biến của lớp Animal. Khi gọi phương thức A trên đối tượng con này , Triển
+khai mới.
+- Nói chung , ghi đè cho phép lớp con cung cấp một triển khai cụ thể của một 
+phương thức mà lớp cha nó đã định nghĩa , giúp thích ứng và mở rộng chức năng
+của lớp cha đã định nghĩa , giúp thích ứng và mở rộng chức năng của lớp cha 
+trong ngữ cảnh của lớp con.
+
+-------------------------------------------------------------------
+- Ghi đè phương thức trong lớp cha : Khi một phương thức trong lớp con có 
+kí tự giống hệt (Tên , kiểu trả về và tham số ) với một phương thức trong 
+lớp cha của nó , nó nên được đánh dấu với @override .
+==> Điều này giúp đảm bảo rằng bạn đang thực sự ghi đè một phương thức 
+từ lớp cha 
+
+class DongVat{
+    public void Keu(){
+        System.out.print("Am thanh chung cua đong vat");
+    }
+}
+class Meo extends DongVat(){
+    @override
+    public void Keu(){
+        System.out.print("Meo keu : meo meo");
+    }
+}

@@ -1,0 +1,148 @@
+                           ARRAY_LIST 
+
+- Nguồn : https://www.programiz.com/java-programming/arraylist
+
+- Sử dụng lớp ArrayList để triển khai chức năng của mảng có thể thay đổi 
+kích thước. 
+------------------------------------------------------------------------
+- Collection là một framework cung cấp một nhóm các lớp và giao diện để quản 
+lí và tổ chức đối tượng .
+- Collection framework giúp thực hiện các tác vụ thường gặp liên quan đến 
+việc lưu trữ , thêm , xóa , truy xuất dữ liệu 
+- Các lớp trong Collection framework được nhóm lại thành hai loại chính : 
++ Interface 
++ Implementation 
+- Một số Interface quan trọng trong Collection : 
+
+
+*********List*********
++ Là một interface mô tả một dãy các phần tử có thứ tự, cho phép các 
+phần tử trùng lặp. 
++ Các lớp thực hiện List bao gồm ArrayList, LinkedList, và Vector.
+
+
+**********Set*********
++ Là một interface mô tả một tập hợp các phần tử không có thứ tự
+ và không cho phép các phần tử trùng lặp. 
++ HashSet, LinkedHashSet, và TreeSet là các lớp thực hiện Set.
+
+
+*********Map*********
++ Là một interface mô tả một tập hợp các cặp key-value, trong đó mỗi key
+phải là duy nhất. 
++ HashMap, LinkedHashMap, và TreeMap là các lớp thực hiện Map.
+
+
+********Queue*********
++ Là một interface mô tả một hàng đợi, nơi mà phần tử mới được thêm vào
+ở cuối và phần tử cũ được loại bỏ ở đầu.
++ PriorityQueue và LinkedList là các lớp thực hiện Queue.
+
+
+********Deque*********
++ Là một interface mô tả một hàng đợi kép, cho phép thêm và loại bỏ 
+phần tử từ cả hai đầu. 
++ LinkedList là một trong những lớp thực hiện Deque.
+-----------------------------------------------------------------------
+- ArrayList thực hiện List giao diện của khung bộ sưu tập . 
+                              Collection 
+                                  |
+                                 List
+                                  |
+                              ArrayList 
+- Trong java chúng ta cần khai báo kích thước của một mảng trước khi có 
+thể sử dụng nó. Khi kích thước của mảng đã được khai báo thì rất khó để 
+thay đổi nó. 
+- Để sử lí vấn đề này , chúng ta có thể sử dụng ArrayList (Tức là vẫn 
+hoạt động như một mảng bình thường nhưng chỉ có điều là đéo cần biết 
+hay cần khai báo kích thước ban đầu là gì ) 
+- Không giống như mảng thì ArrayList có thể tự động điều chỉnh dung lượng 
+khi chúng ta thêm hoặc xóa các phần tử khỏi chúng . 
+
+==> ArrayList <=> Mảng động 
+- Sử dụng ArrayList được thì chúng ta phải import gói ARRAY_LIST trước: 
+        import java.util.ArrayList; 
+
+- Khai báo danh sách mảng trong java : 
+       ArrayList<Type> arrayList= new ArrayList<>();
+
++ Ví dụ : 
+       // create Integer type arraylist
+       ArrayList<Integer> arrayList = new ArrayList<>();
+
+       // create String type arraylist
+       ArrayList<String> arrayList = new ArrayList<>();
+
+- Các kiểu dữ liệu sử dụng trong ArrayList không phải là các kiểu nguyên 
+thủy mà phải là các kiểu bao bọc : 
+                byte	    Byte
+                boolean 	Boolean
+                char	    Character
+                double	    Double
+                float    	Float
+                int	        Integer
+                long	    Long
+                short	    Short
+
+- Cách chuyển đổi các kiểu dữ liệu trong java :
+         KIỂU_BAO_BỌC.valueOf( VALUE );
+
+        int a = 5;
+        double b = 5.65;
+
+        Integer aObj = Integer.valueOf(a);
+        Double bObj = Double.valueOf(b); 
+- Mà có một số lưu ý là các kiểu dữ liệu nguyên thủy luôn được khuyến 
+nghị vì nó có tính hiệu quả cao hơn. 
+====================================================================================
+                     BIỂU THỨC CHÍNH QUY TRONG JAVA  
+- Để sử dụng được regex thì chúng ta phải import thư viện regex  : 
+                     import java.util.regex.*;
+
+- Trong java thì có hai lớp quan trọng là Pattern và Matcher là hai lơp quan trọng trong
+gói  java.util.regex giúp bạn thực hiện các thao tác liên quan đến biểu thức chính quy. 
+
+- Đối tượng Pattern đại diện cho một biểu thức chính quy đã được biên dịch. Nó chứa thông 
+tin về biểu thức chính quy mà bạn muốn áp dụng. 
+- Bạn sử dụng phương thức compile của lớp Pattern để tạo một đối tượng Pattern từ một
+chuỗi biểu thức chính quy.
+              String regex = "[a-zA-Z]+\\d+";
+              Pattern pattern = Pattern.compile(regex);
+
+- CÔNG THỨC :  Pattern pattern = Pattern.compile( REGEX );
+
+- Đối tượng Matcher: sử dụng để thực hiện so khớp giữa biểu thức chính quy và một chuỗi
+đầu vào.
+- Bạn tạo một đối tượng Matcher bằng cách gọi phương thức matcher() của đối tượng 
+Pattern và truyền chuỗi cần kiểm tra.
+              String input = "Hello123";
+              Matcher matcher = pattern.matcher(input);
+
+- CÔNG THỨC :  Matcher matcher = pattern.matcher( CHUỖI_ĐẦU_VÀO );
+
+++++ CÁC HÀM CỦA ĐỐI TƯỢNG PATTERN ++++
++ compile(String regex ) : Biên dịch biểu thức chính quy+ Khởi tạo regex 
++ matcher : So khớp chuỗi với biểu thức chính quy 
+
+- Các ví dụ : 
+
+       Pattern pattern = Pattern.compile("[a-zA-Z]+\\d+");
+       Matcher matcher = pattern.matcher("Hello123");
+
+
+++++ CÁC HÀM CỦA ĐỐI TƯỢNG MATCHER ++++
++ matches() : Kiểm tra xem toàn bộ chuỗi có khớp với biểu thức chính quy 
+hay không  
+
++ find() : Tìm chuỗi con có khớp với biểu thức chính quy trong chuỗi đầu 
+vào. 
+
++ group () : Trả về chuỗi con mà biểu thức chính quy đã khớp 
+
++ group(int group) : Trả về giá trị của nhóm con được chỉ định trong 
+biểu thức chính quy. 
+
++ replatceAll(String chuôi) : Thay thế tất cả các chuỗi khớp bằng biểu 
+thức thay thế. 
+
++ 

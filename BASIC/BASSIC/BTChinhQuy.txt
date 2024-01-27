@@ -1,0 +1,535 @@
+- Các phương thức quan trọng của đối tượng Pattern và Matcher 
+- Đầu tiên ta có thể hiểu đây là hai lớp trong java và để dùng nó thì 
+chúng ta sẽ phải khai báo đối tượng và từ cái đói tượng và sẽ dùng toán 
+tử chấm để khai báo thông tin. 
+= Pattern class :
++ Tạo một đối tượng "Pattern" class : 
+
+1. compile(BIỂU_THỨC_CHÍNH_QUY): Tạo đối tượng từ biểu thức chính quy 
+    Pattern pattern = Pattern.compile("\\d+");
+
+2. matcher(CHUỖI_ĐẦU_VÀO) :: Tạo đối tượng Matcher từ chuỗi đầu vào 
+    Matcher matcher = pattern.matcher("123"); 
+
+- Matcher class : 
+1. matches(): Kiểm tra xem toàn bộ chuỗi có khớp với biểu thức chính quy không.
+                boolean isMatch = matcher.matches();
+2. find():   tra xem có ít nhất một phần của chuỗi khớp với biểu thức chính quy không.
+                boolean found = matcher.find();
+3. group(): Trả về chuỗi con của chuỗi đầu vào mà matcher đã khớp.
+                 String matchedString = matcher.group();
+4. start(), end():Trả về vị trí bắt đầu và kết thúc của chuỗi con khớp trong chuỗi đầu vào.
+                int startIndex = matcher.start();
+                int endIndex = matcher.end();
+5.group(int group): Trả về chuỗi con của chuỗi đầu vào mà matcher đã khớp cho một nhóm cụ thể.
+                String group1 = matcher.group(1);
+6.reset(), reset(CharSequence input): reset(): Đặt matcher về trạng thái ban đầu. 
+                                      reset(CharSequence input): Đặt matcher về trạng thái ban đầu và đặt chuỗi đầu vào mới.
+matcher.reset();
+matcher.reset("new input");
+
+7.replaceAll(String replacement), replaceFirst(String replacement): Thay thế tất cả hoặc chỉ một phần của chuỗi đầu vào khớp với biểu thức chính quy.
+
+        String replacedAll = matcher.replaceAll("replacement");
+        String replacedFirst = matcher.replaceFirst("replacement");
+8. lookingAt(): Kiểm tra xem phần đầu của chuỗi có khớp với biểu thức chính quy không.
+        boolean atBeginning = matcher.lookingAt();
+
+- Giải thích một số  hàm đặc biệt : 
+  * Phương thức find :
+        + được sử dụng để kiểm tra xem có ít nhất một phần của chuỗi 
+đầu vào có khớp với biểu thức chính quy hay không. 
+        + Nó trả về true hoặc false nếu nó khớp 
+        + Nếu find() thì bạn có thể dùng hàm start() và end() để biết được vị trí bắt đầu 
+và kết thúc của chuỗi con khớp.
+   * Phương thức group() : 
+        + Được sử dụng để trả về chuỗi con của chuỗi đầu vào mà matcher đã khớp.
+        + Khi bạn sử dụng find và có khớp sau đó sử dụng group() nó sẽ trả về chuỗi 
+con đã khớp.
+        + Khi bạn có các nhóm trong biểu thức chính quy , bạn có thể sử dụng group(int group)
+để lấy chuỗi con của một nhóm cụ thể. 
+
+        import java.util.regex.Matcher;
+        import java.util.regex.Pattern;
+
+        public class MatcherExample {
+        public static void main(String[] args) {
+                -- Biểu thức chính quy để tìm kiếm các số trong chuỗi --
+                String regex = "\\d+";
+
+                -- Chuỗi đầu vào --
+                String input = "There are 123 apples and 456 oranges in the basket.";
+
+                -- Tạo đối tượng Pattern từ biểu thức chính quy --
+                Pattern pattern = Pattern.compile(regex);
+
+                -- Tạo đối tượng Matcher từ chuỗi đầu vào --
+                Matcher matcher = pattern.matcher(input);
+
+                --  Sử dụng phương thức find()  --
+                while (matcher.find()) {
+                     -- Sử dụng phương thức group() để lấy chuỗi con khớp --
+                        String matchedString = matcher.group();
+                        System.out.println("Chuỗi con khớp: " + matchedString);
+                }
+        }
+        }
+
+=======================================================================
+ Tìm kiếm , sửa đổi quản lí về cái text của chúng ta, kiểu như là xem 
+xem việc nhập có đúng định dạng không .
+
+- Một biểu thức chính quy được định nghĩa theo khuôn mẫu ( pattem ).
+- Nó có thể được sử dụng : 
+                         + Tìm kiếm 
+                         + Thay thế 
+                         + Sửa đổi 
+                         + So sánh 
+                         + Các thao tác khác trên văn bản 
+- Biểu thức chính quy thường được đặt trong dấu ngoặc kép : {^....$}
+- Một số kí hiệu hay dùng của biểu thúc chính quy : 
+     .     --> Khớp với mọi kí tự 
+     ^     --> Bắt đầu của biểu thức chính quy 
+     $     --> Kết thúc biểu thức chính quy 
+  [abc]    --> Thiết lập định nghĩa có thể khớp a hoặc b hoặc c
+[abc][vZ]  --> Thiết lập định nghĩa có thể khớp với a hoặc b hoặc c
+               theo sau là v hay z 
+
+[^abc]    --> Phủ định tức là không thể khớp a , khớp b , khớp c 
+[a-z0-9]  --> Phạm vi biểu diễn từ a đến  z  và từ  0 đến 9 
+
+X|Z --> tìm X hoặc Z 
+XZ --> tìm x và theo sau là Z 
+
+$ --> Dấu kết thúc dòng  
+\d --> Số bất kì viết ngắn gọn của [0-9]
+\D --> Kí tự không phải số , viết ngắn gọn của [^0-9]
+
+\s --> Kí tự khoảng trắng  , viết ngắn gọn cho [\t\n\x0b\r\f]
+\S --> Kí tự không phải khoảng trắng  , viết ngắn gọn cho [^\s]
+
+\w --> Kí tự chữ(chữ cái , chữ số ,..) viết ngắn gọn cho [a-zA-Z0-9] 
+\W --> Không phải kí tự chữ ,viết ngắn gọn của [^\W]
+\S+ --> Một kí tự không phải khoảng trắng 
+
+\b --> là kí tự chữ(chữ số  hoặc chữ cái ) hoặc gạch dưới, viết tắt [a-zA-Z0-9_]
+
+* --> Xuất hiện 0 lần nào hoặc nhiều lần  
++ --> Xuất hiện 1 haojwc nhiều lần 
+? --> Xuất hiện 0 lần hoặc 1 lần 
+
+{X} --> Xuất hiện X lần 
+{X,Y} --> Xuất hiện trong khoảng X tới Y lần  
+
+*? --> Có nghia là xuất hiện 0 lần  hoặc nhiều lần , thêm ? phía sau là tìm kiếm
+khớp nhỏ nhất .
+
+Muốn  các kí tự + * . ,... được hiểu theo cách thông thường ,tức là nó là dấu 
+cộng , dấu nhân , dấu .thì phải thêm \ trước dấu đó  . 
+VÍ DỤ : 
+        // Mẫu regex mô tả một ký tự bất kỳ.
+        String regex = ".";
+        // Mẫu regex mô tả  ký tự dấu chấm.
+        String regex = "\\.";
+========================================================================
+- Bài này chúng ta sẽ nói về cách tạo ra các đoạn regex trong java như thế 
+nào cũng như việc sử dụng của nó như thế nào. 
++ Mục tiêu của regex là tìm kiếm (Search), Trích xuất(Extract), Thay thế(Replace)
++ Ta đi tìm hiểu Cấu trúc làm việc : 
+   Regex  ----------> Regex Engine    -------------> Kết quả 
+     |                                                  |
+     |                                                  |
+   Pattern ---------- Matcher(IN_PUT) -------------> Matcher
+- Pattern là nơi lưu trữ regex 
+- Matcher : Engine nỏi thực hiện việc match và trả lại kết quả sau khi 
+match(Match ở đây là việc kiểm tra xem một chuỗi có khớp với một biểu 
+thức chính quy hay không )
+- Để tạo được Pattern object thì chúng ta phải dùng hàm .compile(regex).
+- Sau đó sẽ gọi là phương thức .matcher(String input) --> Tạo râ Matcher object 
+- Từ matcher sẽ gọi ra .matcher.find() --> Kiểm tra xem có match hay không 
+nếu match nhiều hơn một lần thì sẽ gọi tiếp .matcher.find() 
+--> Đó là lí do ở đây dùng while vì không thể biết match bao nhiêu lần.
+
+        String regex = "\\d+"; // Kiểm tra xem chuỗi có chứa ít nhất một chữ số không
+        String input = "The price is $123.";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.find()) {
+        System.out.println("Chuỗi chứa ít nhất một chữ số");
+        } else {
+        System.out.println("Chuỗi không chứa chữ số nào");
+        }
+
+- Trong java thì Pattern và Matcher là hai lớp làm việc cùng nhau
+để thực hiện việc tìm kiếm và so khớp chuỗi dựa trên biểu thức chính quy.
+
+----------------------------- Pattern-------------------------------
++ Pattern là mattern : Biên dịch biểu thức chính quy 
+một lớp trong gói java.util.regex được sử dụng để biên dịch một
+BTCQ thành một đối tượng có thể sử dụng.
++ Khi bạn tạo một đối tượng Pattern bằng cách sử dụng Pattern.compile(String regex), 
+nó biên dịch BTCQ thành một đối tượng có thể sử dụng để tạo Matcher.
+------------------------------Matcher------------------------------
++ Matcher là một đối tượng thuộc lớp Matcher trong gói được tạo ra từ một đối tượng Pattern.
++ Matcher thực hiện các hoạt động tìm kiếm và so khớp trên một chuỗi dựa trên biểu thức chính
+quy đã được biên dịch từ Pattern.
++ Một đối tượng Matcher được tạo thông qua phương thức pattern.matcher(CharSequence input) 
+của đối tượng Pattern.
+
+- Ví dụ về việc dùng kết hợp của hai chuỗi này : 
+        import java.util.regex.Matcher;
+        import java.util.regex.Pattern;
+public class RegexExample {
+    public static void main(String[] args) {
+        1. Biểu thức chính quy để kiểm tra chuỗi có chứa chữ "Java" không
+        String regex = "Java";
+
+        2. Tạo đối tượng Pattern từ biểu thức chính quy
+        Pattern pattern = Pattern.compile(regex);
+
+        3. Chuỗi đầu vào
+        String input = "Java programming is fun.";
+
+        4. Tạo đối tượng Matcher từ chuỗi đầu vào
+        Matcher matcher = pattern.matcher(input);
+
+        5. Thực hiện tìm kiếm và in ra kết quả
+        if (matcher.find()) {
+            System.out.println("Chuỗi chứa Java");
+        } else {
+            System.out.println("Chuỗi không chứa Java");
+        }
+    }
+}
+========================================================================
+- Phương thức "split" trong java thường được sử dụng để tách một chuỗi thành 
+một mảng các chuỗi con dựa trên một biểu thức chính quy (regex). 
+- Cụ thể phương thức này tách một chuỗi bằng các từ bằng cách sử dụng một mẫu 
+pattem làm điều kiện (Ranh giới) để tách 
+--> Sau khi qua hàm này : TỪ QUỐC CHUNG sẽ thành TỪ , QUỐC  , CHUNG  nhờ điều 
+kiện tách là pattem .
+- Công thức chung  : 
+   public String[] split(String regex)
+             hoặc  
+
+   public String[] split(String regex, int limit)
+
+      + regex : biểu thức chính quy được dùng làm điều kiện tách 
+      + limit : Số lượng phần (từ) tối đa sẽ được tạo ra. Nếu limit là 
+0 thì các chuỗi trống có thể xuất hiện ở cuối mảng kết quả. 
+
+- public class MẢNG_KẾT_QUẢ{
+        public static void main(String[] args){
+                // Chuỗi đầu vào 
+                String chuoi = "apple,orange,banana,grape";
+                // Sử dụng phương thức split để tách chuỗi dựa trên dấu phẩy 
+                String[] mangChuoi = chuoi.split(",");
+
+                 // In ra từng phần tử của mảng kết quả
+                for (String phanTu : mangChuoi) {
+                   System.out.println(phanTu);
+                }
+        }
+}
+
+--> Phương thức này là một công cụ mạnh mẽ cho việc xử lí và phân tích các chuỗi 
+trong java , đặc biệt là khi bạn cần tách dữ liệu từ các chuỗi có định dạng cố 
+định. 
+
+===================================================================================
+- Hàm Matcher là một phần của gói java.util.regex được sử dụng để thực hiện các phương thức 
+tìm kiếm và so khớp chuỗi con trong biểu thức chính quy.
+- Hàm Matcher chủ yếu là : 
+  + find() : tìm kiếm chuối con khớp với biểu thức chính quy đầu vào . 
+  + matcher() : kiểm tra toàn bộ chuỗi có khớp với biểu thức chính quy đầu vào không. 
+  + group()  : Trả về chuỗi con khớp gần nhất với biểu thức  chính quy 
+  --> Nếu bạn sử dụng ngoặc đơn trong biểu thức chính quy để xác định các nhóm thì bạn 
+có thể sử dụng  group(int index) để truy cập chuỗi con trong một nhóm cụ thể.
+  + Bắt đầu và kết thúc (start và end ) : Phương thức start() trả về vị trí bắt đầu của 
+chuỗi con khớp , trong khi end trả về vị trí kết thúc của chuỗi con khớp.  
+
+===================================================================================
+- Để tìm kiếm một chuỗi con có khớp với biểu thức chính quy hay không thì bạn có thể 
+sử dụng lớp Pattern và lớp Matcher trong java để làm điều đó. 
++ Bước đầu tiên để làm được điều đó là  imporrt thư viện : 
+          import java.util.regex.Matcher;
+          import java.util.regex.Pattern;
++ Bước thứ hai là sử dụng hàm compile(BIỂU_THỨC_CHÍNH_QUY) để so sánh thêm nó có Khớp
+với chuỗi con cần lấy ra hay không  rồi say đó chúng ta sẽ tạo đối tượng từ chuỗi đầu 
+vào . 
+- Phân tích các bước để thực hiện và code :
+
+        --------------------  Chuỗi đầu vào  ---------------------
+        String chuoi = "apple, banana, orange, grape";
+        
+        -------------------- Biểu thức chính quy ---------------------
+                   - Biểu thức chính  quy phải khớp với từng từ -
+            String bieuThucChinhQuy = "\\b\\w+\\b"; 
+            Pattern pattern = Pattern.compile(bieuThucChinhQuy);
+  
+       
+       ----------------- Tạo đối tượng Matcher từ chuỗi đầu vào ---------------
+            Matcher matcher = pattern.matcher(chuoi);
+
+       ------------------Thực hiện tìm kiếm và in ra các chuỗi con khớp ---------------
+           
+            while (matcher.find()) {
+                System.out.println("Chuỗi con khớp: " + matcher.group());
+        }
+
+=====================================================================================
+- Học biểu thức chính quy trong W3SCHOOL lầ một chuỗi các kí tự tạo thành mẫu tìm kiếm 
+văn bản. 
+- Bạn có thể sử dụng mẫu tìm kiếm này để mô tả những gì mà bạn đang muốn tìm kiếm. 
+- Biểu thức chính quy có thể là một mẫu kí tự đơn hoặc một mẫu phức tạp hơn. 
+- Biểu thức chính quy có thể được sử dụng để thực hiện tất cả các hoạt động tìm kiếm '
+văn bản hoặc thay thế văn bản. 
+
+- Java không có lớp biểu thức chính quy được tích hợp sẵn nhưng chúng ta có thể nhập 
+gói java.util.regex để làm việc với các biểu thức chính quy . Gói này bao gồm các lớp 
+sau : 
++ Lớp pattern - Xác định mẫu (được sử dụng trong tìm kiếm )
++ Lớp matcher - Được sử dụng để tìm kiếm mẫu . 
++ PatternSyntaxException - Được sử dụng để chỉ ra lỗi cú pháp trong biểu thức chính
+quy 
+
+- Trong java thì biểu thức chính quy được đặt trong Pattern được sử dụng để biên dịch biểu 
+thức chính quy và tạo ra một đối tượng "Matcher" sẵn sàng cho việc tìm kiếm và so khớp trong 
+chuỗi. 
+
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+- Dưới đây là một giải thích về một số khái niệm và cú pháp trong biểu thức chính quy ( regex )
+mà bạn đã đề cập : 
++ Dấu ngoặc vuông "[ ]" : 
+        [abc]: Tìm một ký tự trong các tùy chọn a, b, hoặc c.
+        [^abc]: Tìm một ký tự không nằm trong các tùy chọn a, b, hoặc c.
+        [0-9]: Tìm một ký tự trong khoảng từ 0 đến 9.
+
++ Siêu kí tự : 
+         . : Biểu thức chính quy .
+         ^ : Phủ định biểu thức chính quy 
+         $ : Kết thúc biểu thức chính quy 
+        \d : Tìm một chữ số  (tương đương với [0-9])
+        \s : Tìm một kí tự trắng(Khoảng trắng) 
+        \b : Tìm một danh giới từ , có thể là đầu hoặc cuối  từ  
+               * Danh giới từ nó được sử dụng để tìm kiếm các vị trí ở đầu 
+               hoặc cuối của một từ trong chuỗi
+               * Công thức :   \\bTỪ_KHÓA \\b 
++ Định lượng , tần xuất:    
+        * --> Xuất hiện 0 lần nào hoặc nhiều lần  
+        + --> Xuất hiện 1 haojwc nhiều lần 
+        ? --> Xuất hiện 0 lần hoặc 1 lần 
+        {X} --> Xuất hiện X lần 
+        {X,Y} --> Xuất hiện trong khoảng X tới Y lần  
+        {X,}  --> Xuất hiện ít nhất một lần 
+
++ Các ví dụ [abc]+ : Các kí tự a hoặc b hoặc c xuất hiện ít nhất một lần 
+            [abc]{2,} : Các kí tự a hoặc b hoặc c xuất hiện ít nhất hai lần  
+            [abc] {2,5} : Các kí tự a hoặc b hoặc c xuất hiện ít nhất xuất hiện từ 2 đến 5 lần 
+
+
+- Lấy ví dụ về việc tìm kiếm một từ : 
+
+1. Viết ra chuỗi đầu vào : 
+         String input = "Hello123World456";
+
+2. Viết biểu thức chính quy : 
+         String regex = "\\d+";
+
+3. Tạo một đối tượng Pattern từ biểu thức chính quy : 
+         Pattern pattern = Pattern.compile(regex);
+
+4. Tạo đối tượng Matcher từ chuỗi đầu vào 
+        Matcher matcher = pattern.matcher(input);  
+
+5. Thực hiện tìm kiếm và in ra các chuỗi con khớp : 
+         while (matcher.find()) {
+            System.out.println("Chuỗi con khớp: " + matcher.group());
+        }
+  
+
+input --> regex --> Pattern pattern --> Matcher matcher --> matcher.group(). 
+
+- Nói lại một số phương thức trong lớp pattern : 
+      + compile ( String regex ) : Tạo một đối tượng "pattern" từ biểu thức chính quy 
+được cung cấp. 
+      + matcher ( Chuôi đầu vào ) : Tạo đối tượng matcher từ chuỗi đầu vào được cung 
+cấp , sau đó thì chúng ta có thể dùng đối tượng này để thực hiện các hoạt động tìm kiếm 
+và so khớp trong chuỗi.
+      + split (Chuỗi đầu vào ) : Tạo ra một mảng chuỗi bằng cách chia chuỗi thành các 
+phần dựa theo biểu thức chính  quy. --> CHUỖI_ĐẦU_VÀO.split(BIỂU_THỨC_CHÍNH_QUY);
+
+- Ví dụ về việc tách chuỗi trong java : 
+
+public class Split{
+        public static void main(String[] args){
+             String input = "Chung__La mot__nguoi-----lanh__lung";
+             - VIẾT BIỂU THỨC CHÍNH QUY - 
+             String regex = "[_\\s]+";
+
+             -TÁCH CHUỖI BẰNG BIỂU THỨC CHÍNH QUY - 
+             String[] parts = input.split(regex);
+
+             -IN CÁC THÀNH PHẦN- 
+             for(String part : Parts){
+                System.out.println(part);
+             }
+
+        }
+}
+- Giải thích biểu thức chính quy : 
+[_\\s]+ : Có thể xuất hiện 1 hoặc nhiều lần các dấu _ , 
+
+
+- Đó là vì trong chuỗi Java , một dấu gạch chéo \ là một kí tự đặc biệt và khi bạn 
+muốn bao gồm nó trong biểu thức chính quy ,bạn cần sử dụng  \\ .
+- Điều này là do '\' đã được dùng để đánh dấu các kí tự đặc biệt trong java, nó như kiểu 
+là dấu xuống dòng 
+-  
+
+
+
+=======================================================================================
+- Check email trong java : 
+    eva@chung.com 
+    adelaue@jameo.com 
+    annuguyrn@fpt.edu.vn 
+    hoan36@al.com.vn 
+    H6@fpt.edu.vn 
+    h2345fu@fpt.edu.vn 
+
+    fua-chung-ghgh@fpt.edu.vn 
+    fu_a2w323_lss@fpt.fe.vn 
+
+public static String getMail(){
+        Scanner scanner = new Scanner(System.in);
+        String mail="";
+        while(true){
+                System.out.print("Nhap vao mot mail: ");
+                mail = scanner.nextLine();
+
+                Pattern p = Pattern.compile(");
+                if(p.matcher(mail).find()){
+                        break;   Không nhập nữa == Nhập hợp lệ
+                }
+                else{
+                        // In thông điệp ra cổng lỗi hoặc console
+                        System.err.println("Nhap khong hop le vui long nhap lai");
+                }
+        }
+        return mail;
+}
+public static void main(String[] args){
+        String mail = getMail();
+        System.out.println("Mail: "+ mail );
+}
+
+- Biểu thức chính quy nhập liệu : 
+               Pattern p = Pattern.compile("")
++ mail ban đầu không thể bắt đầu bằng kí tự số mà phải bắt đầu bằng chữ 
++ Dấu ^ đặt ở đầu chuối không là phủ định mà ở đây là hiểu rằng nó sẽ chỉ khớp 
+với các số bắt đầu bằng mẫu. 
++ Dấu ngoặc là để bảo rằng nó đi theo một cụm 
+
+
+
+
+
+"^[a-zA-z][a-zA-Z0-9]+$@[a-zA-Z]+   : Phải có ít nhất một kí tự sau dấu @ 
+^[a-zA-z][a-zA-Z0-9]+$@[a-zA-Z]{2,} : Phải có ít nhất là hai kí tự sau @
+
+"^[a-zA-z][a-zA-Z0-9\\-]+$@[a-zA-Z]+(\\.[a-zA-Z]+){1,3}$"
+
+=====================================================================================
+                            REGULAR EXPERSSION IN JAVA 
+- Là một chuỗi kí tự tạo thành trong mẫu tìm kiếm 
+- Sử dụng để tìm kiếm một chuỗi kí tự / Xác định định dạng kí tự trong java 
+- Có thể là một kí tự đơn hoặc một mẫu phức tạp 
+- Thực hiện import package java.util.regex để sử dụng 
+- Có 3 lớp được sử dụng trong PACKAGE REGEX : 
++ Lớp Pattern( Mẫu ): Định nghĩa các mẫu tìm kiếm 
++ Lớp Matcher : Sử dụng để tìm kiếm 
++ Lớp PatternSyntaxException : Chỉ ra lỗi cú pháp trong mẫu 
+
+- Sử dụng chủ yếu hai cái lớp chính : 
+   + Pattern : compile() , matcher() , find()
+   + Matcher : start() , end() , group(), groupCount();
+
+- Chuỗi mẫu tìm kiếm được đưa vào trong : Pattern.compile() 
+
+- Các cờ được sử dụng trong hàm compile () mẫu : 
++ Pattern.CASE_INSENSITIVE: Bỏ qua chữ hoa và chữ thường khi tìm kiếm 
++ Pattern.LITERAL : Kí tự đặc biệt được tìm kiếm như một kí tự thường 
++ Pattern.UNICODE_CASE: Bỏ qua chữ hoa và chữ thường , sử dụng cùng CASE_INSENSITIVE 
+khi tìm kiếm kí tự UNICODE 
+
+        String regex = "" ;
+        Pattern p = Pattern.compile(regex,Pattern.CASE_INSENSITIVE)..;
+        Matcher m = r.matcher(IN_PUT);
+        if(m.find()){
+                ---TÌM_THẤY---
+        } 
+
+=======================================================================================
+- Lớp Pattern: Là một đối tượng mẫu được biên dịch từ một biểu thức chính quy, 
+không có constructor public.
+- Chúng ta sử dụng method compile() để tạo đối tượng, với tham số là biểu thức chính quy.
+- Các phương thức cơ bản:
++  Pattern compile(String regex): Biên dịch regex đã cho và trả về thể hiện của Pattern.
++  Matcher matcher(CharSequence input) :Tạo một matcher khớp với đầu vào đã cho với mẫu.
++  static boolean matches(String regex, CharSequence input) :Biên dịch biểu thức chính quy và 
+tìm kiếm các chuỗi con từ chuỗi input phù hợp với mẫu regex.
++  String[] split(CharSequence input): Chia chuỗi input đã cho thành mảng các kết quả trùng 
+với đầu vào.	
++ String pattern() :trả về mẫu regex.
+
+- Lớp Matcher: Là một phương tiện để so khớp chuỗi dữ liệu đầu vào với đối tượng Pattern đã 
+được tạo trước, không có constructor public. 
+- Chúng ta lấy đối tượng này thông qua method matcher() của đối tượng Pattern với tham số là 
+đầu vào cần kiểm tra.
++ boolean matches() : Kiểm tra xem biểu thức chính quy có khớp với mẫu hay không.
++ boolean find() : Tìm biểu thức tiếp theo khớp với mẫu.
++ boolean find(int start) :Tìm biểu thức tiếp theo khớp với mẫu từ chỉ số bắt đầu đã cho.	
++ String group() : Trả về chuỗi con phù hợp.	
++ int start():Trả về vị trí bắt đầu của chuỗi con phù hợp.
++ int end() :Trả về vị trí kết thúc của chuỗi con phù hợp.
++ int groupCount() : Trả về tổng số các chuỗi con phù hợp.
+
+==================================================================================================
+- Kiểm tra chuỗi đầu vào có khớp với biểu thức chính quy hay không 
+
+        String[] strTest = { "","1602","1998","NMD98","1998d","nmdse"};
+        ----- Kiểm tra xem chuỗi có chứa các chữ cái hay không  -----
+        for(String str: strTest){
+          System.out.println("Chuỗi " + str + " có chứa các chữ cái:"+str.matches(".*[a-zA-Z].*"));
+        }
+        ---- kiểm tra xem chuỗi có chứa các chữ số hay không -----
+       for(String str: strTest){
+           System.out.println("Chuỗi " + str + " có chứa các chữ số:"+str.matches(".*[0-9].*"));
+       }
+
+===> BÀI TRÊN DÙNG : String.matches(REGEX) để kiểm tra xem chuỗi nào chứa biểu thức chính quy 
+trong mảng hay không
+
+==================================================================================================
+                      SỬ DỤNG LỚP PATTERN VÀ MATCHER TRONG JAVA  
+- B1: import các package cần thiết : 
+        import java.util.regex.Matcher;
+        import java.util.regex.Pattern;
+- B2: Tạo một đối tượng mẫu so sánh : 
+        Pattern p = Pattern.compile(BIỂU_THỨC_CHÍNH_QUY);
+--> Tạo đối tượng này để biên dịch biểu thức chính quy và sẽ được sử dụng sau đó 
+để tạo một đối tượng Matcher 
+- B3: Tạo đối tượng Matches và kiểm tra : 
+       Matcher matcher = p.matcher(CHUỖI_ĐẦU_VÀO);
+--> Sau khi tạo xong Matcher thì bạn có thể sử dụng các phương thức của nó để kiểm 
+tra xem chuỗi có khớp với biểu thức chính quy hay không , và cũng có thể thực hiện 
+các theo tác khác để lấy thông tin ra. 
+
+
+==================================================================================================

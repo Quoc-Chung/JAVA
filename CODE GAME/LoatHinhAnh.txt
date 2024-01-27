@@ -1,0 +1,82 @@
+- Trong Java Swing, jframe.pack() là một phương thức được sử dụng để thiết 
+lập kích thước của các thành phần con bên trong nó. 
+- Khi bạn thêm các thành phần như JButton, JLabel , JPanel , và các thành 
+phần khác vào JFrame , chúng có kích thước mặc định của chúng.
+
+- Phương thức pack() được sử dụng để điều chỉnh kích thước sao cho nó 
+đủ lớn để hiển thị toàn bộ nội dung của các thành phần con mà không làm  
+thay đổi kích thước của chúng. 
+- Cụ thể khi gọi jframe.pack() , JFrame sẽ được điều chỉnh sao cho nó đủ lớn 
+để hiển thị toàn bộ nội dung của các thành phần con mà không làm thay đổi 
+kích thước của chúng. 
+- Điều này đảm bảo rằng kích thước của cửa sổ sẽ được phù hợp với nội dung 
+được thêm vào và tránh việc hiển thị các thanh cuộn khi chúng không cần thiết. 
+
+
+-==================================================================================
+
+- Phương thức "repaint()" nó được yêu cầu hệ thống vẽ lại một thành phần và
+tất cả các thành phần con của nó. 
+- Khi bạn gọi repaint() trên một thành phần như GamePanel , nó sẽ kích thích 
+một chuỗi các sự kiện để làm cho hệ thống gọi lại phương thức update và paint(). 
+
+- Hệ thống gọi lại phương thức update(Graphics g) trên thành phần.
+- Phương thức update() gọi lại phương thức paint(Graphics g) với một đối tượng 
+Graphics mới.
+
+======================================================================================
+
+- Hàm loat hình ảnh được sử dụng để tải một hình ảnh từ tệp /Idle.png trong
+tài nguyên ứng dụng . Dưới đây là cách nó hoạt động: 
+
++ Lấy inputStream từ tệp hình ảnh trong nguồn tài nguyên : 
+         InputStream is = getClass().getResourceAsStream("/Idle.png");
+
+         + getResourceAsStream : Được sử dụng để lấy một InputStream từ tệp 
+    trong nguồn tài nguyên  của ứng dụng. 
+         + ImageIO.read() được sử dụng để đọc hình ảnh từ InputStream và gán nó 
+    cho biến img. 
+         + Nếu có lỗi trong quá trình đọc nó sẽ  in ra lỗi ngoại lệ.   
+
+- rong khối finally, is.close() được gọi để đảm bảo rằng InputStream sẽ được đóng, ngay
+cả khi có lỗi xảy ra trong quá trình đọc hình ảnh.
+
+
+- Sau khi chạy hàm này , bạn có thể sử dụng hình ảnh để trong ứng dụng của 
+mình , ví dụ  bằng cách vẽ nó trên moojt Gramphics context.
+
+=============================================================================
+- Hai thao tác chính với hình ảnh sử dụng thư viện Java Swing : 
+
+subImg = img.getSubimage(1*64 , 0 , 64, 40 ) : Hàm này dùng để trích xuất 
+tạo ra một hình ảnh con (subimage) từ hình ảnh gốc (img). Cụ thể : 
+
++ 1*64 : Xác định tọa độ x của góc trái trên cùng của hình ảnh con , cụ thể 
+ở đây là 64 pixel từ góc trái của hình ảnh gốc
++ 0 : Xác định tọa độ y góc trái trên cùng của hình ảnh con. 
+
++ 64 chiều rộng hình ảnh con 
+
++ 40 :chiều cao của hình ảnh con 
+
+
+
+g.drawImage(img, (int)xDelta, (int)yDelta, 256, 160, null);
+
+Hàm này sử dụng để vẽ hình ảnh lên một đối tượng Graphics (g). Cụ thể:
+
+img: Hình ảnh cần được vẽ.
+
+(int)xDelta: Tọa độ x của góc trái trên cùng của hình ảnh được vẽ trên Graphics. 
+Đối với hình ảnh này, nó có thể là xDelta, giả sử xDelta là một số thực, bạn đã 
+ép kiểu nó thành một số nguyên.
+
+(int)yDelta: Tọa độ y của góc trái trên cùng của hình ảnh được vẽ trên
+Graphics. Đối với hình ảnh này, nó có thể là yDelta, giả sử yDelta là
+một số thực, bạn đã ép kiểu nó thành một số nguyên.
+
+256: Chiều rộng của hình ảnh khi được vẽ.
+
+160: Chiều cao của hình ảnh khi được vẽ.
+
+null: Tham số cuối cùng là một đối tượng ImageObserver, có thể bỏ qua trong trường hợp này (đặt là null).

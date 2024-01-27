@@ -1,0 +1,186 @@
+- Trong chương trình của bạn thì lớp Timer được sử dụng để tạo một sự kiện định 
+kì (Periodic event ) để thực hiện di chuyển của con rắn. Dưới đây là phân 
+tích ý nghĩa cụ thể của lớp Timer trong chương trình : 
+
+        timer = new Timer(100, this); 
+        timer.start(); 
+- Timer(100, this) :Tạo một đối tượng Timer với thời gian độ trễ (delay) là 
+100 mili giây giữa các sự kiện. 
+- this truyền vào làm đối số có nghĩa rằng các sự kiện sẽ được gửi đến đối tượng 
+hiện tại (Dối tượng của lớp RanTest vì nó implements ActionListener )
+
+- Time.start() : Bắt đầu đếm thời gian và kích hoạt sự kiện định kì. 
+- public void actionPerformed(ActionEvent e): Phương thức này được gọi mỗi khi 
+sự kiện định kì xảy ra ( Mỗi 100 mili giấy) trong trường hợp này 
+
+- Trong phương thức này : move () được gọi để đi chuyển con rắn và repaint() để 
+vẽ lại giao diện người dùng. 
+
+==> Tóm lại , lớp Timer ở đây được sử dụng để tạo một chu kì thời gian , giúp cập 
+nhật trạng thái trò chơi ( như di chuyển của con rắn ) một cách định kì và liên 
+tục . Mỗi sự kiện định kì xảy ra , nó kích hoạt các hành động nhất định (trong 
+trường hợp này là di chuyển và vẽ lại giao diện ). 
+
+=====================================================================================
+
+- Ôn lại bài cũ : 
++ Ta có thể dùng Timer để tạo ra một sự kiện định kì (Ví dụ như là tạo một 
+đối tượng sau khoảng bao nhiêu giây chẳng hạn )
++ Một đối tượng Timer thường được 
++ Dưới đây là phân tích ý nghĩa cụ thể của lớp Timer trong chương trình :
+
+        timer = new Timer(100,this);
+        timer.start();
+
++ Timer(100,this) : Dùng để tạo đối tượng Timer với thời gian độ trễ (delay) là 
+100mli giây giữa các sự kiện 
+
+this : truyền vào làm đối số có nghiwax rằng các sự kiện sẽ được gửi đến đối 
+tượng hiện tại( Đối tượng của lớp RanTest ) vì nó implements ActionListener ;
+
+
++ timer.start() Bắt đầu đếm thời gian và kích hoạt sự kiện định kì. 
+
+- Trong chương trình của bạn , lớp Timer được sử dụng để tạo ra một sự kiện định
+kì . Cụ thể Timer này được khởi tạo như sau : 
+      timer = new Timer(100, this) ;
+
+
+- Đây là một số tham số : 
+ + 100 là khoảng thời gian giữa các sự kiện . Trong trường hợp này timer sẽ tạo ra 
+một sự kiện mỗi 100 mili giây 
+ + this : ActionListener được cung cấp để xử lí sự kiện khi timer kích hoạt 
+
+
+- Từ đây ta có thể rút ra các để tạo ra một đối tượng định kì  
+
++ Khởi tạo thời gian Timer với hai tham số truyền vào là thời gian  giữa các sự 
+kiện và một tham só (this) . Hàm khởi tạo này phải được cài trong hàm khởi tạo 
+của cái đói tượng cần tạo. 
+
++ Tiếp theo sẽ dùng đối tượng Timer sử dụng phương thức start để bắt đầu đếm thời 
+gian và kích hoạt thời gian định kì. 
+
++ Tiếp theo thì những hàm hay các sự kiện mà ta muốn lặp lại sẽ được viết ở trong 
+phương thức ghi đè  actionPerformed(ActionEvent e) { } 
+
+=====================================================================================
+
+public class HinhVe2 extends JFrame implements ActionListener {
+    private JPanel draw;
+
+    private Point ViTriOval;
+
+    private Timer timer;
+* LẦN 2 : 
+    public HinhVe2(){
+* LẦN 3:
+        this.setTitle("TEST TIMER");
+        this.setSize(700,400);
+        
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        /*- Không cho thay đổi kích thước cửa sổ - */
+        this.setResizable(false);
+* LẦN 4:
+         /* - Khởi tạo vị trí Oval - */
+        ViTriOval = new Point(50,50);
+
+* LẦN 5 :
+        draw  = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+*LẦN 6 :
+                drawOval(g);
+            }
+        };
+* LẦN 8:
+        this.add(draw);
+
+
+* LẦN 9 :
+        timer = new Timer(1000, this);
+* LẦN 10 :
+        timer.start(); 
+    }
+
+* LẦN 7:
+    private void drawOval(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillOval(ViTriOval.x,ViTriOval.y, 50, 50);    
+    }
+
+* LẦN 11 : 
+-- Trải qua 1000 miliseconds --
+* LẦN 12 : 
+-- Trải qua 1000 miliseconds --
+* LẦN 13 :
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        int newX = (int) (Math.random()* (draw.getWidth() -50));
+        int newY = (int) (Math.random()* (draw.getHeight() -50));
+
+        ViTriOval.setLocation(newX, newY); 
+
+        draw.repaint();
+    }
+    public static void main(String[] args) {
+* LẦN 1 :
+        HinhVe2 hv = new HinhVe2();
+        hv.setVisible(true);
+    }
+}
+
+LẦN 1: main method được gọi khi bạn chạy chương trình, tạo một đối tượng HinhVe2 (HinhVe2 hv = new HinhVe2();).
+LẦN 2-3: Constructor (public HinhVe2()) của HinhVe2 được gọi.
+
+LẦN 4: Đặt tiêu đề của JFrame thành "TEST TIMER".
+
+LẦN 5: Đặt kích thước của JFrame là 700x400 pixel.
+
+LẦN 6: Đặt chế độ đóng cửa sổ khi nhấn nút đóng.
+
+LẦN 7: Khởi tạo ViTriOval tại vị trí (50,50).
+
+LẦN 8-9: Tạo một JPanel (draw) và đặt sự kiện vẽ bên trong nó.
+
+LẦN 10: Khởi tạo một đối tượng Timer với độ trễ là 1000ms (1 giây) và sự kiện
+lắng nghe là chính đối tượng HinhVe2.
+
+LẦN 11: Bắt đầu Timer, bắt đầu chu kỳ sự kiện.
+
+LẦN 12-13: Mỗi giây, sự kiện actionPerformed được gọi. Nó tạo ra một vị trí
+mới ngẫu nhiên cho Oval và vẽ lại JPanel.
+
+====================================================================================================
+- Các bước để nhận tạo ra một chu kì xử lí liên tục ( Vừa di chuyển vừa vẽ ) : 
+
+
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ĐÔI_TƯỢNG  implements ActionListener {
+    private Timer timer;
+    
+    public ĐÔI_TƯỢNG(){
+    
+     timer = new Timer(SỐ_GIÂY, this);
+     timer.start();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        - Thực hiện các lệnh - 
+        draw.repaint();
+    }
+}
+
+====================================================================================================
+
+
+
+
+

@@ -1,0 +1,71 @@
+ FLOWLAYOUT quy định các thành phần (component) được thêm vào và sắp xếp trên giao 
+ diện người dùng theo """" CHIỀU NGANG"""""
+
+FLOWLAYOUT  == CHIỀU NGANG.
+            == ĐẶT THEO THỨ TỰ TỪ TRÁI SANG PHẢI CHO ĐẾN KHI ĐẦY DÒNG.
+            == SAU KHI ĐẦY DÒNG THÌ XUỐNG DÒNG VÀ TIẾP TỤC.
+
+- Căn chỉnh theo chiều ngang:
+    Nếu bạn đặt FlowLayout.LEFT, các thành phần sẽ được đặt từ trái sang phải.
+    Nếu bạn đặt FlowLayout.CENTER, các thành phần sẽ được đặt chính giữa.
+    Nếu bạn đặt FlowLayout.RIGHT, các thành phần sẽ được đặt từ phải sang trái.
+    FlowLayout.LEADING và FlowLayout.TRAILING tương đương với FlowLayout.LEFT và
+FlowLayout.RIGHT tương ứng, tùy thuộc vào hướng văn bản.
+
+- Bạn có thể đặt khoảng cách ngang giữa các thành phần bằng cách sử dụng 
+      setHgap(int hgap) -> Giá trị này đại diện cho khoảng cách ngang giữa các 
+thành phần, được đo bằng pixel.
+
+-==============================================================================
+- BoxLayout được sử dụng để sắp xếp các thành phần con theo chiều dọc hoặc theo 
+chiều ngang . 
+
+
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("BoxLayout Example X_AXIS");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Tạo mới Panel
+        JPanel panel = new JPanel();
+
+        // Tạo Boxlayout với hằng số X_AXIS
+        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+
+        panel.setLayout(boxlayout);
+
+        // Tạo Border cho panel
+        panel.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
+
+        // Tạo các Button
+        JButton jb1 = new JButton("Button 1");
+        JButton jb2 = new JButton("Button 2");
+        JButton jb3 = new JButton("Button 3");
+
+        // Thêm Button vào Panel
+        panel.add(jb1);
+        panel.add(jb2);
+        panel.add(jb3);
+
+
+        frame.add(panel);
+        frame.pack();
+        frame.setVisible(true);
+
+- Ta có thể thay đổi việc sắp xếp theo chiều dọc và theo chiều ngang.
+
++ BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
++ BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+
+
+============================================================================
+- GridLayout bố trí các thành phần theo lưới hình chữ nhật. 
+- Lưới này đã được chia thành  các hình chữ nhật có kích thước bằng nhau và một 
+thành phần được đặt trong mỗi hình chữ nhật. 
+- Chúng ta có thể khởi tạo thông qua contructor 
+
+
+GridLayout() – Tạo GridLayout với duy nhất một dòng và một cột
+GridLayout(int row, int col) – Tạo GridLayout với row dòng và col cột.
+GridLayout(int row, int col, int hgap, int vgap) – Tạo GridLayout với 
+row dòng và col cột, các phần tử trên cùng một dòng cách nhau hgap và 
+trên cùng một cột cách nhau vgap.

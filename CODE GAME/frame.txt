@@ -1,0 +1,95 @@
+- Trong lĩnh vực game, frame thường được sử dụng để mô tả mỗi hình ảnh 
+tương ứng với một khung hình được hiển thị trên màn hình. 
+- Là thời gian mà mỗi frame tồn tại trên màn hình. Frame time thấp hơn có 
+nghĩa là mỗi frame xuất hiện nhanh chóng và tăng FPS. Còn frame mà cao 
+dẫn đến trải nghiệm giật lang. 
+- Số lượng khung hình thường (frame) trong ngữ cảnh của trò chơi hoặc đồ họa 
+máy tính thường được đo bằng đơn vị frames per second(FPS). Tức là số lượng 
+khung hình xuất hiện trên màn hình mỗi giây. 
+
+if (System.currentTimeMillis() - lastCheck >= 1000) {
+    lastCheck = System.currentTimeMillis();
+    System.out.print("FPS : " + frames);
+    frames = 0;
+}
+
++ frame là biến đếm số lượng khung hình. Mỗi lần phương thức paintCommponent 
+được gọi thường xảy ra khi cần vẽ lại giao diện. Frame được tăng lên. 
+
++ Khi đã trôi qua một giây , Giá trị của frame sẽ được in ra. 
+
+- Công thức để tính FPS trong trường hợp này là : 
+      FPS = 1/ ( Thời gian giữa hai lần kiểm tra khung hình / Giây );
+
+- Dưới đây là một cách diễn đạt khác công thức : 
+      FPS = 1000 / ( Thời gian giữa hai lần kiểm tra khung hình / Giây );
+
+- Trong đó , 1 / ( Thời gian giữa hai lần kiểm tra khung hình / Giây ) là tốc
+độ khung hình mỗi miligiay và nhân với 1000 để chuyển đổi thành số khung 
+hình mỗi giây. 
+
+
+=============================================================================
+- Viết tắt của FPS (Số khung hình / Giây) . 
+- Về cơ bản , những chuyển động mà bạn thấy trên màn hình đều là những khung 
+hình tĩnh nối tiếp nhau , tạo nên cảm giác , ảo giác chuyển động.
+
+- Nói cho dễ hiểu là giống như phim hoạt hình hồi đó mà bạn thường thấy, được vẽ 
+từng tấm một sau đó lật các tấm hình đó nối tiếp nhau với tốc độ nhanh . 
+
+- Ở trong game , càng nhiều số khung hình được hiển thị trong một giây thì 
+bạn sẽ nhìn thấy càng mượt. 
+- Số khung hình bạn có được sẽ phụ thuộc vào phần cứng là chính, nhân tố 
+dầu tiên bạn nhắc tới là card đồ họa . Ngoài ra nó cũng phụ thuộc vào các 
+thiết lập trong game và cả egine đồ họa mà game đó sử dụng nữa. 
+
+==============================================================================
+
+- Mối liên hệ giữa Frames và FPS trong game : 
++ Frame (Khung hình): Trong game , mỗi khung hình đại diện cho một hình 
+ảnh tại một thời điểm cụ thể trong game. 
++ VD : Một nhân vật chạy trong game là do ghép nối nhiều khung hình có tốc 
+độ cao tạo làm cho nhân vật ta nhìn thấy như đang chuyển động.  Khi chạy hệ thống đồ họa máy tính cần hiển thị 
+các khung hình liên tiếp để tạo ra hiệu ứng chuyển động. 
+
++ Số lượng frame mỗi giây = FPS 
+
++ FPS  = SỐ_KHUNG_HÌNH / THỜI_GIAN(Giây).
+
+     + SỐ_KHUNG_HÌNH là số lượng frame hiển thị trong khoảng thời gian đó. 
+     + THỜI_GIAN là thời gian mà các frame được hiển thị. 
+
++ Ví dụ : Nếu bạn biết rằng trong một trò chơi , đã có 120 frame được hiển 
+thị trong khoảng thời gian là 2 giây, công thức tính FPS sẽ là : 
+      
+      FPS = 120 / 2 = 60
+
+
+==> Để các nhân vật trong game có thể chạy mượt mà , cần có đủ số lượng
+frame được tạo ra mỗi giây với tốc độ cao.
+
+==> Nếu số lượng frame mỗi giây (FPS) đủ cao, việc chuyển động của nhân 
+vật sẽ trông rất tự nhiên và mượt mà 
+
+==> Nếu FPS thấp, chuyển động của nhân vật  sẽ trở nên giật giật và không 
+mượt mà , gây ra cảm giác lang và độ giật nhất định. 
+
+==============================================================================
+
+Ta đã biết : 
+ 
+FPS  = FRAME / SỐ GIÂY; 
+
+==> FRAME = FPS * SỐ GIÂY
+==> FRAME trong 1 giây = FPS * SỐ_GIÂY 
+                       = FPS * 1s 
+                       = FPS 
+==> SỐ FRAME TRONG 1 GIÂY = FPS ==> TRONG 1 GIÂY  ==> FRAMES = SỐ FPS 
+
+
+- Công thức timePerFrame = 1000000000/ FPS_SET được sử dụng để tính toán 
+thời gian cần chờ giữa mỗi frame để đạt được só FPS mong muốn. 
+
++ 1 000 000 000 : Là số nanosecond trong một giây. 
++ Chia cho FPS_SET sẽ cho ta số nanosecond cần phải chờ giữa mỗi frame 
+để đạt được chỉ só FPS mong muốn 

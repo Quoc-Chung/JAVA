@@ -1,0 +1,19 @@
+- Dưới đây là các bước đã rút ra để thêm sự kiện : 
+
+0. Cho nó implement interface ActionListener
+         public class GamePanel extends JPanel implements ActionListene {}
+
+1. Gán sự kiện cho nút đối với "this" (GamePanel). 
+         button.addActionListener(this);
+
+2. Thêm nút và vẽ vào khung hình : 
+         jframe.add(this, BorderLayout.CENTER);
+         jframe.add(button, BorderLayout.SOUTH);
+
+3. Triển khai inteface là kế thừa ngon ơ : 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == button) {
+                repaint();
+            }
+        }

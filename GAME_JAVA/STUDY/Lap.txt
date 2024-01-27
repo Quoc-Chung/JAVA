@@ -1,0 +1,10 @@
+- Trong java , vòng lặp vẽ lại thường được sử dụng để xử lí trong phương thức 
+paintComponent(Graphics g) của một lớp kế thừa từ JPanel . Đây là nơi bạn đặt 
+mã vẽ các thành phần đồ họa và nó sẽ được gọi tự động khi cần cập nhật giao diện. 
+
+-paintComponent(Graphics g): Phương thức này được gọi tự động khi cần vẽ lại component.
+ Trong đây, chúng ta vẽ một hình chữ nhật màu xanh lá cây.
+
+- repaint(): Được gọi để yêu cầu hệ thống Swing gọi lại paintComponent(Graphics g).
+
+- Luồng: Được sử dụng để thay đổi trạng thái và gọi repaint() trong vòng lặp.

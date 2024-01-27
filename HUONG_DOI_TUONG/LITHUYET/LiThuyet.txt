@@ -1,0 +1,315 @@
+- Đối tượng ở đây ta thể hiện như khái niệm bên ngoài : Con người , Xe 
+máy ,..
+
+- Trong một đối tượng sẽ bao gồm : 
++ Thuộc tính : Chứa các thông tin của đối tượng 
++ Phương thức : Các thao tác , hành động của đối tượng 
+
+- Phân biệt giữa lớp và đối tượng : 
+   + Đối tượng là thể hiện của một lớp 
+   + Lớp là khuôn mẫu hay thiết kế để tạo ra các đối tượng 
+
+
+   + Đối tượng là một thực thể trong thế giới thực  
+   + Lớp là một nhóm các đối tượng tương tự nhau 
+======================================================================================
+- Lớp chính (Class) là định nghĩa của đối tượng. 
+
+= Các khai báo lớp : 
+   <Phạm vi truy cập> class  <Tên lớp> {
+
+   }
+
+- Ví dụ về khởi tạo một lớp trong java :
+ 
+public class Student{
+
+--- Khai báo thuộc tính ----
+    private int id; 
+    private String name; 
+
+--- Hàm khởi tạo có một tham số là id ---- 
+
+    public Student(int id){
+        this.id  = id;
+    }
+ --- Các phương thức lấy giá trị ---
+    public int getId() {
+       return id;
+    }
+
+    public String getName() {
+       return name;
+    }
+
+--- Các phương thức gán giá trị --- 
+   public void setName(String name) {
+      this.name = name;
+   }
+
+}
+
+- Sử dụng lớp cũng y như C++ vậy chả khác cái chó gì : 
+           Student student = new Student(1);
+
+=========================================================================================
+Public (public): Các thành viên được đánh dấu public có thể được truy cập từ mọi
+nơi, không bị giới hạn.
+
+public class MyClass {
+    public int myPublicField;
+    public void myPublicMethod() {
+        // Code here
+    }
+}
+
+=====================================
+Private (private): Các thành viên được đánh dấu private chỉ có thể được truy cập
+từ bên trong cùng một lớp.
+
+
+public class MyClass {
+    private int myPrivateField;
+    private void myPrivateMethod() {
+        
+    }
+}
+
+=====================================
+Protected (protected): Các thành viên được đánh dấu protected có thể được truy cập 
+từ bên trong cùng một lớp, từ các lớp con (subclass), và từ cùng một package.
+
+public class MyClass {
+    protected int myProtectedField;
+    protected void myProtectedMethod() {
+        // Code here
+    }
+}
+
+
+===========================================
+Default (no modifier): Nếu không có phạm vi truy cập được đặt, thì phạm vi truy cập 
+mặc định là package-private. Các thành viên này chỉ có thể được truy cập từ cùng một 
+package.
+
+class MyClass {
+    int myPackagePrivateField;
+    void myPackagePrivateMethod() {
+        // Code here
+    }
+}
+
+-> Không có phạm vi truy cập thì các thành viên chỉ có thể truy cập từ cùng một 
+package. 
+
+- TA CÓ THÊ TÓM TẮT TẤT CẢ CÁC PHẠM VI TRUY CẬP CỦA CÁC LỚP THEO BẢNG SAU : 
+             BÊN TRONG        LỚP       BÊN TRONG       BÊN NGOÀI    
+             CLASS CHA        CON         PACKAGE       PACKAGE
+                                            
+
+private  :      1                 
+protected:      1              1             1                 
+default  :      1              1             1
+public   :      1              1             1            1
+
+
+==============================================================================================
+                               PACKAGE 
+- Package lầ do người dùng tự định nghĩa ,đây là một nhóm các kiểu tương tự của 
+các lớp , giao diện package con 
+- Package trong java có thể được phân loại theo hai hình thức, package dược dựng 
+hoặc package do người dùng tự định nghĩa. 
+- Có rất nhiều package được dựng sẵn trong java như : java , lang , util , sql,... 
+
+- Cú pháp : 
+       
+       package <TÊN_PACKAGE_CHA> .<TÊN_PACKAGE_CON> 
+
+
+- Chúng ta cứ hiểu như là package là các gói : Gói có thể coi như là một thư mục  
+dùng để nhóm các lớp có liên quan đến nhau lại một nơi 
+-  Sử dụng package cho phép tránh xung đột về tên lớp khi trong project có nhiều lớp 
+cùng tên.
++ Trong java, để tránh xung đột về tên lớp khi có nhiều lớp cùng tên, bạn có thể 
+sử dụng gói (package). 
++ Gói giúp bạn tổ chức mã nguồn của mình thành các thư mục khác nhau và từ đó có 
+thể quản lí tốt hơn việc tránh xung đột tên lớp.
++ Giả sử bạn có hai lớp cùng tên là Person : 
+        + Lớp này có ở trong gói com.example.package1 
+        + Lớp này còn có ở trong gói com.example.package2 
+         
+        src
+        |-- com
+        |   |-- example
+        |       |-- package1
+        |           |-- Person.java
+        |       |-- package2
+        |           |-- Person.java
+
++ Nội dung của hai file như sau : 
+
+                    package com.example.package1;
+                    public class Person {
+                        ---- Nội dung của lớp Person ở package1  ----
+                    }
+
+                    package com.example.package2;
+                    public class Person {
+                        ---- Nội dung của lớp Person ở package2 ----
+                    }
+
+- Khi bạn muốn sử dụng lớp "Person" từ một lớp nào đó , bạn cần chỉ định đầy đủ 
+đường dẫn gói ( package path ) như sau : 
+
+                  import com.example.package1.Person;
+                  import com.example.package2.Person;
+public class Main {
+    public static void main(String[] args) {
+        com.example.package1.Person person1 = new com.example.package1.Person();
+        com.example.package2.Person person2 = new com.example.package2.Person();
+    }
+}
+
+---> Điều này giúp tránh xung đột khi có nhiều lớp cùng tên nhưng cũng  có thể làm 
+tăng thêm độ phức tạp của mã nguồn và làm cho mã nguồn trở nên khó hiểu hơn. 
+
+
+
+- Có hai loại package trong java : package được xây dựng sẵn và package do người 
+lập trình tự định nghĩa. 
+- Ta  cứ hiểu đơn giản là mỗi cái lớp sẽ thuộc về một cái package nào đó. \
+- Để sử dụng một lớp nào đó , ta phải import package chứa nó vào đầu file chương 
+trình java. 
+
+- Gói chính là cái đường dẫn thư mục hay chính là cái thư mục mẹ để quản lí cái 
+file code java của chính ta ( Hay đúng hơn là quản lí cái class với cái tên trùng 
+với cái tên của tên chương trình ). 
+
+============================================================================
+- BÀI 16: OOP TRONG JAVA  
+public class Person{
+    String name;
+    int age;
+    float height;
+}
+
+public class HelloWorld{
+    public static void main(String[] args){
+        Person a = new Person();
+        a.name = "Chung" ;
+        a.age = 21;
+        a.height = 1.7f;
+
+        System.out.println(a.name);
+        System.out.println(a.age);
+        System.out.println(a.height);
+    }
+
+}
+- BÀI 18: CÁC LOẠI PHẠM VI TRUY CẬP TRONG LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG 
++ Nếu các bạn sử dụng theo cách truyền thống thì bản chất package trong java chính là fordel 
+chứa class mà thôi. Khi bạn xem trong sourcs project thì 
++ Có 4 loại phạm vi truy cập : private , Default , Protected ,Public
++ Phạm vi truy cập là xác định độ truy cập phạm vi vào dữ liệu của các 
+thuộc tính , phương thức hoặc class. 
++ Package là nhóm các class , interface hoặc các package con liên quan lại 
+với nhau. Việc dùng package dùng để nhóm các class liên quan với nhau thành 
+thư viện , ngăn cản xung đột đặt tên, điều kiện truy cập , thuận tiện tìm kiếm 
+và lưu trữ. 
+
++ Private : Chỉ cho phép truy cập nội bộ bên trong cái class đó. 
+
++ Default : Đây là phạm vi mặc định,  khi bạn không ghi gì hết thì nó để phạm 
+vi truy cập ở dạng này. Ở mặc định , phạm vi truy cập chỉ nằm nội bộ 
+trong package.
+
++ Protected là phạm vi truy cập có thể từ trong và  ngoài package, nhưng phải 
+thông qua tính kế thừa. Protected chỉ có thể áp dụng bên trong class như thuộc 
+tính, phương thức hay lớp con. Không thể áp dụng cho lớp ngoài hay interface. 
+
++ public : Đây là phạm vi truy cập rộng , có thể truy cập bất cứ đâu trong project java 
+Tất nhiên khi khác package để cần phải khai báo import để xác định vị trí của classs 
+như phần giải thích bên trên. 
+
+================================================================================================================
+                                 STATIC 
+- Trong java thì từ khóa static được sử dụng để quản lí bộ nhớ tốt hơn và nó 
+có thể được truy cập trực tiếp thông qua lớp mà không cần khởi tạo. 
+- Thành viên tĩnh là thành viên dùng chung cho tất cả các đối tượng ở bên trong lớp.
+- Thành viên tĩnh được tạo ngay khi lớp được nạp lên bộ nhớ , hầu như nó chỉ 
+nạp một lần thôi và kể từ những lần sau không nạp lại nữa.
+- Trong các phương thức bình thường của lớp được phép truy cập vào các cái thành 
+viên tĩnh. 
+
+- Tóm lại : 
++ Thuộc tính tĩnh, phương thức tĩnh DÙNG CHUNG cho tất cả đối tượng. 
++ Chúng ta gọi sử dụng thông qua tên lớp mà không cần tạo đối tượng. 
+(Ý câu này là dùng tên lớp gọi sử dụng luôn chứ không cần phải tạo đối tượng rồi 
+từ đối tượng đó mới gọi tĩnh sau )
+
+- Trong phương thức tĩnh chỉ truy xuất được các thành viên tĩnh của lớp.
+(Thành viên tĩnh không truy cập được thành viên bình thường chỉ được truy xuất 
+vào các thành viên cùng trang lứa - cùng tĩnh thôi ) 
+
+- Chú ý một thuộc tính private đang là thuộc tính tĩnh nếu muốn lấy ra thì cái 
+phương thức get đó cũng phải đẻ ở private .
+- Sở dĩ là như vậy vậy vì thằng có phương thức tĩnh chỉ chơi với thằng có thuộc 
+tính tĩnh. 
+
+- Để khai báo thuộc tính hay phương thức tính thì chúng ta sẽ dùng từ khóa static 
+trước kiểu dữ liệu : 
+               STATIC   KIỂU_DỮ_LIỆU 
+
+- Ví dụ : 
+------------------------------------------------
+    class PhanSo {
+        private static int SoLuongPS =0;
+
+        public static int TimUoc(int a,int b){
+           - Phải đảm bảo là không có this - 
+        }
+    }
+
+Ta gọi phương thức tĩnh này bằng cách : 
+         int ucln = PhanSo.TimUoc(12,8);
+
+------------------------------------------------
+    class PhanSo{
+        private static int SoLuongPS = 0;
+
+        public PhanSo(){
+            SoLuongPS++;
+        }
+        public void HienThi(){
+            System.out.println(SoLuongPS);
+        }
+    }
+
+    PhanSo p1 = new PhanSo(); 
+    PhanSo p2 = new PhanSo();
+
+    p2.HienThi();
+
+--> Biến tĩnh dùng chung cho tất cả đối tượng , 
+--> Phương thức tĩnh chỉ truy cập được các thành viên tĩnh thôi.
+-----------------------------------------------
+
+class Test {
+    private staitic int n;
+    public Test(){
+        n =3;
+    }
+    public void inc(){
+        n++;
+    }
+    public static int getN(){
+        return n;
+    }
+}
+    Test t1=new Test;
+    t1.inc();
+    t1.inc();
+
+    Test t2 = new Test();
+    t2.inc();
+    System.out.println(Test.getN());

@@ -1,0 +1,609 @@
+- Là ngôn ngữ hướng đối tượng.
+- Chạy bằng máy ảo java 
+- Java hộ trợ lập trình  đa nhiệm - đa luồng : Java hỗ trợ lập trình đa nhiệm , đa luồng cho phép chạy nhiều tiến trình chạy song song trong một 
+thời điểm và tương tác với nhau. 
+- Java bỏ đa kế thừa trong C++ mà thay bằng sử dụng interface 
+- Java không sử dụng con trỏ hoặc phép toán con trỏ 
+
+- Cấu trúc một chương trình java : 
+
++ KHAI BÁO PACKAGE ( nếu có ) 
+      package mypackage;
+
++ IMPORT CÁC THƯ VIỆN CẦN THIẾT 
+      import java.util.Scanner;
+    
++ ĐỊNH NGHĨA LỚP CHÍNH 
+      public class TÊN_FILE_JAVA {
+
+        + KHỞI TẠO PHƯƠNG THỨC MAIN BẮT ĐẦU CHƯƠNG TRÌNH 
+                 public static void main (String[] args){
+                      .....
+                 }
+
+      }
+
++ VÍ DỤ VỀ CHƯƠNG TRÌNH : 
+     package java;
+     public class ChungCho{
+         public static void main (String[] args){
+            System.out.println("Chung Cho ");
+         }
+     }
++ MỘT SÔ HÀM HAY GẶP CỦA C# : 
+
+- Khai báo biến như bình thường : int x = 5;
+
+- Hàm in ra một chuỗi  : System.out.println("-----");
+
+- Vòng lặp cũng y như bình thường : 
+     for (int i  =0 ; i < 5 ; i++){
+        System.out.println(" Chuoi duoc lap " );
+     }
+
+- Hàm nhập một số trong java : Để nhập một số từ người dùng thì có thể sử 
+dụng đối tượng  Scanner từ gói java.util 
++ Bước 1: Import thư viện Scanner 
+    import java.util.Scanner 
+
++ Bước 2: Tạo đối tượng Scanner 
+Scanner scanner = new Scanner(System.in);
+
++ Bước 3: Nhập dữ liệu từ người dùng : 
+       System.out.print("Nhập số nguyên: ");
+       int intValue = scanner.nextInt();
+
+
+       System.out.print("Nhập số thực: ");
+       double doubleValue = scanner.nextDouble();
+
+==> Số nguyên : .nextInt() 
+    Số thực   : .nextDouble() 
+
++ Bước 4 : Đóng đối tượng Scanner ( Tránh dò gỉ bộ nhớ ): 
+    scanner.close();
+     
+- Một ví dụ hoàn chỉnh về nhập hai số và tính tổng của hai số đó. 
+
+import java.util.Scanner;
+public class TongHaiSo{
+   public static void main (String[] args){
+      Scanner scanner = new Scanner(System.in);
+
+      System.out.println("Nhap so thu nhat:");
+      double number1 = scanner.nextDouble(); 
+
+      System.out.println("Nhap so thu hai: ");
+      double number2  = scanner.nextDouble();
+
+      scanner.close();
+
+      double sum = number1 + number2;
+      System.out.println("Tổng của " + number1 + " và " + number2 + " là: " + sum);
+   }
+
+}
+ 
+- Nhập xuất trong java là việc đọc và ghi dữ liệu từ các nguồn khác nhau như file :
+- Một số lớp hỗ trợ việc nhập xuất dữ liệu : 
+
++ java.io  : package cung cấp các lớp và interface để hỗ trợ việc nhập xuất 
+từ file như FileInputStream, FileOutputStream,...
++ java.nio : package cung cấp các lớp và interface để hỗ trợ việc nhập xuất 
+từ file mạng , như FileChannel , SocketChannel,...
++ java.net : package cung cấp các lớp và interface để hỗ trợ việc nhập xuất
+dữ liệu qua mạng, như URL, URLConnection,...
++ java.until.Scanner : Cung cấp dữ liệu dựa trên mô hình nhập xuất dữ liệu,..
+
+- Chúng ta thường dùng các phương thức nhập dữ liệu từ bàn phím và chuyển 
+đổi nó sang kiểu dữ liệu phù hợp như : 
+
++ next()
++ nextInt()
++ nextDouble()
+
+- Lớp System cunng cấp các luồng chuẩn (streams) như System.in hay System.out
+để thực hiện việc nhập xuất dữ liệu :
++ System.in
++ System.out
+
+- Chung quy lại thì có các bước đọc / ghi đữ liệu ra màn hình :
+****** SCANNER ******
++ Bước 1:  import package until.Scanner 
++ Bước 2:  Khởi tạo đối tượng scanner ( Khỏi tạo cả luồng )
++ Bước 3:  Nhập xuất dùng các hàm next..
+      + Xuất dùng : System.out.println()
+      + Nhập dùng : scanner.next()
++ Bước 4:  Đóng scanner.
+
+- Tổng hợp các phương thức sử dụng trong lớp Scanner : 
+   + nextByte()  : Đọc số nguyên kiểu byte 
+   + nextShort() : Đọc số nguyên kiểu nextShort
+   + nextInt()   : Đọc số nguyên kiểu int 
+   + nextLong()  : Đọc số nguyên kiểu Long 
+   + nextFloat() : Đọc số nguyên kiểu Float 
+   + nextDouble(): Đọc số nguyên kiểu Double 
+   + next()      : Đọc số nguyên kết thúc trước một kí tự trắng  
+   + nextLine()  : Đọc một dòng các chữ  --> Kết thúc bằng dấu enter  
+
+- Các phương thức hay dùng : 
+   + nextInt() 
+   + nextLong()
+   + nextLine() : Đọc kí tự kiểu chuỗi 
+   + nextFloat()
+   + nextLong() 
+   + next()
+ 
+
+****** BUFFEREDREADER và INPUTSTREAMREADER ******
++ Bước 1 : import java.io.BufferedReader;
+           import java.io.IOException;
+           import java.io.InputStreamReader;
+
++ Lúc khai báo lớp main thì bổ xung thêm :  throws IOException { }
++ Bước 2: Khởi tạo đối tượng BufferedReader 
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
++ Bước 3: Nhập xuất thay vì dùng scanner thì thay bằng reader 
++ Bước 4: Đóng reader.
+
+
+- Sự khác nhau cơ bản khi xuất ra trong java : 
+  + print()   : In ra một chuỗi bên trong dấu ngoặc kép 
+  + println() : In ra một chuỗi giống như hàm print () , sau đó tự động xuống
+dòng mới . 
+  + printf()  : In ra chuỗi với việc cung cấp các  đinh  dạng khác nhau giống  
+như hàm printf ()
+--> Tóm lại  thì cái println = print + endl kiểu kiểu thế. 
+
+==============================================================================
+- Các hàm toán tử trong java : 
+
+     + Hàm Math.pow(a, b) tính a mũ b.
+     + Hàm Math.sqrt(x) tính căn bậc hai của x
+
+
+=============================================================================
+- Trong java , phương thức main có một tham số là một mảng các đối só (args)
+được truyền từ dòng lệnh khi bạn chạy một ứng dụng trong java. 
+- Thông thường thì args được sử dụng để chứa các thông tin mà bạn muốn truyền
+vào chương trình từ bên ngoài , như là các tham số trong dòng lệnh. 
+- Cú pháp chung của phương thức main trong java là : 
+        public static void main(String[] args) {
+          
+      }
+
++ public : Mức truy cập công cộng, tức là nó có thể truy cập từ bất kì đâu trong 
+chương trình. 
++ static : Phương thức main là phương thức tĩnh, bạn có thể gọi nó mà không cần 
+tạo một đối tượng của lớp chứa nó .
++ void : Phương thức main không trả về giá trị. 
++ main : Tên của phương thức 
++ args : Là một mảng chuỗi (String[] ) và bạn có thể sử dụng nó để truyền thông tin 
+từ dòng lệnh khi bạn chạy chương trình. 
+
+public static void main(String[] args) {
+   ------ args là một mảng các chuỗi chứa các đối số từ dòng lệnh  ------ 
+    for (String arg : args) {
+        System.out.println(arg);
+    }
+}
+
+- Khi bạn chạy chương trình Java từ dòng lệnh và truyền vào các tham số , chúng ta 
+sẽ được đặt vào mảng args và sau đó bạn có thể sử dụng chúng trong phương thức main 
+để điều chỉnh các hành vi của mình. 
+
+- Bắt đầu chương trình thì chạy từ main 
+- Đọc tham số dòng lệnh ( args ) là một mảng chứa các đối số được truyền vào từ dòng 
+lệnh 
+- Xử lí logic ứng dụng  
+- Kết thúc chương trình. 
+
+=========================================================================
+- Kiểu dữ liệu nguyên thủy : 
+       + byte  : 8 bit có dấu giá trị từ -128 đến 127 
+       + short : 16 bit có dấu , giá trị từ -32768 đến 32767 
+       + int 
+       + long 
+       + float 
+       + double  
+       + char 
+       + boolean
+- Kiểu dữ liệu tham chiếu : 
+       + class : Kiểu dữ liệu đối tượng  
+       + interface: Định nghĩa một giao diện 
+       + array : Mảng chứa nhiều giá trị cùng một loại 
+       + String : Chuỗi kí tự 
+       + enum : Định nghĩa một kiểu liệt kê  
+       + null : Giá trị đặc biệt , thường được sử dụng để chỉ 
+       một biến chưa được khởi tạo. 
+
+=========================================================================
+- Tổng hợp các cách duyệt mảng bằng vòng for : 
+
++ Duyệt mảng bằng vòng for : 
+int[] mang = {1,2,3,4,5};
+for (int i=0;i<mang.length ; i++){
+    System.out.println(mang[i]);
+}
+
++ Duyệt mảng bằng vòng lặp "foreach" : 
+int[] mang = {1 ,2,3,4,5 }; 
+for (var x : mang){
+  System.out.println(" "+ x);
+}
+
++ Duyệt mảng bằng câu lệnh :
+           Arrays.stream( TÊN_MẢNG ).forEach(System.out::println);
+      
++ Duyệt mảng bằng while : 
+           int[] mang = {1, 2, 3, 4, 5};
+           int i = 0;
+           while (i < mang.length) {
+              System.out.println(mang[i]);
+              i++;
+           }
++ Duyệt qua mảng bằng LIST (Sử dụng 'Arrays.asList') :
+    Integer[] mang = {1, 2, 3, 4, 5};
+    List<Integer> list = Arrays.asList(mang);
+    for (int phanTu : list) {
+        System.out.println(phanTu);
+   }
+ 
++ Sử dụng iterator để duyệt mảng : 
+   
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class IteratorExample {
+    public static void main(String[] args) {
+        // Khởi tạo mảng
+        Integer[] mang = {1, 2, 3, 4, 5};
+
+        // Chuyển mảng thành List để sử dụng iterator
+        // (Cách này chỉ áp dụng cho mảng của đối tượng, không áp dụng cho mảng nguyên)
+        // Nếu bạn đã có một mảng nguyên, bạn có thể sử dụng Arrays.asList() và ép kiểu
+        // List<Integer> list = Arrays.asList(ArrayUtils.toObject(mangNguyen));
+        // hoặc có thể sử dụng vòng lặp for
+        Iterator<Integer> iterator = Arrays.asList(mang).iterator();
+
+        // Duyệt qua mảng bằng Iterator
+        while (iterator.hasNext()) {
+            Integer phanTu = iterator.next();
+            System.out.println(phanTu);
+        }
+    }
+}
+
+- Cách chuyển một mảng thường sang mảng của đối tượng : 
+                Integer[] mang = {1, 2, 3, 4, 5};
+                List<Integer> list = Arrays.asList(mang);
+                Iterator<Integer> iterator = list.iterator();
+
+                while (iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }
+- Nhớ một điều là khi khai báo cũng như cấp phát một mảng thì ta phải để : 
+               KIỂU_DỮ_LIỆU[] TÊN_MẢNG; 
+
+=======================================================================================================
+- Trong lập  trình  java  , đôi khi ta khi nhập  một chuỗi kí tự trong java 
+sẽ gặp trường hợp phải dùng phương thức trim() khi nhập một chuỗi như này: 
+      
+         System.out.println("Nhập chuỗi: ");
+         String input = scanner.nextLine().trim();
+         System.out.println("Chuỗi sau khi đã trim: '" + input + "'");
+- Công dụng của việc dùng trim này  mang ý nghĩa khá hay :Đó là nó sẽ được  
+sử dụng để loại bỏ các khoảng trắng ở đầu chuỗi và cuối chuỗi. 
+- Khi bạn nhập dữ liệu từ người dùng , như trong đoạn mã của bạn  với  : 
+           scanner.nextLine().trim()  
+--> Việc dùng trim() trong trường hợp này giúp loại bỏ khoảng trắng bất kì 
+nào xuất hiện ở đầu chuỗi và cuối chuỗi giúp bạn không có  những khoảng cách 
+không mong muốn làm  ảnh hưởng đến xử lí của bạn ,  đặc  biệt là việc nhập  
+dữ liệu vào từ bàn phím . 
+
+============================================================================
+                             TRY -CATCH TRONG JAVA  
+- Trong java thì thì câu lệnh try-catch trong java là một cách để xử lí  
+các ngoại lệ ( exception ) trong java . 
+- Ngoại lệ (exception ) ở đây là những lỗi xảy ra khi chương trình đang chạy 
+, ví dụ như là truy cập vào một phần tử không tồn tại của mảng hoặc cũng 
+có thể như là đang chạy thì nó yêu cầu nhập cái gì đó và chúng ta muốn kiêmr
+tra xem việc nhập vào nó có nhập liệu vào đúng hay không, hoặc cũng có thể 
+là chia cho số 0 hay không. 
+
+= Câu lệnh try cho phép bạn định nghĩa một khối lệnh (block of code ) để kiểm 
+tra lỗi khi nó được thực thi .
+= Câu lệnh catch cho phép bạn định nghĩa một khối lệnh để thực hiện khi có lỗi 
+xảy ra trong try 
+- Ngoài ra chúng ta còn có thể bắt gặp các câu lệnh finally cho phép bạn 
+thực hiện các khối lệnh sau khi thực thi mã , sau try-catch  , bất kể kết quả 
+có như thế nào đi chăng nữa thì cứ hết cái try - catch chạy xong thì đảm bảo 
+là các câu lệnh  trong finally sẽ chạy.
+
+- Tóm lại : 
+          + Hai bố này phải đi cùng nhau 
+          + Try : Chứa khối lệnh kiểm tra lỗi 
+          + Catch : Chứa khối lệnh xử lí khi lỗi try 
+          + finally :Chạy cuối cùng hết try-catch là chạy kệ mẹ kết quả là gì .
+
+            try {
+                // Khối lệnh để kiểm tra lỗi
+            } catch (Exception e) {
+                // Khối lệnh để xử lý lỗi
+            }
+            finally{
+                // Khối lệnh chạy khi try-catch chạy xong kệ mẹ bọn nó.
+            }
+
+
+- Ví dụ như là chúng ta có một mảng gồm có 3 phần tử và muốn in ra phần tử 
+thứ 10 thì điều này sẽ gây ra lỗi vì mảng không có phần tử thứ 10 . Nếu ta 
+không sử dụng try trong trường hợp nàu thì chương trình sẽ dùng lại và hiển 
+thị thông báo gây lỗi. 
+- Chúng ta cần phải sử dụng try - catch trong trường hợp này : 
+             public class  Main{
+                public static void main(String[] args){
+                    int [] a= {!,2,3};
+                    System.out.println(myNumbers[10]); // Lỗi!
+                }
+             }
+- Phải bạn không cùng sửa nhé : 
+            public class Main{
+                 public static void main(String[] args){
+                    try{
+                        int a[] a ={1,2,3};
+                        System.out.println(a[10]);
+                    }
+                    catch(Exception e){
+                         System.out.println("Da có loi xay ra");
+                    }
+                 }
+            }
+- Phân tích một chút với câu này: 
++ Với các câu lệnh bình thường thì chúng ta sẽ đút các trường hợp này cho hết vào trong 
+try còn ở trong catch thì chúng ta sẽ sử lí nế các câu lệnh trong try 
+có câu lệnh làm cho chương trình bi lỗi. 
+
+
+- Một ví dụ khác : 
+            public class Main {
+                public static void main(String[] args) {
+                  try {
+                    int[] myNumbers = {1, 2, 3};
+                    System.out.println(myNumbers[10]);
+                    }
+                  catch (Exception e) {
+                    System.out.println("Something went wrong.");
+                    } 
+                  finally { 
+                    System.out.println("The 'try catch' is finished.");
+                    }
+                }
+            }
+- Tham số truyền vào  hàm catch là một biến(Thường được gọi là e hoặc 
+thích đặt tên đéo nào cũng được) đại diện cho một đối tượng ngoại lệ 
+(exception object ) được ném(thrown) trong khối try . 
+- Chỉ có một số trường hợp cụ thể mà bạn hay gặp là : 
+  +  ArithmeticException
+  +  FileNotFoundException
+  +  ArrayIndexOutOfBoundsException
+-  e là tham chiếu đến phiên bản của Ngoại lệ, giống như s sẽ là tham 
+chiếu đến phiên bản của Chuỗi khi bạn khai báo như Chuỗi s = "...".
+- Theo chat thì đúng e trong khối catch là một tham chiếu đến phiên bản 
+ngoại lệ . Bạn có thể sử dụng biến này  để truy  cập thông tin chi tiết về 
+ngoại lệ đó. Dưới đây là một ví dụ cụ thể sử dụng biến e để in ra thông điệp 
+lỗi cùng với stack trace khi xảy ra ngoại lệ.
+- stackTrace ở đây là một danh sách các hàm được gọi ra trong quá trình thực
+thi chương trình. Nó thường được sử dụng để theo dõi quá trình thực thi của 
+chương trình và giúp xác định nỏi mà một lỗi xảy ra.
+
+- Khi ngoại lệ xảy ra , java sẽ tạo một đối tượng StackTraceElement để biểu 
+diễn thông tin về nơi xảy ra ngoại lệ. 
+- Một đối tượng này đại diện cho một hàm hoặc một phương thức cụ thẻ trong 
+dãy gọi hàm.
+- Thông thường một stack trace sẽ bắt đầu từ nơi xảy ra ngoại lệ và liệt kê 
+các hàm đã được gọi ngược về thời điểm gặp lỗi. 
+
+============================================================================
+- Câu lệnh scanner.hasNextInt() là một phương thức của lớp Scanner tỏng java  
+được sử dụng để kiểm tra xem có một số nguyên (int) hợp lệ nằm trong dữ liệu 
+đầu vào mà scanner đang quét không.
+- Phương thức này trả về giá trị boolean (true hoặc false ) 
+- Nếu dữ liệu tiếp theo mà "Scanner" đang quét là một số nguyên thì : 
+scanner.hasNextInt() sẽ trả về true() ngược lại nếu không phải là số nguyên 
+thì nó sẽ trả về false.
+- Ta có thể lấy ví dụ để hiểu rõ hơn : 
+      public class Example{
+        public static void main(String[] args){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Nhap mot so nguyen: ");
+
+            if(scanner.hasNextInt()){
+                int number = scanner.nextInt();
+                System.out.println("Bạn đã nhập số nguyên: " + number);
+            } 
+            else {
+                System.out.println("Dữ liệu không phải là số nguyên.");
+            }
+                scanner.close();
+          }
+        }
+
+- Công thức chung để kiểm tra điều này bao gồm : 
+       - Khai báo đối tượng scanner - 
+       - if(scanner.hasNextInt()){
+          - Thực hiện các các tác vụ nhập số nguyên -
+       }
+       else{
+        - Thực hiện các tác vụ nhập không phải là số nguyên - 
+       }
+
+======================================================================================
+- Sắp xếp tăng dần một mảng thì rất đơn giản chúng ta chỉ cân import thư viên 
+Arrays.sort(a) là được . 
+- Trong việc sắp xếp giảm dần một mảng int thì chúng ta sẽ phải dùng hàm 
+sort để sắp xếp nó. 
+       SORT GIẢM DÂN = ARRAY.SORT + COLLECTIONS.REVERSEORDER 
+
+- Chúng ta sẽ phải trải qua các nước sau  : 
+1. Thực hiện chuyển đổi mảng : 
+                  - Từ mảng "Int" ---> "Integer"
+2.Sử dụng hàm sort để sắp xếp nó giảm dần: 
+   - Hàm sort này có hai tham số truyền vào : 
+          + Mảng đổi tượng kiểu Integer mà chúng ta vừa chuyển 
+          + Collections.reverseOrder() : tạo ra bộ so sánh ngược đảo 
+        thứ tự tự nhiên của các phần tử trong một bộ dữ liệu có thứ tự .
+
+- Tiếp theo chúng ta phân tích quá trình chuyển đổi mảng từ kiểu nguyên thủy 
+sang kiểu dữ liệu đối tượng 
+   +  Sử dụng lớp đóng(Integer, Double , Boolean ,vv ).
+   +  Sử dụng 'Arrays.stream() và boxed()
+   +  Sử dụng ArrayUtils.toObject()
+   +  Sử dụng Arrays.stream() và boxed() cùng với toArray ();
+
+
+1. Sử dụng Lớp Đóng (Integer, Double, Boolean, v.v.):
+
+        int[] NguyenThuy = {1, 2, 3, 4, 5};
+        --------Chuyển mảng int[] sang Integer[]-------
+        Integer[] DoiTuong = new Integer[NguyenThuy.length];
+
+        for (int i = 0; i < NguyenThuy.length; i++) {
+            DoiTuong[i] = Integer.valueOf(NguyenThuy[i]);
+        }
+===> Cách này khá dễ hiểu nhưng nó vô cùng dài dòng, quan trọng nhất của cách này là dùng hàm  Integer.valueOf(NguyenThuy[i])
+để chuyển giá trị int sang Integer.
+
+
+2. Sử dụng Arrays.stream() và boxed():
+
+         int[] NguyenThuy = {1, 2, 3, 4, 5};
+         -------- Chuyển mảng int[] sang Integer[]---------
+        Integer[] DoiTuong = Arrays.stream(NguyenThuy).boxed().toArray(Integer[]::new);
+
+
+3. Sử dụng ArrayUtils.toObject() (Apache Commons Lang):
+        Nếu bạn sử dụng thư viện Apache Commons Lang, bạn có thể sử dụng ArrayUtils.toObject():
+
+        import org.apache.commons.lang3.ArrayUtils;
+        int[] NguyenThuy = {1, 2, 3, 4, 5};
+        -------- Chuyển mảng int[] sang Integer[] --------
+        Integer[] DoiTuong = ArrayUtils.toObject(NguyenThuy);
+
+
+4. Java 8 và sau đó: Sử dụng Arrays.stream() và boxed() cùng với toArray():
+
+        int[] NguyenThuy = {1, 2, 3, 4, 5};
+
+        ------- Chuyển mảng int[] sang Integer[]-------
+        Integer[] DoiTuong = Arrays.stream(NguyenThuy).boxed().toArray(Integer[]::new);
+
+==> Chỉ cần nhớ một cách thông dụng nhất là  : DÙNG STREAM(NGUYÊNTHUY).BOXED().toArray(nteger[]::new).
+
+=====================================================================================================================
+               CÁC KIỂU DỮ LIỆU TRONG JAVA 
+Có 8 loại dữ liệu nguyên thủy (primitive data) trong JAVA:
+    Kiểu số nguyên: byte, short, int, long
+    Kiểu số thực: float, double
+    Kiểu ký tự: char
+    Kiểu logic: trả về giá trị true hoặc false (đúng hoặc sai).
+
+Các kiểu đối tượng trong java : 
+                   ObJect 
+    
+    Number                       Boolean              Character 
+
+  + Byte                         
+  + Short 
+  + Long 
+  + Float  
+  + Integer
+  + Double 
+
+- Phân biệt hai loại kiểu dữ liệu này : 
+boolean	  Boolean
+char	  Character
+byte	  Byte
+short	  Short
+int	      Integer
+long	  Long
+float	  Float
+double    Double
+
+- Nói chung là bạn nên sử dụng các kiểu dữ liệu nguyên thủy 
+================================================================================
+                    TỔNG HỢP CÁC TỪ KHÓA TRONG JAVA  
+
++ abstract: Từ khóa abstract trong Java được sử dụng để khai báo lớp trừu tượng.
+Lớp trừu tượng có thể cung cấp việc thực hiện interfaces. Nó có thể có chứa phương
+thức trừu tượng và không trừu tượng.
+
++ case: Từ khóa case trong Java được sử dụng với các câu lệnh switch để kiểm tra một 
+danh sách các trường hợp. Một case là một trường hợp.
+
++ catch: Từ khóa catch trong Java được sử dụng để bắt các ngoại lệ được tạo bởi các câu 
+lệnh try. Nó phải được sử dụng sau khối try.
+
+
++ default: Từ khóa default trong Java được sử dụng để chỉ định khối mã mặc định trong câu
+lệnh switch.
+
++ enum: Từ khóa enum trong Java được sử dụng để xác định một bộ hằng cố định. Enum constructor
+luôn ở chế độ private hoặc default.
+
++ extends: Từ khóa extends trong Java được sử dụng để chỉ ra rằng một lớp có nguồn gốc từ một
+lớp hoặc interface khác.
+
++ final: Từ khóa final trong Java được sử dụng để chỉ ra rằng một biến giữ giá trị không đổi. 
+Nó được áp dụng với một biến. Nó được sử dụng để hạn chế người dùng thay đổi giá trị của biến
+đã được định nghĩa final.
+
++ finally: Từ khóa finally trong Java chỉ ra một khối mã trong cấu trúc try…catch. Khối này 
+luôn được thực thi cho dù ngoại lệ được có được xử lý hay không.
+
+implements: Từ khóa implements được sử dụng để triển khai một interface.
+
+import: Từ khóa import trong Java làm cho các class và interface được nhúng vào và có thể truy
+cập ở phạm vi làm việc hiện tại.
+
+instanceof: Từ khóa instanceof trong Java được sử dụng để kiểm tra xem đối tượng là một thể hiện 
+của lớp được chỉ định hay là khai triển của một interface.
+
+interface: Từ khóa interface được sử dụng để khai báo một interface. Nó có thể chứa phương thức
+trừu tượng.
+
+native: Từ khóa native trong Java được sử dụng để xác định rằng một phương thức được triển khai
+trong mã gốc bằng cách sử dụng JNI (Java Native Interface).
+
+package: Từ khóa package được sử dụng để khai báo Java package chứa các class.
+
+static: Từ khóa static trong Java được sử dụng để chỉ ra rằng một biến hoặc phương thức là một 
+class method. Từ khóa static trong Java chủ yếu được sử dụng để quản lý bộ nhớ.
+
+strictfp: Từ khóa stricfp trong Java được sử dụng để hạn chế các phép tính dấu phẩy động để đảm 
+bảo tính di động.
+
+super: Từ khóa super trong Java là một biến tham chiếu được sử dụng để tham chiếu đối tượng lớp 
+cha. Nó có thể được sử dụng để gọi phương thức lớp cha ngay lập tức.
+
+
+sychronized: Từ khóa sychronized (được đồng bộ hóa) trong Java được sử dụng để chỉ định các phần
+hoặc phương thức quan trọng trong ứng dụng đa luồng (Multi thread).
+
+this: Từ khóa this trong Java có thể được sử dụng để chỉ đối tượng hiện tại trong một phương thức
+hoặc hàm tạo (Constructor).
+
+throw: Từ khóa throw trong Java được sử dụng để ném một ngoại lệ rõ ràng. Từ khóa throw chủ yếu
+được sử dụng để ném ngoại lệ tùy chỉnh.
+
+throws: Từ khóa throws được sử dụng để khai báo một ngoại lệ. Kiểm tra ngoại lệ có thể được truyền
+ra với throws..
+
+transient: Từ khóa transient trong Java được sử dụng trong tuần tự hóa (serialization). Nếu bạn xác
+định bất kỳ data member nào là transient, nó sẽ không được tuần tự hóa.
+.
+volatile: Từ khóa volatile trong Java được sử dụng để chỉ ra rằng một biến có thể thay đổi không đồng bộ.
+==============================================================================================================================
+
+

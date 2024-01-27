@@ -1,0 +1,361 @@
+- Biểu thức lambda đã được sử dụng vào java8 
+
+- Biểu thức lamda là một khối mã ngắn chứa tham số và trả về một giá trị.
+- Biểu thức lamda tương tự như các phương thức , nhưng chúng không cần tên và 
+có thể được triển khai ngay trong phần nội dung của phương thức. 
+
+- Nếu như một phương thức chỉ có một câu lệnh triển khai phương thức thì chúng 
+ta có thể bỏ dấu ngoặc nhọn đi , nếu không thì chúng ta không thể bỏ dấu ngoặc 
+nhọn đi. 
+- Công thức một biểu thức cơ bản : 
+      (CÁC THAM SỐ ) -> (BIỂU THỨC )
+
+- Biểu thức lambda in ra một số : 
+    MyFunctionalInterface a = (n) -> System.out.println(n);
+
+- Biểu thức Lambda với nhiều tham số : 
+      (THAM SỐ 1, THAM SỐ 2) -> (BIỂU THỨC) 
+
+    MyFunctionalInterface2 tmp = (a,b) -> a+b 
+
+- Biểu thức Lambda với 0 có tham số nào : 
+
+      () -> ( BIỂU THỨC )
+
+    MyFunctionalInterfaceNoParam tmp = () -> System.out.println("HELLO");   
+
+- Biểu thức Lambda với kiểu dữ liệu cụ thể : 
+     (KIỂU_DỮ_LIỆU  THAM_SỐ) -> (BIỂU THỨC)
+   
+     CheckEven checkEven = (int number) -> number % 2 == 0;
+
+
+- Biểu thức Lambda sử dụng dấu ngoặc nhọn {} cho nhiều lệnh : 
+  
+     ( THAM SỐ ) -> {
+        .....
+        return ...;
+     }
+
+
+- Biểu thức Lambda cho các phương thức của Stream API : 
+  
+   list.stream().filter(PHẦN_TỬ -> ĐIỀU_KIỆN_PHẦN_TỬ).forEach(System.out::println);
+
+
+   List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+   numbers.stream().filter(n -> n % 2 == 0).forEach(System.out::println);
+
+=> Dùng thành thạo biểu thức lambda rất mạnh giúp viết code trở nên ngắn gọn , nếu 
+không chúng ta sẽ phải sử lí bài toán như sau : 
+   
+    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    for (Integer number : numbers) {
+            if (number % 2 == 0) {
+                System.out.println(number);
+            }
+        }
+=============================================================================
+@FunctionalInterface
+public interface Animal{
+    void speak();
+}
+
+- FunctionalInterface là interface chỉ có duy nhất một phương thức trừu tượng. 
+
+public class Cat impliment {
+    @override 
+    public void speak(){
+        System.out.println("Meo keu meo meo .");
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Animal meo = new Cat();
+        meo.speak();
+
+        Animal  meo =  (TiengMeo)->  System.out.println("Meo keu" + TiengMeo);
+
+       meo.speak();
+    }
+}
+- Không cần ghi tên phương thức cũng không cần ghi kiểu trả về nhưng nó vẫn nhận 
+diện được là đang thực hiện phương thức nào vì cơ bản rằng lambda chỉ có thể sử 
+dụng được cho FunctionalInterface (tức là chỉ có một phương thức ảo thôi) nên  là 
+chắc chắn nó sẽ luôn nhận diện được.
+- Nếu cách triển khai của phương thức nhiều hơn một dòng thì chúng ta bắt buộc phải 
+dùng dấu ngoặc nhọn.
+
+
+@FunctionalInterface
+public interface Animal{
+    void speak(String first);
+}
+
+- FunctionalInterface là interface chỉ có duy nhất một phương thức trừu tượng. 
+
+public class Cat impliment {
+    @override 
+    public void speak(String TiengMeo){
+        System.out.println("Meo keu " + TiengMeo);
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Animal meo = new Cat();
+        meo.speak();
+
+        Animal  meo =  ()->{
+        System.out.println("Meo keu meo meo .");
+       };
+
+       meo.speak();
+    }
+}
+
+
+@FunctionalInterface
+public interface Animal{
+      String void speak(String firstName , string LastName);
+}
+
+- FunctionalInterface là interface chỉ có duy nhất một phương thức trừu tượng. 
+
+public class Cat impliment {
+    @override 
+    public void speak(String TiengMeo){
+        System.out.println("Meo keu " + TiengMeo);
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Animal meo = new Cat();
+        meo.speak();
+
+        Animal  meo =  (firstName , LastName)-> {return firstName + " " + LastName;};
+
+      String TenMeo =  meo.speak();
+    }
+}
+
+==========================================================================
+- Khi chuyển đổi một phương thức java thành một biểu thức lambda thì bạn không 
+phải luôn loại bỏ tất cả các thành phần . Dưới đây là một giải thích chi tiết. 
+
+1. Phạm vi truy cập : Phạm vi truy cập  của phương thức thường không được đưa 
+vào biểu thức lambda, vì các biểu thức lambda thường được sử dụng trong phạm 
+vi hạn chế  
+2. Kiểu trả về của phương thức : Bạn không loại bỏ kiểu trả về của phương thức nếu 
+phương thức có kiểu trả về . Biểu thức lambda không yêu cầu bạn phải chỉ định kiểu 
+trả về nếu nó không yêu cầu bạn phải chỉ định kiểu trả về nếu nó có thể được suy 
+luận từ ngữ cảnh. 
+
+3. Tên phương thức : Tên phương thức không cần được đưa vào biểu thức lambda. Biểu 
+thức lambda chủ yếu tập trung vào tham số và cơ thể của phương thức. 
+
+4. Kiểu tham số : Bạn không cần chỉ định kiểu của tham số nếu kiểu đó có thể 
+được suy luận từ ngữ cảnh
+
+5. Từ khóa : return : Trong trường hợp biểu thức lambda chỉ có một biểu thức , từ 
+khóa return sẽ có thể được loại bỏ. 
+
+
+======================================================
++ Loại trừ từ khóa "return" : Trong biểu thức lambda, bạn không cần từ khóa return 
+nếu phương thức chỉ có một biểu thức duy nhất và nó trả về một giá trị. Lambda sẽ
+tự động trả về giá trị của biểu thức đó. 
+
+
+---- Phương thức Java thông thường ----
+public int add(int a, int b) {
+    return a + b;
+}
+
+---- Biểu thức lambda tương đương ----
+(int a, int b) -> a + b
+
+======================================================
++ Loại bỏ kiểu tham số : Trong biểu thức lambda ,bạn không cần chỉ định kiểu của 
+tham số nếu kiểu đó có thể được suy luận được từ ngữ cảnh.
+
+---- Phương thức Java thông thường ----
+public boolean isEven(int number) {
+    return number % 2 == 0;
+}
+
+---- Biểu thức lambda tương đương ----
+(number) -> number % 2 == 0
+
+======================================================
++ Loại bỏ dấu ngoặc nhọn {} cho phương thức chỉ có một câu lệnh : Nếu phương thức 
+chỉ có một câu lệnh ,bạn có thể bỏ đi dấu ngoặc nhọn 
+
+---- Phương thức Java thông thường ----
+public void printHello() {
+    System.out.println("Hello");
+}
+
+---- Biểu thức lambda tương đương ----
+() -> System.out.println("Hello")
+
+=====================================================
+- Phương thức JAVA thông thường - 
+public int add (int a,int b){
+    return a+b;
+}
+
+- Biểu thức lambda tương đương 
+ 
+ (a+b) -> a+b
+
+
+
+
+- Công thức một biểu thức cơ bản : 
+      (CÁC THAM SỐ ) -> (BIỂU THỨC )
+
+- Biểu thức lambda in ra một số : 
+    MyFunctionalInterface a = (n) -> System.out.println(n);
+
+- Biểu thức Lambda với nhiều tham số : 
+      (THAM SỐ 1, THAM SỐ 2) -> (BIỂU THỨC) 
+
+    MyFunctionalInterface2 tmp = (a,b) -> a+b 
+
+- Biểu thức Lambda với 0 có tham số nào : 
+
+      () -> ( BIỂU THỨC )
+
+    MyFunctionalInterfaceNoParam tmp = () -> System.out.println("HELLO");   
+
+- Biểu thức Lambda với kiểu dữ liệu cụ thể : 
+     (KIỂU_DỮ_LIỆU  THAM_SỐ) -> (BIỂU THỨC)
+   
+     CheckEven checkEven = (int number) -> number % 2 == 0;
+
+
+- Biểu thức Lambda sử dụng dấu ngoặc nhọn {} cho nhiều lệnh : 
+  
+     ( THAM SỐ ) -> {
+        .....
+        return ...;
+     }
+
+
+- Biểu thức Lambda cho các phương thức của Stream API : 
+  
+   list.stream().filter(PHẦN_TỬ -> ĐIỀU_KIỆN_PHẦN_TỬ).forEach(System.out::println);
+
+
+   List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+   numbers.stream().filter(n -> n % 2 == 0).forEach(System.out::println);
+
+=> Dùng thành thạo biểu thức lambda rất mạnh giúp viết code trở nên ngắn gọn , nếu 
+không chúng ta sẽ phải sử lí bài toán như sau : 
+   
+    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    for (Integer number : numbers) {
+            if (number % 2 == 0) {
+                System.out.println(number);
+            }
+        }
+=============================================================================
+- Chúng ta có thể dùng biểu thức lambda để triển khai một phương thức ảo trong 
+interface và sử dụng chúng 
+
+- Biểu thức lambda chỉ có thể triển khai lớp 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@FunctionalInterface
+public interface Animal{
+    void speak();
+}
+
+- FunctionalInterface là interface chỉ có duy nhất một phương thức trừu tượng. 
+
+public class Cat impliment {
+    @override 
+    public void speak(){
+        System.out.println("Meo keu meo meo .");
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Animal meo = new Cat();
+        meo.speak();
+
+        Animal  meo =  (TiengMeo)->  System.out.println("Meo keu" + TiengMeo);
+
+       meo.speak();
+    }
+}
+- Không cần ghi tên phương thức cũng không cần ghi kiểu trả về nhưng nó vẫn nhận 
+diện được là đang thực hiện phương thức nào vì cơ bản rằng lambda chỉ có thể sử 
+dụng được cho FunctionalInterface (tức là chỉ có một phương thức ảo thôi) nên  là 
+chắc chắn nó sẽ luôn nhận diện được.
+- Nếu cách triển khai của phương thức nhiều hơn một dòng thì chúng ta bắt buộc phải 
+dùng dấu ngoặc nhọn.
+
+
+@FunctionalInterface
+public interface Animal{
+    void speak(String first);
+}
+
+- FunctionalInterface là interface chỉ có duy nhất một phương thức trừu tượng. 
+
+public class Cat impliment {
+    @override 
+    public void speak(String TiengMeo){
+        System.out.println("Meo keu " + TiengMeo);
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Animal meo = new Cat();
+        meo.speak();
+
+        Animal  meo =  ()->{
+        System.out.println("Meo keu meo meo .");
+       };
+
+       meo.speak();
+    }
+}
+
+
+@FunctionalInterface
+public interface Animal{
+      String void speak(String firstName , string LastName);
+}
+
+- FunctionalInterface là interface chỉ có duy nhất một phương thức trừu tượng. 
+
+public class Cat impliment {
+    @override 
+    public void speak(String TiengMeo){
+        System.out.println("Meo keu " + TiengMeo);
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Animal meo = new Cat();
+        meo.speak();
+
+        Animal  meo =  (firstName , LastName)-> {return firstName + " " + LastName;};
+
+      String TenMeo =  meo.speak();
+    }
+}

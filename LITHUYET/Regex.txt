@@ -1,0 +1,76 @@
+- Chúng ta thường gặp các thông báo :  
++ Mật khẩu phải chứa kí tự hoa 
++ Kí tự đặc biệt : Định dạng id ,email,... 
+- Regular Expression hay gọi tắt là regex là một dãy các kí tự liên tục , 
+qua nó giúp người sử dụng tìm kiếm hoặc so khớp hoặc các thao tác liên 
+quan tuân theo những quy tắc và cú pháp nhất định. 
+
+- Gói java.util.regex cung cấp các lớp và giao diện cơ bản sau : 
++ Lớp Pattern 
++ Lớp Matcher 
+-----------------------------------------------------------------------
+- Lớp Pattern là một đối tượng mẫu được biên dịch từ một biểu thức chính quy 
+không có constructor public 
+- Chúng ta sử dụng method compile() để tạo đối tượng với tham số chính là 
+cái biểu thức chính quy mà chúng ta cần biên dịch.
+- Các phương thức cơ bản : 
++ compile () : Biên dịch biểu thức chính quy 
+
++ 
+
+-----------------------------------------------------------------------
+- Lớp Matcher là một phương tiện để so khớp chuỗi dữ liệu đầu vào với đối 
+tượng Pattern đã tạo trước đó. Chúng ta lấy đối tượng này thông qua phương 
+thức matcher() của đối tượng Pattern  với tham số đầu vào là đối tượng cần 
+kiểm tra. 
+
+- Các phương thức cơ bản : 
+
++ boolean matches() : Kiểm tra xem biểu thức chính quy có khớp với mẫu
+hay không 
+ 
++ boolean find() : Tìm biểu thức tiếp theo khớp với mẫu 
+
++ boolean group(): Trả về chuỗi con phù hợp 
+
++ int start() : Trả về vị trí bắt đầu của chuỗi con phù hợp 
+
++ int end() : Trả về vị trí kết thúc của chuỗi con phù hợp 
+
++ int groupCount() : Trả về tổng số các chuỗi con phù hợp 
+
+- Các phương thức biểu thức chính quy : 
+
+. : So khớp với kí tự đơn nào 
+^ : So khớp phần đầu của chuỗi hay dòng  
+$ : So khớp phần cuối của chuỗi hay dòng 
+
+\d : So khớp với kí tự số [0-9]
+\D : So khớp với kí tự không phải số [^0-9]
+
+\s : Khoảng trắng   
+\S : Không phải khoảng trắng 
+
+\w : Chữ cái , chữ số [a-zA-Z0-9]
+\W : Kí tự không phải số [^\w]
+
+\b : Ranh giới của một từ 
+\B : Không phải là ranh giới của một từ 
+
++  : So khớp với 1 hoặc nhiều sự xuất hiện X 
+*  : So khớp với 0 hoặc nhiều sự xuất hiện X 
+?  : So khớp với 0 hoặc 1 
+{n}   : Xuất hiện n lần  
+{n,}  : Xuất hiện n hoặc nhiều hơn số lần xuất hiện của X 
+{n,m} : xuất hiện ít nhất n lần hoặc nhiều nhất m lần 
+
+
+- Một chú ý vô cùng quan trọng trong java là khi chúng ta sử dụng các kí  
+tự đặc biệt trong biểu thức chính quy , như  \w thì chúng ta cần thêm 
+một dấu gạch chéo \ trước để tránh việc hiểu lầm trong quá trình biên 
+dịch chuỗi java. 
+
+- Khi bạn sử dụng \w trong biểu thức chính quy , bạn cần viết \\w 
+
+
+

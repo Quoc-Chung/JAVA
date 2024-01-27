@@ -1,0 +1,186 @@
+- Sử dụng khối try - catch - finally để bắt giữ các ngoại lệ : 
+
+    try {
+        - Phần code - 
+        - Trong quá trình code có thể có câu lệnh lỗi gây ra ngoại lệ - 
+    }
+    catch (TÊN_NGOẠI_LỆ name){
+        - Phần này chạy khi ngoại lệ xảy ra -
+
+    }
+    catch (){
+       - .... - 
+    }
+    finally{
+        - Khối lệnh sẽ thực hiện bất chấp ngoại lệ xảy ra hay không - 
+        - Tức là sau phần code của try- catch thì nó luôn chạy - 
+    }
+
+- Khi có một ngoại lệ xảy ra thì chúng ta sẽ thông báo ra lỗi mà sẽ
+không ngưng chương trình làm cho các câu lệnh bên dưới không chạy.
+========================================================================
+- Nếu một chương trình gặp phải một ngoại lệ nào đó thì nó sẽ cho chương 
+trình dừng luôn vì ta hiểu cơ bản ngoại lệ là một lỗi. 
+- Và khi chương trình dừng đó,nó sẽ kéo theo các câu lệnh ở phía bên dưới 
+cái ngoại lệ cũng sẽ dừng theo luôn. 
+
+- Nếu như chúng ta muốn khi xảy ra ngoại lệ mà chương trình không dừng luôn 
+mà chỉ hiển thị (thông báo) ra ngoại lệ sau đó sẽ chạy các chương trình , câu 
+lệnh phía dưới thì ta sẽ cần dùng khối try -catch để gói (Bắt giữ) cái 
+ngoại lệ đó lại 
+
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class SumTwoIntegers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Nhập số nguyên thứ nhất: ");
+            int num1 = scanner.nextInt();
+
+            System.out.print("Nhập số nguyên thứ hai: ");
+            int num2 = scanner.nextInt();
+
+       
+        } catch (InputMismatchException e) {
+            System.out.println("Ngoại lệ: Bạn phải nhập số nguyên.");
+        } finally {
+            int sum = num1 + num2;
+            System.out.println("Tổng của " + num1 + " và " + num2 + " là: " + sum);
+            scanner.close();
+        }
+    }
+}
+
+====================================================================================================================================
+
+1. Nếu chúng ta chia bất kì số nào cho số 0 
+=> Xảy ra ngoại lệ : ArithmeticException 
+int a = 10 / 0; // ArithmeticException
+
+
+
+
+
+2. NullPointerException : Truy cập biến mang giá trị null 
+String obj = null;
+System.out.println(obj .length()); // NullPointerException
+
+
+
+
+
+3. NumberFormatException : Xảy ra khi chuyển đổi một chuỗi string sang số 
+mà chuỗi string này chứa kí tự chữ cái 
+
+String str = "abc"; 
+int num = Integer.parseInt(str); // NumberFormatException 
+
+
+
+
+
+4.ArrayIndexOutOfBoundsException : Nếu bạn chèn bất kì giá trị nào vào 
+index sai , sẽ xảy ra ngoại lệ 
+
+int arr[] = new int[5];
+arr[5] = 50; // ArrayIndexOutOfBoundsException
+
+
+
+
+
+5. ClassCastException : Nếu không thể chuyển kiểu Object này sang kiểu Object khác 
+thì sẽ xảy ra ngoại lệ.
+
+Object dog = new Dog();
+Rectangle rect = (Rectangle) dog;
+
+===================================================================================
+- Các phương thức trong sử lí ngoại lệ : 
+
++ public String getMessage() : Trả về một tin nhắn cụ thể về ngoại lệ đã 
+xẩy ra . Message này được khởi tạo bỏi phương thức khởi tạo của Throwable 
+
++ public Throwable getCause() : Trả về nguyên nhân xảy ra ngoại lệ biểu 
+diễn bởi đối tượng Throwable 
+
+
++ public String toString() :Trả về tên của lớp và kết hợp với kết quả từ 
+phương thức getMessage()
+
++ public void printStackTrace() : In ra kết quả của phương thức toString 
+cùng với stack trace đến System.err
+
+
+
+
+public String getMessage(): Trả về một tin nhắn cụ thể về ngoại lệ đã xảy ra.
+
+public class GetMessageExample {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            String message = e.getMessage();
+            System.out.println("Message: " + message);
+        }
+    }
+}
+
+
+public Throwable getCause(): Trả về nguyên nhân xảy ra ngoại lệ.
+
+public class GetCauseExample {
+    public static void main(String[] args) {
+        try {
+            try {
+                throw new NullPointerException("Null reference");
+            } catch (NullPointerException innerException) {
+                throw new RuntimeException("Runtime exception", innerException);
+            }
+        } catch (RuntimeException e) {
+            Throwable cause = e.getCause();
+            System.out.println("Cause: " + cause.getMessage());
+        }
+    }
+}
+
+
+public String toString(): Trả về tên của lớp và kết hợp với kết quả từ phương thức getMessage().
+public class ToStringExample {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            String toStringResult = e.toString();
+            System.out.println("toString result: " + toStringResult);
+        }
+    }
+}
+
+
+
+public void printStackTrace(): In ra kết quả của phương thức toString cùng với stack trace đến System.err.
+
+public class PrintStackTraceExample {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Printing stack trace:");
+            e.printStackTrace();
+        }
+    }
+}
+Lưu ý rằng các ví dụ này sử dụng ngoại lệ ArithmeticException nhưng bạn có thể áp dụng các phương thức
+này cho bất kỳ loại ngoại lệ nào trong Java.
+
+
+
+
+
+

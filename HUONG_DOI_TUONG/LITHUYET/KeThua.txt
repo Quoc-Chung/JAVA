@@ -1,0 +1,712 @@
+- Kế thừa (inheritance) trong java là một tính năng của lập trình hướng 
+đối tượng , cho phép class mới tiếp nhận các thuộc tính và phương thức 
+của lớp khác. 
+- Lớp mới được gọi là lớp con ( subclass ) và lớp mà nó kế thừa được gọi 
+là lớp cha 
+- Một chú ý hết sức đặc biệt : 
+      TRONG JAVA THÌ MỘT LỚP CON CHỈ CÓ THỂ KẾ THỪA ĐƯỢC DUY NHẤT MỘT LỚP CHA
+   <==> Một lớp con chỉ có thể như này : 
+           class LỚP_CON  extends LỚP_CHA{
+                .............
+           }
+   <==> Chứ không được như này : 
+           class LỚP_CON  extends LỚP_CHA_1 extends LỚP_ CHA_2 {
+                ............
+           }
+   <==> Cách khắc phục ở đây là dùng interface : 
+           class LỚP_CON extends LỚP_CHA implements A,B,C,...{
+                ............
+           }
+
+
+                LỚP CHA 
+                   ^
+                   ^ 
+                   ^ CON KẾ THỪA CHA
+                   ^ 
+                   ^
+                LỚP CON 
+- Các thuật ngữ quan trọng trong kế thừa :  
++ Lớp cha : Lớp mà các thuộc tính và phương thức được kế thừa bởi lớp con 
++ Lớp con : Lớp kế thừa các thuộc tính và phương thức từ lớp cha 
++ extends : Từ khóa dùng để chỉ rõ lớp con kế thừa từ lớp cha
++ super : Từ khóa dùng để truy cập các thuộc tính và phương thức của lớp 
+cha từ lóp con. 
+
+- Khi nào cần sử dụng  kế thừa trong java : 
++ Khi có một số lớp có các thuộc tính và phương thức chung bằng cách tạo 
+ra một lớp cha chung và kế thừa lại lớp đó để tránh lặp mã. 
++ Khi cần mở rộng các chức năng của một lớp hiện có bằng cách thêm các 
+thuộc tính và phương thức mới. 
+
++ Khi cần ghi đè phương thức của lớp cha để đạt được hành vi khác nhau 
+trong lớp con. 
+
++ Kế thừa thì kế thừa nhưng ta phải viết class cha riêng ra , viết class 
+con riêng ra ,  class Main riêng ra. 
+- Cú pháp của kế thừa : 
+     class LỚP_CON  extends LỚP_CHA {
+       ---- Code của lớp con ----
+     }
+
+- Phân loại tính kế thừa trong java  : 
++ Đơn kế thừa  
++ Kế thừa đa cấp 
++ Kế thừa phân cấp 
++ Đa kế thừa  
++ Kế thừa hỗn hợp 
+
+
+1. ĐƠN KẾ THỪA ( Cha con độc thân )  
+- được sử dụng khi ta muốn tạo ra một lớp con duy nhất kế thừa từ một
+lớp cha duy nhất  
+         class LỚP_CHA {
+
+         }
+         class LỚP_CON  extends LỚP_CHA{
+
+         }
+
+      class Animal {
+         public void eat() {
+               System.out.println(“Eating…”);
+         }
+
+      }
+
+      class Dog extends Animal {
+        public void bark() {
+              System.out.println(“Barking…”);
+
+         }
+
+      }
+
+      public class Main {
+         public static void main(String[] args) {
+         Dog d = new Dog();
+         d.eat(); // gọi phương thức từ lớp cha
+         d.bark(); // gọi phương thức từ lớp con
+
+         }
+}
+
+2. KẾ THỪA ĐA CẤP (Kế thừa so le nhau )
+- Trong java thì kế thừa đa cấp được sử dụng khi ta cần tạo ra các lớp con 
+phức tạp và đa dạng. 
+- Các lớp con này có thể kế thừa các thuộc tính và phương thức từ nhiều lớp 
+cha khác nhau. 
+
+    class  LỚP_CHA {
+
+    }
+
+    class LỚP_CON_1 extends LỚP_CHA{
+
+    }
+    class LỚP_CON_2 extends LỚP_CON_1{
+
+    }
+
+3. KẾ THỪA PHÂN CẤP (1 thằng cha mấy thằng con )
+- Trong kế thừa phân cấp , một lớp cha được kế thừa bởi nhiều lớp con khác 
+nhau. 
+- Cứ hiểu là nhiều lớp con kế thừa một lớp cha. 
+    class LỚP_CHA{
+
+    }
+    class LỚP_CON_1 extends LỚP_CHA {
+
+    }
+    class LỚP_CON_1 extends LỚP_CHA{
+
+    }
+
+- Ví dụ : 
+   class Animal {
+         public void eat() {
+              System.out.println(“Eating…”);
+         }
+   }
+
+   class Dog extends Animal {
+         public void bark() {
+              System.out.println(“Barking…”);
+         }
+
+   }
+
+   class Cat extends Animal {
+         public void meow() {
+              System.out.println(“Meowing…”);
+         }
+   }
+
+   public class Main {
+        public static void main(String[] args) {
+            Dog d = new Dog();
+
+            d.eat(); // gọi phương thức từ lớp cha
+            d.bark(); // gọi phương thức từ lớp con
+            Cat c = new Cat();
+            c.eat(); // gọi phương thức từ lớp cha
+            c.meow(); // gọi phương thức từ lớp con
+        }
+   }
+========================================================================
+- Đa kế thừa là khả năng một lớp có thể kế thừa từ nhiều lớp cha khác 
+nhau. 
+- Điều này cho phép một lớp con (hoặc dẫn xuất) có thể sử dụng các thuộc 
+tính và phương thức từ nhiều lớp cha hoặc lớp cơ sở. 
+- Để thực hiện đa kế thừa , bạn chỉ cần sử dụng cú pháp sau khi đặc tả 
+tên lớp con.
+- Ví dụ : 
+      class A {
+         public :
+         void Phương_Thức_A(){
+            .........
+         }
+      };
+
+      class B {
+         public : 
+         void Phương_Thức_B(){
+           ........
+         }
+      };
+     
+     class C : public A, public B{
+         public : 
+         void Phương_Thức_C(){
+
+      }
+     }
+     int main() {
+         C myObject;
+         myObject.methodA(); // Gọi phương thức của lớp A
+         myObject.methodB(); // Gọi phương thức của lớp B
+         myObject.methodC(); // Gọi phương thức của lớp C
+         return 0;
+   }
+- Cứ hiểu đa kế thừa là con kế thừa một lúc nhiều lớp cha hay một con lại 
+có rất nhiều cha cùng lúc. 
+==> Nhưng có một điều rất đặc biệt đối với JAVA là nó không hỗ trợ việc 
+đa kế thừa(Một lớp kế thừa từ nhiều lớp ) vì có thể gây ra nhiều vấn đề 
+phức tạp và khó kiểm soát . 
+==> JAVA kế thừa gián tiếp thông qua việc sử dụng interfaces 
+- Trong java thì một lớp có thể triển khai nhiều interface khác nhau , nhưng 
+chỉ có thể kế thừa từ một lớp cha duy nhất. 
+
+- interface là cấu trúc định nghĩa : 
+
+      interface A {
+         void methodA();
+      }
+
+      interface B{
+         void methodB();
+      }
+
+      interface C{
+         void methodC();
+      }
+
+      // Lớp cha  
+      class Parent {
+         void methodParent(){
+            System.out.println("Method from Parent class");
+         }
+      }
+
+      // Lớp con triển khai các interface và kế thừa từ lớp cha. 
+      class LỚP_CON  extends LỚP_CHA implements A,B{
+         // Triển khai các phương thức từ interfaces
+         public void methodA() {
+            System.out.println("Method from interface A");
+         }
+         public void methodB() {
+            System.out.println("Method from interface B");
+         }
+         // Các phương thức của lớp con
+         void methodChild() {
+            System.out.println("Method from Child class");
+         }
+      }
+
+- Một ví dụ cho ta thấy rõ  là cách  xử lí các bài đơn kế thừa ( Tức là 
+chỉ có một lớp con  kế thừa lại một lớp cha ) 
++ Thứ nhất ta phải hiểu từ khóa "super" được sử dụng để tham chiếu đến lớp 
+cha (suppper class ) . Tùy thuộc vào ngữ cảnh , super có thể được sử dụng 
+để thực hiện các nhiệm vụ
+1. Ta hay dùng từ khóa "super" này để tham chiếu đến phương thức của lớp cha 
+khi lớp con có một phương thưc cùng tên và muốn mở rộng hay thay đổi kích thước  
+và hành vi của cái phương thức của cái lớp  con đó. 
+- Một ví dụ cho ta thây rõ cách dùng của lóp con : 
+class Parent{
+         void display(){
+            System.out.println("Test dùng super ");
+         }
+       }
+       class Child extends Parent{
+         void display(){
+            -- Gọi lại phương thức cùng tên của lớp cha --
+            super.display();
+            System(" Mở rộng phương thức của lớp con.");
+         }
+}
+
+
+2. Gọi hàm khởi taho của lớp cha: Trong contructor của lớp con , "super" có 
+thể được sử dụng để gọi contructor của lớp cha . Điều này giúp cho việc  khởi 
+tạo của lớp cha thực hiện trước công việc khởi tạo của lớp con.
+
+class Parent {
+   public Parent(){
+      System.out.print("Khoi tao cua ham cha");
+   }
+}
+
+
+class Child extends Parent {
+     Child(){
+      --- Gọi contructor khởi tạo của lớp cha --- 
+      super(); 
+      Sytem.out.print("Khoi tao ngon ngu con");
+     }
+}
+
+3. Tham chiếu đến biến hoặc phương thức cuar lớp cha : "super" cũng có thể 
+được sử dụng để tham chiếu đến biến hoặc phương thức của lớp cha khi chúng 
+bị ẩn bởi các biến hoặc phương thức của lớp con có cùng tên.
+
+class Parent {
+   int x =10;
+
+   void display (){
+      System.out.println("Trình bày lớp cha");
+   }
+}
+
+class Child extends Parent{
+   int x = 20;
+   void display(){
+        System.out.println("Child class variable x: " + x);
+
+   }
+}
+
+
+- Một ví dụ tổng quát về việc sử dụng java làm bài toán đơn kế thừa :
+
+package ....
+import java.util.Scanner;
+
+class NgayThang{
+    private int ngay , thang , nam; 
+
+    public NgayThang(){
+      ngay = 0 ;
+      thang = 0;
+      nam = 0;
+    }
+      public void nhap(){
+         Scanner  scanner = new Scanner(System.in);
+         System.out.print("\nNhap ngay - thang - nam : ");
+         ngay = scanner.nextInt();
+         thang = scanner.nextInt();
+         nam = scanner.nextInt();
+      }
+
+      public void xuat() {
+        System.out.println(ngay + "/" + thang + "/" + nam);
+    }
+}
+
+class Nguoi {
+   private Strring hoTen; 
+   private NgayThang ngaySinh; 
+   private String diaChi ;
+
+   public Nguoi(){
+      hoTen =" ";
+      diaChi = "";
+      - Chỗ này lấy lại cái đối tượng bên trên nên chúng ta phải khởi tạo đối tượng - 
+      ngaySinh = new NgayThang();
+   }
+   
+    public String getHoTen() {
+        return hoTen;
+    }
+    
+    public void nhap() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nNhap ho ten:");
+        hoTen = sc.nextLine();
+        ngaySinh.nhap();
+        System.out.print("\nNhap dia chi:");
+        diaChi = sc.nextLine();
+    }
+
+     public void xuat() {
+        System.out.println("\n Ho ten :" + hoTen);
+        System.out.print("Ngay sinh :");
+        ngaySinh.xuat();
+        System.out.println("Dia chi :" + diaChi);
+    }
+
+}
+
+
+- Tiếp theo chỗ này quan trọng nhất là  : 
+class KhachHang extends Nguoi {
+   private int maKH; 
+   private float ChiSoTruoc;
+   private float ChiSoSau;
+
+   public KhachHang(){
+        maKH = 0;
+        chiSoTruoc = 0;
+        chiSoSau = 0;
+   }
+
+   public void nhap() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nNhap ma khach hang:");
+        maKH = sc.nextInt();
+        super.nhap();
+        System.out.print("\nNhap chi so truoc:");
+        chiSoTruoc = sc.nextFloat();
+        System.out.print("\nNhap chi so sau :");
+        chiSoSau = sc.nextFloat();
+    }
+
+      public float tinhTienDien() {
+        float tienDien = 0;
+        int bac = (int) (chiSoSau - chiSoTruoc);
+        if (bac >= 0 && bac <= 50) {
+            tienDien = 1.678f * bac;
+        } else if (bac > 50 && bac <= 100) {
+            tienDien = 1.734f * bac;
+        } else if (bac > 100 && bac <= 200) {
+            tienDien = 2.014f * bac;
+        } else if (bac > 200 && bac <= 300) {
+            tienDien = 2.536f * bac;
+        } else if (bac > 300 && bac <= 400) {
+            tienDien = 2.834f * bac;
+        } else if (bac > 400) {
+            tienDien = 2.927f * bac;
+        }
+        return tienDien;
+    }
+
+    public void timKiemKhach(KhachHang[] kh, int n, String ten) {
+        boolean check = false;
+        for (int i = 0; i < n; i++) {
+            if (kh[i].getHoTen().equals(ten)) {
+                System.out.println("\nTim Thay khach hang.");
+                System.out.println("\nMa khach hang :" + kh[i].maKH);
+                System.out.println("\nSo dien tieu thu :" + (kh[i].chiSoSau - kh[i].chiSoTruoc));
+                float soTien = kh[i].tinhTienDien();
+                System.out.println("\nSo tien dien phai tra la :" + soTien + " nghin dong.");
+                check = true;
+                break;
+            }
+        }
+        if (!check) {
+            System.out.println("\nKhong tim thay khach hang");
+        }
+    }
+
+    public void thongKe(KhachHang[] kh, int n) {
+        // Làm tương tự thôi
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        System.out.print("\nNhap so khach hang :");
+        n = sc.nextInt();
+        KhachHang[] kh = new KhachHang[n];
+
+
+        for (int i = 0; i < n; i++) {
+            kh[i] = new KhachHang();
+            kh[i].nhap();
+        }
+        System.out.println("\nTHONG TIN KHACH HANG :");
+        for (int i = 0; i < n; i++) {
+            kh[i].xuat();
+        }
+        sc.nextLine(); // consume the newline character left in the buffer
+        String timKiem;
+        System.out.print("\nNhap ten tim kiem :");
+        timKiem = sc.nextLine();
+        kh[0].timKiemKhach(kh, n, timKiem);
+    }
+}
+
+==============================================================================
+                LỚP TRỪU TƯỢNG ( ABSTRACT CLASS ) TRONG JAVA 
+- Đặc điểm của lớp trừu tượng ( abstract class ): 
+    + Một lớp được khai báo với từ khóa abstract là lớp trừu tượng trong java
+
+    + Lớp trừu tượng có thể có các phương thức abstract hoặc non-abstract
+ 
+    + Lớp trừu tượng có thể khai báo không ,một hoặc nhiều method trừu tượng bên trong 
+    
+    + Không thể khởi tạo một đối tượng trực tiếp từ một class trừu tượng. 
+
+- Một lớp kế thừa từ lớp trừu tượng không cần phải implements non-abstract 
+phương thức , nhưng những phương thức nào có abstract thì bắt buộc phải override
+
+- Cú pháp khai báo lớp trừu tượng trong java : 
+     <PhamViTruyCap> abstract class <TenLop> {
+     
+}
+
+=============================================================================
+               INTERFACE TRONG JAVA  
+- Một interface trong java là một bản thiết kế của một lớp. 
+- Nó chỉ có các phương thức trừu tượng và các hằng só ( Hiểu đơn giản là nó 
+chỉ định nghĩa các phương thức ra chứ không triển khai cái phương thức đó ra)
+- Tất cả các hằng số mặc định là ở dạng public static final
+- Tất cả các phương thức là ở dạng public 
+
+- Tương tự như lớp trừu tượng (abstract) , nó không thể khởi tạo thành đối tượng . 
+
+- Mục đích của việc sử dụng interface là để thu được tính trừu tượng hoàn toàn 
+và đa kế thừa trong java 
+
+-----------------------------------------------------------
+++++ kiểu như nó là một cái giao diện chung cho tất cả ++++
+     các đối tượng kế thừa từ cái interface đó và từ đó
+     chúng ta có thể dùng chính cái interface đó để cấp 
+     phát , khởi tạo , quản lí tất cả các đối tượng có 
+                giao diện chung đó 
+++++                                                   ++++
+-----------------------------------------------------------
+- Một số lưu ý : 
+      + Một lớp có thể triển khai một hoặc nhiêu interface tại một thời điểm. 
+      + Một interface có thể kế thừa từ một interface khác , tương tự cách một 
+lớp có thể kế thừa lớp khác. 
+
+- Một ví dụ cho thấy được sức mạnh của interface trong java : 
+ + Trong ví dụ này thì chúng ta sẽ tạo ra một interface "Shape" đại diện cho 
+các hình học và có hai lớp triển khai là " Circle" và "Rectangle" . Bạn sẽ thấy 
+làm thế nào interface giúp chúng ta dễ dang mở rộng chương trình và tái sử dụng 
+lại mã nguồn : 
+       - Interface đại diện cho các hình học - 
+
+       import java.util.ArrayList;
+       import java.util.List; 
+
+       interface Shape{
+         double calculateArea(); 
+       }
+
+       - Lớp triển khai hình tròn - 
+       class Circle implements Shape {
+         private double radius; 
+
+         public Circle(double radius){
+            this.radius = radius;
+         }
+
+         @override
+         public double calculateArea() {
+             return Math.PI * radius * radius;
+           }
+   }
+
+      - Lớp triển khai cho hình chữ nhật -
+      class Rectangle implements Shape {
+         private double width;
+         private double height;
+
+         public Rectangle(double width, double height) {
+            this.width = width;
+            this.height = height;
+         }
+
+         @Override
+         public double calculateArea() {
+            return width * height;
+         }
+      }
+
+      public class Main{
+         public static void main(String[] args){
+            -- Sử dung interface để tạo mảng chứa các hình học ---
+               Shape[] shapes  =new Shape[2];
+               shapes[0] = new Circle(5.0);
+
+               shapes[1] = new Rectangle(4.0 ,6.0 );
+
+            -- Tính diện tích cho  từng hình học trong mảng  --- 
+               for (Shape shape : shapes){
+                  System.out.println("Area :" + shape.calculateArea());
+               }
+         }
+      }
+
+      -- Chúng ta có thể quản lí các đối tượng bằng mảng đối tượng  bình thường 
+hoặc chúng ta cũng có thể dùng arrayList để quản lí : 
+      
+      public class Main {
+         public static void main(String[] args) {
+               --- Sử dụng ArrayList để chứa các hình học ---
+               List<Shape> shapes = new ArrayList<>();
+               shapes.add(new Circle(5.0));
+               shapes.add(new Rectangle(4.0, 6.0));
+
+               --- Tính diện tích cho từng hình học trong ArrayList  --- 
+               for (Shape shape : shapes) {
+                     System.out.println("Area: " + shape.calculateArea());
+               }
+         }
+      }
+
+- Trong ví dụ này thì interface định nghĩa một phương thức calculateArea(). Cả 
+hai lớp "Circle" và "Rectangle" đều triển khai mảng interface này và cung cấp 
+triển khai cụ thể cho phương thức calculateArea. 
+
+- Sức mạnh của việc sử dụng interface ở đây là bạn có thể thêm các loại hình học 
+mới bằng cách triển khai interface "shape" mà không cần phải sửa đổi mã nguồn của
+lớp chứa . Điều này giúp cho việc mở rộng chương trình trở nên dễ dàng hơn và làm  
+cho chương trình trở nên linh hoạt và dễ bảo trì hơn.
+- Nếu bạn không sử dụng interface , bạn có thể phải sửa đổi mã nguồn của lớp chứa
+khi thêm một loại hình học mới , điều này có theer tăng độ phức tạp và rủi ro của 
+mã nguồn của bạn. 
+
+- Lưu ý rằng khi bạn sử dụng interface ,đặc biệt là trong trường hợp của ví dụ về 
+hình học , bạn có thể thêm các loại hình học mới mà không cần phải sửa đổi mã nguôn
+của lớp chứa hay các lớp đã được triển khai. 
+
+- MỘT VÍ DỤ KHÁC CHO THẤY SỨC MẠNH CỦA INTERFACE TRONG JAVA: 
++ Khi xem xét một ví dụ đơn giản về sức mạnh của interface trong java , cụ 
+thể là một ứng dụng quản lí hình ảnh . Trong ứng dụng này , chúng ta sẽ có 
+các đối tượng khác nhau để xử lí hình ảnh , ví dụ như ta có 3 đối tượng quản 
+xử lí : JPEGImageProcessor, PNGImageProcessor và GIFImageProcessor
+
++ Nếu chúng ta không sử dụng interface thì chúng ta có thể viết mã như sau : 
+
+class JPEGImageProcessor {
+    public void process() {
+        // Logic xử lý hình ảnh JPEG
+        System.out.println("Processing JPEG image");
+    }
+}
+
+class PNGImageProcessor {
+    public void process() {
+        // Logic xử lý hình ảnh PNG
+        System.out.println("Processing PNG image");
+    }
+}
+
+class GIFImageProcessor {
+    public void process() {
+        // Logic xử lý hình ảnh GIF
+        System.out.println("Processing GIF image");
+    }
+}
+
+public class ImageProcessingApp {
+    public static void main(String[] args) {
+        JPEGImageProcessor jpegProcessor = new JPEGImageProcessor();
+        PNGImageProcessor pngProcessor = new PNGImageProcessor();
+        GIFImageProcessor gifProcessor = new GIFImageProcessor();
+
+        jpegProcessor.process();
+        pngProcessor.process();
+        gifProcessor.process();
+    }
+}
+ - Rõ ràng ta thấy rõ được để có thể làm việc với các đối tượng thì 
+nó sẽ rất khó khăn trong việc quản lí đối tượng , đơn giản nhìn cái mã 
+ta sẽ phải cùng một lúc khởi tạo cả 3 đối tượng ,không có tính linh hoạt , 
+nhất quán giữa các đối tượng có chung kiểu dữ liệu hay có thể là chung các 
+phương thức.
+ 
+- Tuy nhiên khi sử dụng interface thì mọi thứ sẽ rất rõ ràng. Có được các
+- Tạo một cái interface- Giao diện chung cho tất cả dữ liệu của máy tính : 
+
+import java.util.ArrayList;
+
+interface ImageProcessor {
+    void process();
+}
+
+class JPEGImageProcessor implements ImageProcessor {
+    @Override
+    public void process() {
+        // Logic xử lý hình ảnh JPEG
+        System.out.println("Processing JPEG image");
+    }
+}
+class PNGImageProcessor implements ImageProcessor {
+    @Override
+    public void process() {
+        // Logic xử lý hình ảnh PNG
+        System.out.println("Processing PNG image");
+    }
+}
+class GIFImageProcessor implements ImageProcessor {
+    @Override
+    public void process() {
+        // Logic xử lý hình ảnh GIF
+        System.out.println("Processing GIF image");
+    }
+}
+public class ImageProcessingApp {
+    public static void main(String[] args) {
+        ImageProcessor jpegProcessor = new JPEGImageProcessor();
+        ImageProcessor pngProcessor = new PNGImageProcessor();
+        ImageProcessor gifProcessor = new GIFImageProcessor();
+
+        jpegProcessor.process();
+        pngProcessor.process();
+        gifProcessor.process();
+    }
+}
+
+public class ImageProcessingApp {
+    public static void main(String[] args) {
+        // Tạo một danh sách để lưu trữ các đối tượng xử lý hình ảnh
+
+        ArrayList<ImageProcessor> processors = new ArrayList<>();
+
+        // Thêm các đối tượng xử lý hình ảnh vào danh sách
+        processors.add(new JPEGImageProcessor());
+        processors.add(new PNGImageProcessor());
+        processors.add(new GIFImageProcessor());
+
+        // Duyệt qua danh sách và gọi phương thức process cho mỗi đối tượng
+        for (ImageProcessor processor : processors) {
+            processor.process();
+        }
+    }
+}
+
+
+- Ví dụ : 
+   + Tạo một interface có tên là máy tính bỏ túi có các phương thức mặc định 
+như là cộng trừ nhân chia hai số thực  
+   + Xây dựng các lớp hiện thực hóa interface bên trên có tên là 
+maytinhCasioFX500 và maytinhVinaCal500MS 
+   + Tạo ra một interface có tên là SapXepInterface có các phương thức sắp xếp 
+tăng và sắp xếp giảm một mảng số nguyên . 
+    + Xây dựng các lớp hiện thực hóa interface bên trên có tên là sắp xếp chèn và 
+sắp xếp chọn 
+    + Xây dựng lớp hiện thực cả hai interface ở câu a và b có tên là 
+PhanMemMayTinhBoTui. 
+
+
+
+
+
+
+

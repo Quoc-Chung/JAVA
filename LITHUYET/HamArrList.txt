@@ -1,0 +1,282 @@
+- Các  hàm hay dùng trong ArrayList : 
+1. THÊM PHẦN TỬ : 
+
++ add(VALUE) : Thêm phần tử vào trong ArrayList 
++ add(INDEX ,VULUE ) : Thêm phần tử vào vị trí index  
++ addAll(TẬP_HỌP) : Thêm tất cả các phần tử của tập hợp vào trong AL 
+
+- Các ví dụ : 
+
++ ArrayList<String> languages = new ArrayList<>();
+    languages.add("Java");
+    languages.add("C");
+    languages.add("Python");
+    System.out.println("ArrayList: " + languages);
+    === ArrayList: [Java, C, Python]
+
+
++   languages.add(1, "JavaScript");
+    languages.add(3, "C++");
+ 
+
++   HashSet<String> vowels = new HashSet<>();
+    vowels.add("a");
+    vowels.add("e");
+    vowels.add("i");
+    ArrayList<String> alphabets = new ArrayList<>();
+    alphabets.addAll(vowels);
+
+
+======================================================================
+2. TRUY CẬP CÁC PHẦN TỬ 
+- Để truy cập các phần tử trong ArrayList thì chúng ta sử dụng hàm get() 
+
++  ARRAY_LIST.get(int INDEX) : Truy cập phần tử ở vị trí index
++  ARRAY_LIST.iterator() : Trình lặp qua các phần tử trong danh sách mảng
+
+- Các ví dụ : 
+    import java.util.ArrayList;
+    import java.util.Iterator;
+
++   ArrayList<String> animals = new ArrayList<>();
+    
+        animals.add("Cat");
+        animals.add("Dog");
+        animals.add("Cow");
+        System.out.println("ArrayList: " + animals);
+
+        String str = animals.get(1);
+        System.out.print("Element at index 1: " + str);
+
++   ArrayList<String> languages = new ArrayList<>();
+
+        languages.add("Java");
+        languages.add("Python");
+        languages.add("JavaScript");
+        languages.add("Swift");
+
+        Iterator<String> iterate = languages.iterator();
+        System.out.print("ArrayList: ");
+
+        while(iterate.hasNext()){
+        System.out.print(iterate.next());
+        System.out.print(", ");
+        }
+
+========================================================================
+3.THAY ĐỔI CÁC PHẦN TỬ TRONG ARRAY_LIST 
+- Để thay đổi các phần tử của danh sách mảng , chúng ta sử dụng set() 
+
++ ARRAY_LIST.set(VỊ_TRÍ_THAY , GIÁ_TRỊ_THAY )
+
+- Các ví dụ : 
++   ArrayList<String> languages = new ArrayList<>();
+
+    languages.add("Python");
+    languages.add("English");
+    languages.add("JavaScript");
+    System.out.println("ArrayList: " + languages);
+
+    String element = languages.set(1, "Java");
+    System.out.println("Updated ArrayList: " + languages);
+    System.out.println("Replaced Element: " + element);
+
+========================================================================
+4. LOẠI BỎ CÁC PHẦN TỬ KHỎI MẢNG :
+
+- Đê loại bỏ các phần tử khỏi ArrayList thì chúng ta dùng remove()
+
++ ARRAY_LIST.remove( VALUE ) : Loại bỏ giá trị value 
++ ARRAY_LIST.remove( INDEX ) : Loại bỏ giá trị ở chỉ mục index  
++ ARRAY_LIST.removeAll( ARRAY_LIST_CẦN_XÓA_HẾT )
++ ARRAY_LIST_1.removeAll(ARRAY_LIST_2) : xóa hết các phần tử có trong 
+ArrayList_2 ra khỏi ArrayList_1
+
+- Chú ý phương thức này chỉ lấy value là một đối tượng nên nếu chúng 
+ta muốn xóa bằng đối tượng thì 
+
+- Các ví dụ :
+
++   ArrayList<Integer> primeNumbers = new ArrayList<>();
+        primeNumbers.add(2);
+        primeNumbers.add(3);
+        primeNumbers.add(5);
+        System.out.println("ArrayList: " + primeNumbers);
+
+        int removedElement = primeNumbers.remove(2);
+        System.out.println("Removed Element: " + removedElement);
+
+( LOẠI BỎ SỰ XUẤT HIỆN ĐẦU TIÊN CỦA MỘT PHẦN TỬ )
++   ArrayList<Integer> randomNumbers = new ArrayList<>();
+        randomNumbers.add(22);
+        randomNumbers.add(13);
+        randomNumbers.add(35);
+        randomNumbers.add(13);
+        randomNumbers.add(40);
+        System.out.println("ArrayList: " + randomNumbers);
+
+        boolean result = randomNumbers.remove(Integer.valueOf(13));
+
+===========================================================================
+
+add(): Thêm một phần tử vào cuối ArrayList.
+    ArrayList<String> list = new ArrayList<>();
+    list.add("Element 1");
+
+    ArrayList<String> list1 = new ArrayList<>();
+    list1.add("Element 1");
+
+addAll(): Thêm tất cả các phần tử từ một Collection vào cuối ArrayList.
+        ArrayList<String> list2 = new ArrayList<>();
+        list2.addAll(list1);
+
+clear(): Xóa tất cả các phần tử khỏi ArrayList.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        list.clear();
+
+clone(): Tạo một bản sao của ArrayList.
+        ArrayList<String> originalList = new ArrayList<>();
+        originalList.add("Element 1");
+        ArrayList<String> clonedList = (ArrayList<String>) originalList.clone();
+      
+contains(): Kiểm tra xem một phần tử có tồn tại trong ArrayList hay không.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        boolean containsElement = list.contains("Element 1");
+
+get(): Trả về phần tử ở vị trí được chỉ định trong ArrayList.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        String element = list.get(0);
+
+indexOf(): Trả về chỉ số của phần tử đầu tiên có giá trị đã chỉ định trong ArrayList.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        int index = list.indexOf("Element 1");
+
+removeAll(): Xóa tất cả các phần tử có trong một Collection khác khỏi ArrayList.
+        ArrayList<String> list1 = new ArrayList<>();
+        list1.add("Element 1");
+        ArrayList<String> list2 = new ArrayList<>();
+        list2.add("Element 1");
+        list1.removeAll(list2);
+
+remove(): Xóa một phần tử cụ thể khỏi ArrayList.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        list.remove("Element 1");
+
+size(): Trả về số lượng phần tử trong ArrayList.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        int size = list.size();
+
+isEmpty(): Kiểm tra xem ArrayList có rỗng không.
+        ArrayList<String> list = new ArrayList<>();
+        boolean isEmpty = list.isEmpty();
+
+subList(): Trả về một phần của ArrayList từ vị trí bắt đầu đến vị trí kết thúc.
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Element 1");
+        list.add("Element 2");
+        List<String> sublist = list.subList(0, 1);
+======================================================================================
+======================================================================================
+                      ÔN TẬP CÁC PHƯƠNG THỨC TRONG CHUỖI 
+
+contains(): Kiểm tra xem chuỗi có chứa một chuỗi con hay không.
+        String str = "Hello, World!";
+        boolean containsSubstring = str.contains("World");
+
+substring(): Trả về chuỗi con của chuỗi.
+        String str = "Hello, World!";
+        String subStr = str.substring(7); // Kết quả là "World!"
+
+join(): Nối các chuỗi sử dụng một dấu phân cách.
+        String joinedString = String.join("-", "Java", "is", "fun");
+        // Kết quả là "Java-is-fun"
+
+
+replace(): Thay thế ký tự cũ bằng ký tự mới.
+        String str = "Hello, World!";
+        String newStr = str.replace('o', '0');
+        // Kết quả là "Hell0, W0rld!"
+
+replaceAll(): Thay thế tất cả các chuỗi con phù hợp với mẫu regex bằng một chuỗi mới.
+        String str = "Hello, World!";
+        String newStr = str.replaceAll("o", "0");
+
+replaceFirst(): Thay thế chuỗi con phù hợp với mẫu regex đầu tiên bằng một chuỗi mới.
+        String str = "Hello, World!";
+        String newStr = str.replaceFirst("o", "0");
+        // Kết quả là "Hell0, World!"
+
+charAt(): Trả về ký tự ở vị trí đã cho trong chuỗi.
+        String str = "Hello";
+        char character = str.charAt(2); // Kết quả là 'l'
+
+getBytes(): Chuyển đổi chuỗi thành một mảng byte.
+        String str = "Hello";
+        byte[] byteArray = str.getBytes();
+
+indexOf(): Trả về vị trí đầu tiên của ký tự đã cho trong chuỗi.
+        String str = "Hello";
+        int index = str.indexOf('e'); // Kết quả là 1
+
+compareTo(): So sánh hai chuỗi theo thứ tự từ điển.
+        String str1 = "Hello";
+        String str2 = "World";
+        int result = str1.compareTo(str2);
+        // Kết quả là một số âm vì "Hello" đi trước "World"
+
+trim(): Loại bỏ các khoảng trắng ở đầu và cuối chuỗi.
+
+        String str = "   Hello, World!   ";
+        String trimmedStr = str.trim();
+        // Kết quả là "Hello, World!"
+
+toLowerCase(), toUpperCase(): Chuyển đổi chuỗi thành dạng chữ thường hoặc chữ hoa.
+        String str = "Hello, World!";
+        String lowerCaseStr = str.toLowerCase();
+        String upperCaseStr = str.toUpperCase();
+
+
+split(): Tách chuỗi thành mảng các chuỗi sử dụng một ký tự phân cách.
+        String str = "Java,is,fun";
+        String[] strArray = str.split(",");
+        // Kết quả là một mảng ["Java", "is", "fun"]
+
+matches(): Kiểm tra xem chuỗi có khớp với biểu thức chính quy hay không.
+        String str = "12345";
+        boolean isMatch = str.matches("\\d+");
+        // Kết quả là true vì chuỗi chỉ chứa các chữ số
+
+startsWith(), endsWith(): Kiểm tra xem chuỗi có bắt đầu hoặc kt bằng một chuỗi đã cho 
+        String str = "Hello, World!";
+        boolean startsWithHello = str.startsWith("Hello");
+        boolean endsWithWorld = str.endsWith("World!");
+
+isEmpty(): Kiểm tra xem chuỗi có rỗng hay không.
+        String str = "";
+        boolean isEmpty = str.isEmpty();
+        // Kết quả là true
+
+intern(): Trả về biểu diễn canoncial của chuỗi, giảm bộ nhớ sử dụng.
+        String str1 = new String("Hello");
+        String str2 = str1.intern();
+
+contentEquals(): So sánh chuỗi với một đối tượng CharSequence.
+        String str = "Hello";
+        StringBuilder sb = new StringBuilder("Hello");
+        boolean isEqual = str.contentEquals(sb);
+        // Kết quả là true vì nội dung của str và sb giống nhau
+
+hashCode(): Trả về mã băm cho chuỗi.
+        String str = "Hello";
+        int hashCode = str.hashCode();
+
+subSequence(): Trả về một chuỗi con (được xem như CharSequence) từ chuỗi đã cho.
+        String str = "Hello, World!";
+        CharSequence subSequence = str.subSequence(7, 12);
+        // Kết quả là "World"

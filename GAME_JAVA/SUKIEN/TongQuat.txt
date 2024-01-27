@@ -1,0 +1,176 @@
+- Nói chung là trong ba bài này thì sẽ có rất nhiều cách để xử lí với sự kiện nhưng đưới đây là ba cách tổng quát nhất để có thể xử lí 
+với sự kiện trong java  : 
+
++ ActionListener |- Hai cái này dùng để quản lí sự kiện với bàn phím hoặc chuột cũng được 
+                 |
++ KeyListener    |
+
+
++ MouseListener  | - Cái này được dùng để xử lí sự kiện với chuột.
+---------------------------------------------------------------------------------------
+- BƯỚC 1 : import các thư viện dùng cho xử lí sự kiện : 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+---------------------------------------------------------------------------------------
+- BƯỚC 2 : Sau khi impport thư viện thì chúng ta cho cái đối tượng kế thừa interface : 
+
+public class TEST extends JFrame implements ActionListener {
+
+}
+
+public class TEST extends JFrame implements KeyListener {
+
+}
+
+public class TEST extends JFrame implements MouseListener {
+
+}
+
+
+----------------------------------------------------------------------------------------
+- BƯỚC 3 : Chúng ta thêm sự kiện cho cái nút hoặc cho một JPanel cũng được bằng cách gọi 
+hàm add..... và biến đối tượng thành đối tượng lắng nghe : 
+
+button.addActionListener(this);
+
+textArea.addKeyListener(this);
+
+button.addMouseListener(this);
+
+
+--------------------------------------------------------------------------------------
+
+- BƯỚC 4 : Triển khai các phương thức có trong cái interface mà mình vừa kế thừa : 
+- BƯỚC 4 : Triển khai các phương thức trừu tượng có trong interface mà mình vừa kế thừa : 
++ Điều thứ nhất là các phương thức này chúng ta cần phải ghi đè, tức là ta phải sử dụng 
+từ khóa @Override. 
+
++ Điều thứ hai là cần truyền vào hàm các đối số sự kiện : 
+    + implements ActionListener --> Đối số là ActionEvent 
+    + implements KeyListener    --> Đối số là KeyEvent 
+    + implements MouseListener  --> Đối số là MouseEvent
+
+***************************CỦA PHÍM ******************************
+  @Override
+  public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == button) {
+            System.out.println("Button clicked!");
+            // Xử lý sự kiện khi nút được nhấn
+        }
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được nhấn và released
+        char keyChar = e.getKeyChar();
+        textArea.append("Key Typed: " + keyChar + "\n");
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được nhấn
+        int keyCode = e.getKeyCode();
+        textArea.append("Key Pressed: " + KeyEvent.getKeyText(keyCode) + "\n");
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Xử lý sự kiện khi một phím được released
+        int keyCode = e.getKeyCode();
+        textArea.append("Key Released: " + KeyEvent.getKeyText(keyCode) + "\n");
+    }
+
+***************************CỦA CHUỘT *****************************
+   @Override
+   public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == button) {
+            System.out.println("Button clicked!");
+            // Xử lý sự kiện khi nút được nhấn chuột
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // Xử lý khi chuột vào nút
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // Xử lý khi chuột rời khỏi nút
+    }
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // Xử lý khi chuột được nhấn
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // Xử lý khi chuột được thả ra
+    }
+
+    @Override
+    public static void main(String[] args) {
+        new MouseEventExample();
+    }
+==================================================================================
+- Trong ngữ cảnh xử lí sự kiện bàn phím, "Sau khi được released" đề cập đến 
+việc một phím đẫ được nhấn (preassed) và sau đó được thả ra (release) .
+- Khi bạn nhấn một phím trên bàn phím, sự kiện "KeyPressed" sẽ được kích hoạt, và khi 
+bạn thả phím đó,sự kiện "keyReleased" sẽ được kích hoạt 
+- Ví dụ như việc ta nhấn và giữ phím "A" , sự kiện keyPressed sẽ được gọi 
+với thông tin về phím "A" . Khi bạn thả phím "A" , sự kiện "keyReleased" sẽ
+được gọi , cùng với thông tin về phím "A". 
+
+- Mô hình này cho phép bạn xử lí cả hai hành động : 
++ Khi bạn nhấn một phím và khi nó được thả ra. 
+
+==> REALEASED : THẢ RA 
+==================================================================================
+- Giải thích cách chạy của các sự kiện: 
+
+* XỬ LÍ SỰ KIỆN NÚT (BUTTON): 
++ Chạy khi một hành động (action) xảy ra, trong trường hợp này là khi có 
+một sự kiện (event) được kích hoạt trên thành phần (component) có thể gửi 
+sự kiện (ActionEvent).
++ Kiểm tra xem nguồn sự kiện có phải là nút (button) hay không.
++ In ra "Button clicked" khi nút được nhấn.
+==> Nghĩa là khi ta thêm một sự kiện cho một cái nút thì cái hàm này sẽ được 
+gọi.
+
+
+* XỬ LÍ SỰ KIỆN BÀN PHÍM ( KEYBOARD ): 
+- Ta có thể thẩy rõ lớp interface KeyListener này có tổng cộng ba loại 
+phương thức trừu tượng mà ta cần phải xử lí :
+
++ keyTyped(KeyEvent e) : Chạy khi một phím được nhấn và sâu đó được thả ra. 
+
++ keyPressed(KeyEvent e) : Chạy khi một phím đươc nhấn. 
+
++ keyReleased(KeyEvent e) : Chạy khi một phím được thả ra. 
+
+* XỬ LÍ SỰ KIỆN CHUỘT (MOUSE) : 
+- Ta có thể thấy được rõ lớp interface MouseListener này có tổng cộng tất cả 
+NĂM phương thức trừu tượng mà ta cần phải xử lí : 
+
++ mouseClicked(MouseEvent e) : Chạy khi một sự kiện click chuột xảy ra. 
+
++ mouseEntered(MouseEvent e) : Chạy khi chuột đi vào khu vực  của thành phần
+
++ mouseExited(MouseEvent e) : Chạy khi chuột thoát ra khỏi khu vực của 
+thành phần 
+
++ mousePressed(MouseEvent e) : Chạy khi chuột được nhấn 
+
++ mouseReleased(MouseEvent e) : Chạy khi chuột được thả ra. 
+
+
+
